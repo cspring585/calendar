@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Student Calendar & Feelings Check-in</title>
+    <title>Interactive Student Calendar & Morning Check-in</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
@@ -85,7 +85,7 @@
             </div>
             <div>
                 <h1 class="font-bold text-slate-900 text-sm leading-tight">Student Calendar & Check-in</h1>
-                <p class="text-[11px] text-slate-600 hidden sm:block">Fill calendar • Pick how you feel • Write notes</p>
+                <p class="text-[11px] text-slate-600 hidden sm:block">Fill calendar • Choose greeting & feeling • Write notes</p>
             </div>
         </div>
 
@@ -113,10 +113,10 @@
     <!-- Main Workspace -->
     <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative p-2 lg:p-3 gap-2 lg:gap-3">
 
-        <!-- Left Sidebar: Numbers, Badges & Feelings Tray -->
+        <!-- Left Sidebar: Numbers, Badges, Greeting, and Feelings -->
         <aside class="w-full lg:w-72 frosted-panel border border-white/60 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden">
             <!-- Tray Tab Header -->
-            <div class="p-2 border-b border-white/50 bg-white/40 flex items-center justify-between">
+            <div class="p-2 border-b border-white/50 bg-white/40 flex items-center justify-between shrink-0">
                 <span class="font-bold text-slate-800 text-xs flex items-center space-x-1.5">
                     <i class="fa-solid fa-shapes text-indigo-600"></i>
                     <span>Tray</span>
@@ -127,8 +127,8 @@
                 </div>
             </div>
 
-            <!-- Scrollable Tray Items -->
-            <div class="flex-1 overflow-y-auto p-2 min-h-0" id="trayContainer">
+            <!-- Scrollable Number and Badge Tray -->
+            <div class="flex-1 overflow-y-auto p-2 min-h-[110px]" id="trayContainer">
                 <!-- Numbers Section (1 to 31) -->
                 <div id="numbersSection" class="grid grid-cols-5 gap-1.5"></div>
 
@@ -136,41 +136,73 @@
                 <div id="badgesSection" class="hidden space-y-1.5"></div>
             </div>
 
-            <!-- 6-Feelings Check-in Card (Under Number Section) -->
-            <div class="border-t border-white/60 bg-white/50 p-2.5 flex flex-col shrink-0">
-                <div class="flex items-center justify-between mb-1.5">
+            <!-- Greeting Choice Section (Above Feelings) -->
+            <div class="border-t border-white/60 bg-white/50 p-2 flex flex-col shrink-0">
+                <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-extrabold text-slate-800 flex items-center space-x-1.5">
-                        <i class="fa-solid fa-face-smile text-amber-500 text-sm"></i>
+                        <i class="fa-solid fa-handshake-angle text-indigo-600 text-xs"></i>
+                        <span>Morning Greeting</span>
+                    </span>
+                    <span id="selectedGreetingText" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Choose one</span>
+                </div>
+                <div class="grid grid-cols-5 gap-1" id="greetingsGrid">
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition shadow-2xs" data-greeting="Fist Bump" title="Fist Bump">
+                        <span class="text-lg leading-none">👊</span>
+                        <span class="text-[9px] font-bold text-sky-900 mt-0.5 truncate w-full text-center">Fist</span>
+                    </button>
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition shadow-2xs" data-greeting="High Five" title="High Five">
+                        <span class="text-lg leading-none">✋</span>
+                        <span class="text-[9px] font-bold text-amber-900 mt-0.5 truncate w-full text-center">Five</span>
+                    </button>
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition shadow-2xs" data-greeting="Handshake" title="Handshake">
+                        <span class="text-lg leading-none">🤝</span>
+                        <span class="text-[9px] font-bold text-emerald-900 mt-0.5 truncate w-full text-center">Shake</span>
+                    </button>
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition shadow-2xs" data-greeting="Heart Hands" title="Heart Hands">
+                        <span class="text-lg leading-none">🫶</span>
+                        <span class="text-[9px] font-bold text-rose-900 mt-0.5 truncate w-full text-center">Heart</span>
+                    </button>
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition shadow-2xs" data-greeting="Hug" title="Hug">
+                        <span class="text-lg leading-none">🫂</span>
+                        <span class="text-[9px] font-bold text-purple-900 mt-0.5 truncate w-full text-center">Hug</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6 Feelings Check-in Card -->
+            <div class="border-t border-white/60 bg-white/50 p-2 flex flex-col shrink-0">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-extrabold text-slate-800 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-face-smile text-amber-500 text-xs"></i>
                         <span>How are you feeling today?</span>
                     </span>
-                    <span id="selectedFeelingText" class="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">Select one</span>
+                    <span id="selectedFeelingText" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Select one</span>
                 </div>
                 
-                <div class="grid grid-cols-3 gap-1.5" id="feelingsGrid">
-                    <!-- 6 Feelings based on Strong4Life chart -->
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-2xs" data-feeling="Happy">
-                        <span class="text-xl leading-none">😊</span>
-                        <span class="text-[10px] font-bold text-emerald-800 mt-0.5">Happy</span>
+                <div class="grid grid-cols-3 gap-1" id="feelingsGrid">
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-2xs" data-feeling="Happy">
+                        <span class="text-lg leading-none">😊</span>
+                        <span class="text-[9px] font-bold text-emerald-800 mt-0.5">Happy</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition text-center shadow-2xs" data-feeling="Sad">
-                        <span class="text-xl leading-none">😢</span>
-                        <span class="text-[10px] font-bold text-sky-800 mt-0.5">Sad</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition text-center shadow-2xs" data-feeling="Sad">
+                        <span class="text-lg leading-none">😢</span>
+                        <span class="text-[9px] font-bold text-sky-800 mt-0.5">Sad</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition text-center shadow-2xs" data-feeling="Angry">
-                        <span class="text-xl leading-none">😡</span>
-                        <span class="text-[10px] font-bold text-rose-800 mt-0.5">Angry</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition text-center shadow-2xs" data-feeling="Angry">
+                        <span class="text-lg leading-none">😡</span>
+                        <span class="text-[9px] font-bold text-rose-800 mt-0.5">Angry</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition text-center shadow-2xs" data-feeling="Scared">
-                        <span class="text-xl leading-none">😨</span>
-                        <span class="text-[10px] font-bold text-purple-800 mt-0.5">Scared</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition text-center shadow-2xs" data-feeling="Scared">
+                        <span class="text-lg leading-none">😨</span>
+                        <span class="text-[9px] font-bold text-purple-800 mt-0.5">Scared</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition text-center shadow-2xs" data-feeling="Excited">
-                        <span class="text-xl leading-none">🤪</span>
-                        <span class="text-[10px] font-bold text-amber-800 mt-0.5">Excited</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition text-center shadow-2xs" data-feeling="Excited">
+                        <span class="text-lg leading-none">🤪</span>
+                        <span class="text-[9px] font-bold text-amber-800 mt-0.5">Excited</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-lg border border-teal-300 bg-teal-50 hover:bg-teal-100 transition text-center shadow-2xs" data-feeling="Calm">
-                        <span class="text-xl leading-none">😌</span>
-                        <span class="text-[10px] font-bold text-teal-800 mt-0.5">Calm</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-teal-300 bg-teal-50 hover:bg-teal-100 transition text-center shadow-2xs" data-feeling="Calm">
+                        <span class="text-lg leading-none">😌</span>
+                        <span class="text-[9px] font-bold text-teal-800 mt-0.5">Calm</span>
                     </button>
                 </div>
             </div>
@@ -203,9 +235,9 @@
                 <div id="calendarGrid" class="grid grid-cols-7 gap-1 flex-1 auto-rows-fr min-h-0"></div>
             </div>
 
-            <!-- Handwriting & Notes Pad (Fitted at bottom) -->
-            <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2.5 flex flex-col h-40 lg:h-44 shrink-0">
-                <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-white/50 shrink-0">
+            <!-- Handwriting & Notes Pad -->
+            <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col h-36 lg:h-40 shrink-0">
+                <div class="flex items-center justify-between pb-1 mb-1 border-b border-white/50 shrink-0">
                     <div class="flex items-center space-x-1.5">
                         <i class="fa-solid fa-pen-nib text-indigo-600 text-xs"></i>
                         <h3 class="font-bold text-slate-900 text-xs">Handwriting & Notes Pad</h3>
@@ -261,6 +293,7 @@
             currentYear: 2026,
             activeTab: 'numbers',
             placements: {},
+            selectedGreeting: null,
             selectedFeeling: null,
             draggedItem: null,
             isErasing: false,
@@ -272,6 +305,7 @@
         const STORAGE_KEY_PLACEMENTS = 'studentCalendarPlacements';
         const STORAGE_KEY_MONTH = 'studentCalendarMonth';
         const STORAGE_KEY_CANVAS = 'studentCalendarCanvas';
+        const STORAGE_KEY_GREETING = 'studentCalendarGreeting';
         const STORAGE_KEY_FEELING = 'studentCalendarFeeling';
 
         let drawingCanvas = null;
@@ -282,6 +316,18 @@
                 localStorage.setItem(STORAGE_KEY_MONTH, state.currentMonth.toString());
             } catch (e) {
                 console.error('Could not save calendar state:', e);
+            }
+        }
+
+        function saveGreetingState() {
+            try {
+                if (state.selectedGreeting) {
+                    localStorage.setItem(STORAGE_KEY_GREETING, state.selectedGreeting);
+                } else {
+                    localStorage.removeItem(STORAGE_KEY_GREETING);
+                }
+            } catch (e) {
+                console.error('Could not save greeting:', e);
             }
         }
 
@@ -317,6 +363,12 @@
                 const savedPlacements = localStorage.getItem(STORAGE_KEY_PLACEMENTS);
                 if (savedPlacements) {
                     state.placements = JSON.parse(savedPlacements);
+                }
+
+                const savedGreeting = localStorage.getItem(STORAGE_KEY_GREETING);
+                if (savedGreeting) {
+                    state.selectedGreeting = savedGreeting;
+                    updateGreetingUI(savedGreeting);
                 }
 
                 const savedFeeling = localStorage.getItem(STORAGE_KEY_FEELING);
@@ -359,6 +411,8 @@
         const eraserText = document.getElementById('eraserText');
         const brushSizeSelect = document.getElementById('brushSize');
         const colorBtns = document.querySelectorAll('.color-btn');
+        const greetingBtns = document.querySelectorAll('.greeting-btn');
+        const selectedGreetingText = document.getElementById('selectedGreetingText');
         const feelingBtns = document.querySelectorAll('.feeling-btn');
         const selectedFeelingText = document.getElementById('selectedFeelingText');
 
@@ -366,8 +420,43 @@
             renderTrayItems();
             renderCalendar();
             initCanvas();
+            initGreetings();
             initFeelings();
             loadSavedState();
+        }
+
+        // Greeting Handler
+        function initGreetings() {
+            greetingBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const greeting = btn.dataset.greeting;
+                    if (state.selectedGreeting === greeting) {
+                        state.selectedGreeting = null;
+                        updateGreetingUI(null);
+                    } else {
+                        state.selectedGreeting = greeting;
+                        updateGreetingUI(greeting);
+                    }
+                    saveGreetingState();
+                });
+            });
+        }
+
+        function updateGreetingUI(greeting) {
+            greetingBtns.forEach(btn => {
+                if (btn.dataset.greeting === greeting) {
+                    btn.classList.add('ring-2', 'ring-indigo-700', 'scale-105', 'font-black');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-indigo-700', 'scale-105', 'font-black');
+                }
+            });
+            if (greeting) {
+                selectedGreetingText.textContent = `${greeting}!`;
+                selectedGreetingText.className = 'text-[10px] font-black text-indigo-800 uppercase tracking-wider';
+            } else {
+                selectedGreetingText.textContent = 'Choose one';
+                selectedGreetingText.className = 'text-[10px] font-bold text-slate-500 uppercase tracking-wider';
+            }
         }
 
         // Feelings Handler
@@ -390,13 +479,13 @@
         function updateFeelingUI(feeling) {
             feelingBtns.forEach(btn => {
                 if (btn.dataset.feeling === feeling) {
-                    btn.classList.add('ring-2', 'ring-indigo-600', 'scale-105', 'font-black');
+                    btn.classList.add('ring-2', 'ring-indigo-700', 'scale-105', 'font-black');
                 } else {
-                    btn.classList.remove('ring-2', 'ring-indigo-600', 'scale-105', 'font-black');
+                    btn.classList.remove('ring-2', 'ring-indigo-700', 'scale-105', 'font-black');
                 }
             });
             if (feeling) {
-                selectedFeelingText.textContent = `Today: ${feeling}!`;
+                selectedFeelingText.textContent = `${feeling}!`;
                 selectedFeelingText.className = 'text-[10px] font-black text-indigo-800 uppercase tracking-wider';
             } else {
                 selectedFeelingText.textContent = 'Select one';
@@ -447,7 +536,6 @@
             numbersSection.classList.add('hidden');
         });
 
-        // 5 rows x 7 cols = exactly 35 slots
         function renderCalendar() {
             calendarGrid.innerHTML = '';
             const month = state.currentMonth;
@@ -520,10 +608,13 @@
 
         resetBtn.addEventListener('click', () => {
             state.placements = {};
+            state.selectedGreeting = null;
             state.selectedFeeling = null;
             localStorage.removeItem(STORAGE_KEY_PLACEMENTS);
             localStorage.removeItem(STORAGE_KEY_CANVAS);
+            localStorage.removeItem(STORAGE_KEY_GREETING);
             localStorage.removeItem(STORAGE_KEY_FEELING);
+            updateGreetingUI(null);
             updateFeelingUI(null);
             renderCalendar();
             clearCanvas();
@@ -611,11 +702,11 @@
             ctx.fillStyle = '#fffefb';
             ctx.fillRect(0, 0, width, height);
 
-            const rowHeight = 48; // Scaled down to fit smaller display areas
+            const rowHeight = 44;
             const halfRow = rowHeight / 2;
-            const topMargin = 20;
+            const topMargin = 16;
 
-            for (let y = topMargin; y + rowHeight <= height + 10; y += rowHeight + 16) {
+            for (let y = topMargin; y + rowHeight <= height + 10; y += rowHeight + 14) {
                 // Headline (Solid Sky Blue)
                 ctx.beginPath();
                 ctx.strokeStyle = '#60a5fa';
