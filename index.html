@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
+    <!-- Google Fonts Inter & Bubblegum Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bubblegum+Sans&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; touch-action: manipulation; }
@@ -58,7 +58,7 @@
         }
 
         .frosted-panel {
-            background-color: rgba(255, 255, 255, 0.82);
+            background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
@@ -79,19 +79,19 @@
 <body class="h-full crayon-rainbow-bg text-slate-800 flex flex-col overflow-hidden">
 
     <!-- Top Navigation Bar (Compact) -->
-    <header class="frosted-panel border-b border-white/50 px-3 py-2 flex items-center justify-between shrink-0 shadow-sm z-20">
-        <div class="flex items-center space-x-2.5">
-            <div class="w-8 h-8 bg-indigo-700 rounded-lg flex items-center justify-center text-white shadow-sm">
-                <i class="fa-solid fa-calendar-days text-sm"></i>
+    <header class="frosted-panel border-b border-white/50 px-4 py-2.5 flex items-center justify-between shrink-0 shadow-sm z-20">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 bg-indigo-700 rounded-xl flex items-center justify-center text-white shadow-sm">
+                <i class="fa-solid fa-calendar-days text-base"></i>
             </div>
             <div>
-                <h1 class="font-bold text-slate-900 text-sm leading-tight">Student Calendar & Check-in</h1>
-                <p class="text-[11px] text-slate-600 hidden sm:block">Fill calendar • Choose greeting & feeling • Write notes</p>
+                <h1 class="font-bold text-slate-900 text-base leading-tight">Student Calendar & Check-in</h1>
+                <p class="text-xs text-slate-600 hidden sm:block">Fill calendar • Choose greeting & feeling • Watch daily video • Write notes</p>
             </div>
         </div>
 
         <div class="flex items-center space-x-2">
-            <select id="monthSelect" class="bg-white/95 border border-slate-300 text-slate-800 text-xs rounded-lg px-2.5 py-1.5 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-xs">
+            <select id="monthSelect" class="bg-white/95 border border-slate-300 text-slate-800 text-xs rounded-lg px-3 py-1.5 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-xs">
                 <option value="8">September 2026</option>
                 <option value="9">October 2026</option>
                 <option value="10">November 2026</option>
@@ -104,7 +104,7 @@
                 <option value="5">June 2027</option>
             </select>
 
-            <button id="resetBtn" class="bg-rose-100 hover:bg-rose-200 text-rose-800 border border-rose-300 px-2.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center space-x-1 shadow-xs" title="Reset All">
+            <button id="resetBtn" class="bg-rose-100 hover:bg-rose-200 text-rose-800 border border-rose-300 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 shadow-xs" title="Reset All">
                 <i class="fa-solid fa-rotate-right"></i>
                 <span class="hidden sm:inline">Reset</span>
             </button>
@@ -112,16 +112,16 @@
     </header>
 
     <!-- Main Workspace -->
-    <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative p-2 lg:p-3 gap-2 lg:gap-3">
+    <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative p-2.5 lg:p-3.5 gap-2.5 lg:gap-3.5">
 
-        <!-- Left Sidebar: Good Morning -> Numbers Tray -> Morning Greeting -> Feelings -->
-        <aside class="w-full lg:w-72 frosted-panel border border-white/60 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden">
+        <!-- Left Column: 1/3 Width with Added Padding and Double-Sized Good Morning Card -->
+        <aside class="w-full lg:w-1/3 frosted-panel border border-white/60 rounded-2xl flex flex-col shrink-0 shadow-md overflow-hidden">
             
-            <!-- Top Section: Good Morning Graphic with Sun Background -->
-            <div class="p-2 border-b border-white/60 bg-gradient-to-b from-amber-50/90 to-sky-50/90 flex items-center justify-center shrink-0">
-                <div class="relative w-full h-14 rounded-xl overflow-hidden flex items-center justify-center border border-amber-200/80 shadow-inner bg-gradient-to-r from-amber-100/60 via-yellow-100/80 to-amber-100/60">
-                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-80">
-                        <svg class="w-24 h-24 text-amber-300 animate-[spin_20s_linear_infinite]" viewBox="0 0 100 100" fill="currentColor">
+            <!-- Double-Sized Good Morning Graphic Section -->
+            <div class="p-4 border-b border-white/60 bg-gradient-to-b from-amber-50/90 to-sky-50/90 flex items-center justify-center flex-1 min-h-[190px]">
+                <div class="relative w-full h-full min-h-[180px] rounded-2xl overflow-hidden flex flex-col items-center justify-center border border-amber-200/90 shadow-inner bg-gradient-to-r from-amber-100/70 via-yellow-100/90 to-amber-100/70 p-4">
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-85">
+                        <svg class="w-48 h-48 text-amber-300 animate-[spin_35s_linear_infinite]" viewBox="0 0 100 100" fill="currentColor">
                             <g stroke="currentColor" stroke-width="3" stroke-linecap="round">
                                 <line x1="50" y1="10" x2="50" y2="2" />
                                 <line x1="50" y1="90" x2="50" y2="98" />
@@ -137,139 +137,164 @@
                         </svg>
                     </div>
 
-                    <div class="relative z-10 flex items-center space-x-1.5 px-3 py-1 bg-white/70 backdrop-blur-xs rounded-full border border-amber-300/80 shadow-xs">
-                        <span class="text-xl leading-none">☀️</span>
-                        <span class="font-bubble text-base text-amber-900 tracking-wide font-bold drop-shadow-2xs">Good Morning!</span>
+                    <div class="relative z-10 flex flex-col items-center space-y-1.5 px-6 py-3 bg-white/80 backdrop-blur-xs rounded-2xl border border-amber-300 shadow-sm text-center">
+                        <span class="text-4xl leading-none">☀️</span>
+                        <span class="font-bubble text-2xl text-amber-950 tracking-wide font-bold drop-shadow-2xs leading-tight">Good Morning!</span>
+                        <span class="text-xs font-bold text-amber-900/80">Ready for a fantastic day of learning</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Tray Header Tabs -->
-            <div class="p-2 border-b border-white/50 bg-white/40 flex items-center justify-between shrink-0">
+            <!-- Number & Badge Tray Header -->
+            <div class="px-3.5 py-2 border-b border-white/50 bg-white/40 flex items-center justify-between shrink-0">
                 <span class="font-bold text-slate-800 text-xs flex items-center space-x-1.5">
                     <i class="fa-solid fa-shapes text-indigo-600"></i>
                     <span>Number & Badge Tray</span>
                 </span>
-                <div class="flex space-x-1">
-                    <button id="tabNums" class="px-2 py-0.5 text-xs font-bold rounded-md bg-indigo-700 text-white shadow-xs">Numbers</button>
-                    <button id="tabBadges" class="px-2 py-0.5 text-xs font-bold rounded-md bg-white/70 text-slate-700 hover:bg-white">Badges</button>
+                <div class="flex space-x-1.5">
+                    <button id="tabNums" class="px-2.5 py-1 text-xs font-bold rounded-md bg-indigo-700 text-white shadow-xs">Numbers</button>
+                    <button id="tabBadges" class="px-2.5 py-1 text-xs font-bold rounded-md bg-white/70 text-slate-700 hover:bg-white">Badges</button>
                 </div>
             </div>
 
-            <!-- Number and Badge Tray (No scroll for numbers: 7 columns fits all 31 cleanly) -->
-            <div class="p-2 shrink-0 overflow-y-auto max-h-48" id="trayContainer">
-                <!-- Numbers Section (1 to 31 in 7 cols, fits completely without scrolling) -->
-                <div id="numbersSection" class="grid grid-cols-7 gap-1"></div>
-
-                <!-- Event Badges Section -->
-                <div id="badgesSection" class="hidden space-y-1.5"></div>
+            <!-- Numbers Section (7 cols, comfortably fitted) -->
+            <div class="p-3 shrink-0" id="trayContainer">
+                <div id="numbersSection" class="grid grid-cols-7 gap-1.5"></div>
+                <div id="badgesSection" class="hidden space-y-1.5 max-h-36 overflow-y-auto"></div>
             </div>
 
-            <!-- Greeting Choice Section -->
-            <div class="border-t border-white/60 bg-white/50 p-2 flex flex-col shrink-0">
-                <div class="flex items-center justify-between mb-1">
+            <!-- Morning Greeting Card (Extra padding) -->
+            <div class="border-t border-white/60 bg-white/50 p-3 flex flex-col shrink-0">
+                <div class="flex items-center justify-between mb-1.5">
                     <span class="text-xs font-extrabold text-slate-800 flex items-center space-x-1.5">
-                        <i class="fa-solid fa-handshake-angle text-indigo-600 text-xs"></i>
+                        <i class="fa-solid fa-handshake-angle text-indigo-600 text-sm"></i>
                         <span>Morning Greeting</span>
                     </span>
                     <span id="selectedGreetingText" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Choose one</span>
                 </div>
-                <div class="grid grid-cols-5 gap-1" id="greetingsGrid">
-                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition shadow-2xs" data-greeting="Fist Bump" title="Fist Bump">
-                        <span class="text-lg leading-none">👊</span>
-                        <span class="text-[9px] font-bold text-sky-900 mt-0.5 truncate w-full text-center">Fist</span>
+                <div class="grid grid-cols-5 gap-1.5" id="greetingsGrid">
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-sky-300 bg-sky-50 hover:bg-sky-100 transition shadow-2xs" data-greeting="Fist Bump" title="Fist Bump">
+                        <span class="text-xl leading-none">👊</span>
+                        <span class="text-[10px] font-bold text-sky-900 mt-0.5 truncate w-full text-center">Fist</span>
                     </button>
-                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition shadow-2xs" data-greeting="High Five" title="High Five">
-                        <span class="text-lg leading-none">✋</span>
-                        <span class="text-[9px] font-bold text-amber-900 mt-0.5 truncate w-full text-center">Five</span>
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 transition shadow-2xs" data-greeting="High Five" title="High Five">
+                        <span class="text-xl leading-none">✋</span>
+                        <span class="text-[10px] font-bold text-amber-900 mt-0.5 truncate w-full text-center">Five</span>
                     </button>
-                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition shadow-2xs" data-greeting="Handshake" title="Handshake">
-                        <span class="text-lg leading-none">🤝</span>
-                        <span class="text-[9px] font-bold text-emerald-900 mt-0.5 truncate w-full text-center">Shake</span>
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition shadow-2xs" data-greeting="Handshake" title="Handshake">
+                        <span class="text-xl leading-none">🤝</span>
+                        <span class="text-[10px] font-bold text-emerald-900 mt-0.5 truncate w-full text-center">Shake</span>
                     </button>
-                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition shadow-2xs" data-greeting="Heart Hands" title="Heart Hands">
-                        <span class="text-lg leading-none">🫶</span>
-                        <span class="text-[9px] font-bold text-rose-900 mt-0.5 truncate w-full text-center">Heart</span>
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-rose-300 bg-rose-50 hover:bg-rose-100 transition shadow-2xs" data-greeting="Heart Hands" title="Heart Hands">
+                        <span class="text-xl leading-none">🫶</span>
+                        <span class="text-[10px] font-bold text-rose-900 mt-0.5 truncate w-full text-center">Heart</span>
                     </button>
-                    <button class="greeting-btn flex flex-col items-center justify-center p-1 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition shadow-2xs" data-greeting="Hug" title="Hug">
-                        <span class="text-lg leading-none">🫂</span>
-                        <span class="text-[9px] font-bold text-purple-900 mt-0.5 truncate w-full text-center">Hug</span>
+                    <button class="greeting-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-purple-300 bg-purple-50 hover:bg-purple-100 transition shadow-2xs" data-greeting="Hug" title="Hug">
+                        <span class="text-xl leading-none">🫂</span>
+                        <span class="text-[10px] font-bold text-purple-900 mt-0.5 truncate w-full text-center">Hug</span>
                     </button>
                 </div>
             </div>
 
-            <!-- 6 Feelings Check-in Card -->
-            <div class="border-t border-white/60 bg-white/50 p-2 flex flex-col shrink-0">
-                <div class="flex items-center justify-between mb-1">
+            <!-- Feelings Check-in Card (Extra padding) -->
+            <div class="border-t border-white/60 bg-white/50 p-3 flex flex-col shrink-0">
+                <div class="flex items-center justify-between mb-1.5">
                     <span class="text-xs font-extrabold text-slate-800 flex items-center space-x-1.5">
-                        <i class="fa-solid fa-face-smile text-amber-500 text-xs"></i>
+                        <i class="fa-solid fa-face-smile text-amber-500 text-sm"></i>
                         <span>How are you feeling today?</span>
                     </span>
                     <span id="selectedFeelingText" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Select one</span>
                 </div>
                 
-                <div class="grid grid-cols-3 gap-1" id="feelingsGrid">
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-2xs" data-feeling="Happy">
-                        <span class="text-lg leading-none">😊</span>
-                        <span class="text-[9px] font-bold text-emerald-800 mt-0.5">Happy</span>
+                <div class="grid grid-cols-3 gap-1.5" id="feelingsGrid">
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-2xs" data-feeling="Happy">
+                        <span class="text-xl leading-none">😊</span>
+                        <span class="text-[10px] font-bold text-emerald-800 mt-0.5">Happy</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition text-center shadow-2xs" data-feeling="Sad">
-                        <span class="text-lg leading-none">😢</span>
-                        <span class="text-[9px] font-bold text-sky-800 mt-0.5">Sad</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-sky-300 bg-sky-50 hover:bg-sky-100 transition text-center shadow-2xs" data-feeling="Sad">
+                        <span class="text-xl leading-none">😢</span>
+                        <span class="text-[10px] font-bold text-sky-800 mt-0.5">Sad</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition text-center shadow-2xs" data-feeling="Angry">
-                        <span class="text-lg leading-none">😡</span>
-                        <span class="text-[9px] font-bold text-rose-800 mt-0.5">Angry</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-rose-300 bg-rose-50 hover:bg-rose-100 transition text-center shadow-2xs" data-feeling="Angry">
+                        <span class="text-xl leading-none">😡</span>
+                        <span class="text-[10px] font-bold text-rose-800 mt-0.5">Angry</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition text-center shadow-2xs" data-feeling="Scared">
-                        <span class="text-lg leading-none">😨</span>
-                        <span class="text-[9px] font-bold text-purple-800 mt-0.5">Scared</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-purple-300 bg-purple-50 hover:bg-purple-100 transition text-center shadow-2xs" data-feeling="Scared">
+                        <span class="text-xl leading-none">😨</span>
+                        <span class="text-[10px] font-bold text-purple-800 mt-0.5">Scared</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition text-center shadow-2xs" data-feeling="Excited">
-                        <span class="text-lg leading-none">🤪</span>
-                        <span class="text-[9px] font-bold text-amber-800 mt-0.5">Excited</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 transition text-center shadow-2xs" data-feeling="Excited">
+                        <span class="text-xl leading-none">🤪</span>
+                        <span class="text-[10px] font-bold text-amber-800 mt-0.5">Excited</span>
                     </button>
-                    <button class="feeling-btn flex flex-col items-center justify-center p-1 rounded-lg border border-teal-300 bg-teal-50 hover:bg-teal-100 transition text-center shadow-2xs" data-feeling="Calm">
-                        <span class="text-lg leading-none">😌</span>
-                        <span class="text-[9px] font-bold text-teal-800 mt-0.5">Calm</span>
+                    <button class="feeling-btn flex flex-col items-center justify-center p-1.5 rounded-xl border border-teal-300 bg-teal-50 hover:bg-teal-100 transition text-center shadow-2xs" data-feeling="Calm">
+                        <span class="text-xl leading-none">😌</span>
+                        <span class="text-[10px] font-bold text-teal-800 mt-0.5">Calm</span>
                     </button>
                 </div>
             </div>
         </aside>
 
-        <!-- Right Main Workspace: Calendar & Handwriting Pad -->
-        <main class="flex-1 flex flex-col gap-2 min-h-0 overflow-hidden">
+        <!-- Right Main Workspace: 2/3 Width (Split into Calendar, YouTube Video, & Handwriting Pad) -->
+        <main class="flex-1 flex flex-col gap-2.5 min-h-0 overflow-hidden">
 
-            <!-- 5 x 7 Calendar Grid Container -->
-            <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2.5 flex flex-col flex-1 min-h-0">
-                <div class="flex items-center justify-between mb-1.5 shrink-0">
-                    <h2 id="calendarTitle" class="text-base font-extrabold text-slate-900 tracking-tight">September 2026</h2>
-                    <span class="text-[11px] font-semibold text-indigo-800 bg-indigo-100 border border-indigo-200 px-2 py-0.5 rounded-full shadow-2xs">
-                        5 × 7 Day Grid
-                    </span>
+            <!-- Top Row: Resized Calendar + YouTube Video Card -->
+            <div class="flex-1 flex flex-col xl:flex-row gap-2.5 min-h-0">
+                
+                <!-- Resized Calendar Grid Container -->
+                <div class="frosted-panel rounded-2xl border border-white/60 shadow-md p-2.5 flex flex-col flex-1 min-h-0">
+                    <div class="flex items-center justify-between mb-1.5 shrink-0">
+                        <h2 id="calendarTitle" class="text-base font-extrabold text-slate-900 tracking-tight">September 2026</h2>
+                        <span class="text-[11px] font-semibold text-indigo-800 bg-indigo-100 border border-indigo-200 px-2 py-0.5 rounded-full shadow-2xs">
+                            5 × 7 Day Grid
+                        </span>
+                    </div>
+
+                    <!-- Days of Week Header -->
+                    <div class="grid grid-cols-7 gap-1 text-center font-bold text-[11px] text-slate-700 uppercase tracking-wider mb-1 shrink-0">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+
+                    <!-- 35 Uniform Grid Slots -->
+                    <div id="calendarGrid" class="grid grid-cols-7 gap-1 flex-1 auto-rows-fr min-h-0"></div>
                 </div>
 
-                <!-- Days of Week Header -->
-                <div class="grid grid-cols-7 gap-1 text-center font-bold text-[11px] text-slate-700 uppercase tracking-wider mb-1 shrink-0">
-                    <div>Sun</div>
-                    <div>Mon</div>
-                    <div>Tue</div>
-                    <div>Wed</div>
-                    <div>Thu</div>
-                    <div>Fri</div>
-                    <div>Sat</div>
+                <!-- YouTube Video Section -->
+                <div class="frosted-panel rounded-2xl border border-white/60 shadow-md p-2.5 flex flex-col w-full xl:w-72 shrink-0 min-h-[180px]">
+                    <div class="flex items-center justify-between mb-1.5 shrink-0">
+                        <div class="flex items-center space-x-1.5">
+                            <i class="fa-brands fa-youtube text-red-600 text-sm"></i>
+                            <h3 class="font-bold text-slate-900 text-xs">Daily Video</h3>
+                        </div>
+                        <button id="changeVideoBtn" class="text-[10px] font-bold text-indigo-700 hover:text-indigo-900 underline">Change URL</button>
+                    </div>
+
+                    <!-- Video Player Container -->
+                    <div class="flex-1 rounded-xl overflow-hidden bg-black/90 relative shadow-inner min-h-0 flex items-center justify-center">
+                        <iframe id="youtubePlayer" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Quick URL Input Bar -->
+                    <div id="videoUrlBar" class="hidden mt-2 pt-2 border-t border-white/60 flex items-center space-x-1">
+                        <input id="videoUrlInput" type="text" placeholder="Paste YouTube link or ID..." class="flex-1 bg-white/95 border border-slate-300 rounded px-2 py-1 text-[11px] text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-600">
+                        <button id="saveVideoBtn" class="bg-indigo-700 text-white font-bold text-[10px] px-2.5 py-1 rounded shadow-xs">Load</button>
+                    </div>
                 </div>
 
-                <!-- 35 Uniform Grid Slots -->
-                <div id="calendarGrid" class="grid grid-cols-7 gap-1 flex-1 auto-rows-fr min-h-0"></div>
             </div>
 
-            <!-- Handwriting & Notes Pad -->
-            <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col h-36 lg:h-40 shrink-0">
-                <div class="flex items-center justify-between pb-1 mb-1 border-b border-white/50 shrink-0">
-                    <div class="flex items-center space-x-1.5">
+            <!-- Single-Line Primary Handwriting Pad (Fills entire space) -->
+            <div class="frosted-panel rounded-2xl border border-white/60 shadow-md p-2.5 flex flex-col h-32 lg:h-36 shrink-0">
+                <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-white/50 shrink-0">
+                    <div class="flex items-center space-x-2">
                         <i class="fa-solid fa-pen-nib text-indigo-600 text-xs"></i>
-                        <h3 class="font-bold text-slate-900 text-xs">Handwriting & Notes Pad</h3>
+                        <h3 class="font-bold text-slate-900 text-xs">Handwriting Practice (1 Line)</h3>
                     </div>
 
                     <!-- Canvas Controls -->
@@ -283,8 +308,8 @@
 
                         <select id="brushSize" class="bg-white/80 border border-slate-300 text-slate-800 text-[10px] font-bold rounded px-1.5 py-0.5 focus:outline-none">
                             <option value="2">Fine</option>
-                            <option value="3" selected>Normal</option>
-                            <option value="6">Thick</option>
+                            <option value="4" selected>Normal</option>
+                            <option value="7">Thick</option>
                         </select>
 
                         <button id="eraserBtn" class="bg-white/80 hover:bg-white text-slate-800 px-2 py-0.5 rounded text-[10px] font-bold transition flex items-center space-x-1 border border-slate-200">
@@ -299,11 +324,11 @@
                     </div>
                 </div>
 
-                <!-- Guided Lined Canvas Area -->
-                <div class="relative w-full flex-1 bg-[#fffefb] rounded-lg border border-white/80 overflow-hidden touch-none shadow-inner min-h-0">
+                <!-- Guided Lined Canvas Area with exactly 1 Full Primary Line Set -->
+                <div class="relative w-full flex-1 bg-[#fffefb] rounded-xl border border-white/80 overflow-hidden touch-none shadow-inner min-h-0">
                     <canvas id="notesCanvas" class="w-full h-full cursor-crosshair"></canvas>
                     <div id="canvasPlaceholder" class="absolute inset-0 flex items-center justify-center text-slate-400 text-xs pointer-events-none select-none">
-                        <span>Practice your handwriting, letters, or daily notes here...</span>
+                        <span>Write your name, letters, or numbers on the guidelines...</span>
                     </div>
                 </div>
             </div>
@@ -316,7 +341,6 @@
 
     <!-- Application Script -->
     <script>
-        // State management
         const state = {
             currentMonth: 8,
             currentYear: 2026,
@@ -324,18 +348,19 @@
             placements: {},
             selectedGreeting: null,
             selectedFeeling: null,
+            youtubeVideoId: '03mq59i_k04',
             draggedItem: null,
             isErasing: false,
             brushColor: '#020617',
-            brushSize: 3
+            brushSize: 4
         };
 
-        // Storage Keys
         const STORAGE_KEY_PLACEMENTS = 'studentCalendarPlacements';
         const STORAGE_KEY_MONTH = 'studentCalendarMonth';
         const STORAGE_KEY_CANVAS = 'studentCalendarCanvas';
         const STORAGE_KEY_GREETING = 'studentCalendarGreeting';
         const STORAGE_KEY_FEELING = 'studentCalendarFeeling';
+        const STORAGE_KEY_VIDEO = 'studentCalendarVideo';
 
         let drawingCanvas = null;
 
@@ -372,6 +397,14 @@
             }
         }
 
+        function saveVideoState() {
+            try {
+                localStorage.setItem(STORAGE_KEY_VIDEO, state.youtubeVideoId);
+            } catch (e) {
+                console.error('Could not save video:', e);
+            }
+        }
+
         function saveCanvasState() {
             if (!drawingCanvas) return;
             try {
@@ -405,6 +438,12 @@
                     state.selectedFeeling = savedFeeling;
                     updateFeelingUI(savedFeeling);
                 }
+
+                const savedVideo = localStorage.getItem(STORAGE_KEY_VIDEO);
+                if (savedVideo) {
+                    state.youtubeVideoId = savedVideo;
+                    youtubePlayer.src = `https://www.youtube.com/embed/${savedVideo}`;
+                }
             } catch (e) {
                 console.error('Could not load saved state:', e);
             }
@@ -423,7 +462,6 @@
 
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-        // DOM Elements
         const monthSelect = document.getElementById('monthSelect');
         const calendarTitle = document.getElementById('calendarTitle');
         const calendarGrid = document.getElementById('calendarGrid');
@@ -444,6 +482,11 @@
         const selectedGreetingText = document.getElementById('selectedGreetingText');
         const feelingBtns = document.querySelectorAll('.feeling-btn');
         const selectedFeelingText = document.getElementById('selectedFeelingText');
+        const youtubePlayer = document.getElementById('youtubePlayer');
+        const changeVideoBtn = document.getElementById('changeVideoBtn');
+        const videoUrlBar = document.getElementById('videoUrlBar');
+        const videoUrlInput = document.getElementById('videoUrlInput');
+        const saveVideoBtn = document.getElementById('saveVideoBtn');
 
         function init() {
             renderTrayItems();
@@ -451,10 +494,10 @@
             initCanvas();
             initGreetings();
             initFeelings();
+            initVideoControls();
             loadSavedState();
         }
 
-        // Greeting Handler
         function initGreetings() {
             greetingBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -488,7 +531,6 @@
             }
         }
 
-        // Feelings Handler
         function initFeelings() {
             feelingBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -522,6 +564,34 @@
             }
         }
 
+        function initVideoControls() {
+            changeVideoBtn.addEventListener('click', () => {
+                videoUrlBar.classList.toggle('hidden');
+                if (!videoUrlBar.classList.contains('hidden')) {
+                    videoUrlInput.focus();
+                }
+            });
+
+            saveVideoBtn.addEventListener('click', () => {
+                const input = videoUrlInput.value.trim();
+                if (!input) return;
+
+                let videoId = input;
+                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                const match = input.match(regExp);
+
+                if (match && match[2].length === 11) {
+                    videoId = match[2];
+                }
+
+                state.youtubeVideoId = videoId;
+                youtubePlayer.src = `https://www.youtube.com/embed/${videoId}`;
+                saveVideoState();
+                videoUrlBar.classList.add('hidden');
+                videoUrlInput.value = '';
+            });
+        }
+
         function renderTrayItems() {
             numbersSection.innerHTML = '';
             for (let i = 1; i <= 31; i++) {
@@ -539,7 +609,7 @@
             badgesSection.innerHTML = '';
             eventBadges.forEach(badge => {
                 const item = document.createElement('div');
-                item.className = `draggable-item ${badge.bg} ${badge.textCol} border ${badge.border} hover:shadow-xs rounded-lg p-1.5 font-bold text-[11px] transition flex items-center space-x-1.5 h-7 px-2 select-none shadow-2xs`;
+                item.className = 'draggable-item ${badge.bg} ${badge.textCol} border ${badge.border} hover:shadow-xs rounded-lg p-1.5 font-bold text-[11px] transition flex items-center space-x-1.5 h-7 px-2 select-none shadow-2xs';
                 item.innerHTML = `<i class="fa-solid ${badge.icon} text-xs"></i><span class="truncate">${badge.text}</span>`;
                 item.dataset.type = 'badge';
                 item.dataset.id = badge.id;
@@ -551,21 +621,20 @@
 
         tabNums.addEventListener('click', () => {
             state.activeTab = 'numbers';
-            tabNums.className = 'px-2 py-0.5 text-xs font-bold rounded-md bg-indigo-700 text-white shadow-xs';
-            tabBadges.className = 'px-2 py-0.5 text-xs font-bold rounded-md bg-white/70 text-slate-700 hover:bg-white';
+            tabNums.className = 'px-2.5 py-1 text-xs font-bold rounded-md bg-indigo-700 text-white shadow-xs';
+            tabBadges.className = 'px-2.5 py-1 text-xs font-bold rounded-md bg-white/70 text-slate-700 hover:bg-white';
             numbersSection.classList.remove('hidden');
             badgesSection.classList.add('hidden');
         });
 
         tabBadges.addEventListener('click', () => {
             state.activeTab = 'badges';
-            tabBadges.className = 'px-2 py-0.5 text-xs font-bold rounded-md bg-indigo-700 text-white shadow-xs';
-            tabNums.className = 'px-2 py-0.5 text-xs font-bold rounded-md bg-white/70 text-slate-700 hover:bg-white';
+            tabBadges.className = 'px-2.5 py-1 text-xs font-bold rounded-md bg-indigo-700 text-white shadow-xs';
+            tabNums.className = 'px-2.5 py-1 text-xs font-bold rounded-md bg-white/70 text-slate-700 hover:bg-white';
             badgesSection.classList.remove('hidden');
             numbersSection.classList.add('hidden');
         });
 
-        // 5 rows x 7 cols = exactly 35 slots with top-right square numbers
         function renderCalendar() {
             calendarGrid.innerHTML = '';
             const month = state.currentMonth;
@@ -609,7 +678,7 @@
         function createDroppedItemElement(item, cellKey, index) {
             const el = document.createElement('div');
             if (item.type === 'number') {
-                el.className = 'w-6 h-6 bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-extrabold rounded-md flex items-center justify-center relative shadow-xs cursor-pointer group/num transition';
+                el.className = 'w-5 h-5 bg-indigo-700 hover:bg-indigo-800 text-white text-[11px] font-extrabold rounded flex items-center justify-center relative shadow-xs cursor-pointer group/num transition';
                 el.innerHTML = `<span>${item.text}</span> <button class="absolute -top-1 -left-1 w-3.5 h-3.5 bg-rose-600 text-white hover:bg-rose-700 rounded-full text-[9px] flex items-center justify-center opacity-0 group-hover/num:opacity-100 transition shadow-2xs remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
             } else {
                 el.className = `${item.bg} text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center justify-between shadow-2xs cursor-pointer transition w-full`;
@@ -729,40 +798,43 @@
             });
         }
 
+        // Single Full-Width Primary Elementary Line Set
         function drawHandwritingGuidelines(ctx, width, height) {
             ctx.save();
             ctx.fillStyle = '#fffefb';
             ctx.fillRect(0, 0, width, height);
 
-            const rowHeight = 44;
+            const rowHeight = Math.min(height * 0.72, 70);
             const halfRow = rowHeight / 2;
-            const topMargin = 16;
+            const topMargin = Math.max((height - rowHeight) / 2, 8);
 
-            for (let y = topMargin; y + rowHeight <= height + 10; y += rowHeight + 14) {
-                ctx.beginPath();
-                ctx.strokeStyle = '#60a5fa';
-                ctx.lineWidth = 1.2;
-                ctx.setLineDash([]);
-                ctx.moveTo(8, y);
-                ctx.lineTo(width - 8, y);
-                ctx.stroke();
+            // Headline (Solid Sky Blue)
+            ctx.beginPath();
+            ctx.strokeStyle = '#60a5fa';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([]);
+            ctx.moveTo(10, topMargin);
+            ctx.lineTo(width - 10, topMargin);
+            ctx.stroke();
 
-                ctx.beginPath();
-                ctx.strokeStyle = '#3b82f6';
-                ctx.lineWidth = 1.2;
-                ctx.setLineDash([6, 5]);
-                ctx.moveTo(8, y + halfRow);
-                ctx.lineTo(width - 8, y + halfRow);
-                ctx.stroke();
+            // Midline (Dashed Sky Blue)
+            ctx.beginPath();
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([8, 6]);
+            ctx.moveTo(10, topMargin + halfRow);
+            ctx.lineTo(width - 10, topMargin + halfRow);
+            ctx.stroke();
 
-                ctx.beginPath();
-                ctx.strokeStyle = '#ef4444';
-                ctx.lineWidth = 1.5;
-                ctx.setLineDash([]);
-                ctx.moveTo(8, y + rowHeight);
-                ctx.lineTo(width - 8, y + rowHeight);
-                ctx.stroke();
-            }
+            // Baseline (Solid Red)
+            ctx.beginPath();
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([]);
+            ctx.moveTo(10, topMargin + rowHeight);
+            ctx.lineTo(width - 10, topMargin + rowHeight);
+            ctx.stroke();
+
             ctx.restore();
         }
 
