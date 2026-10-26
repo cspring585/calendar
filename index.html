@@ -536,6 +536,7 @@
             numbersSection.classList.add('hidden');
         });
 
+        // 5 rows x 7 cols = exactly 35 slots with top-right square numbers & no "Day" text
         function renderCalendar() {
             calendarGrid.innerHTML = '';
             const month = state.currentMonth;
@@ -549,38 +550,43 @@
                 const cellKey = `${year}-${month}-${cellIndex}`;
 
                 const dayCell = document.createElement('div');
-                dayCell.className = 'drop-target bg-white/85 border border-white/80 hover:border-indigo-500 rounded-lg p-1 flex flex-col justify-start relative group transition shadow-2xs min-h-0 overflow-hidden';
+                dayCell.className = 'drop-target bg-white/85 border border-white/80 hover:border-indigo-500 rounded-lg p-1 flex flex-col justify-between relative group transition shadow-2xs min-h-0 overflow-hidden';
                 dayCell.dataset.cellKey = cellKey;
 
-                const cellHeader = document.createElement('div');
-                cellHeader.className = 'flex items-center justify-between mb-0.5';
-                cellHeader.innerHTML = '<span class="text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Day</span>';
-                dayCell.appendChild(cellHeader);
+                // Top row inside cell justified to right for square badge
+                const numberRow = document.createElement('div');
+                numberRow.className = 'w-full flex items-start justify-end';
 
-                const droppedContainer = document.createElement('div');
-                droppedContainer.className = 'flex-1 flex flex-col gap-1 overflow-y-auto min-h-0';
-                droppedContainer.dataset.cellKey = cellKey;
+                // Bottom container inside cell for any event badges
+                const badgesContainer = document.createElement('div');
+                badgesContainer.className = 'w-full flex flex-col gap-0.5 overflow-y-auto min-h-0 mt-0.5';
 
                 if (state.placements[cellKey]) {
                     state.placements[cellKey].forEach((item, itemIndex) => {
                         const itemEl = createDroppedItemElement(item, cellKey, itemIndex);
-                        droppedContainer.appendChild(itemEl);
+                        if (item.type === 'number') {
+                            numberRow.appendChild(itemEl);
+                        } else {
+                            badgesContainer.appendChild(itemEl);
+                        }
                     });
                 }
 
-                dayCell.appendChild(droppedContainer);
+                dayCell.appendChild(numberRow);
+                dayCell.appendChild(badgesContainer);
                 setupDropTarget(dayCell, cellKey);
                 calendarGrid.appendChild(dayCell);
             }
         }
 
+        // Numbers render as square boxes in the top right
         function createDroppedItemElement(item, cellKey, index) {
             const el = document.createElement('div');
             if (item.type === 'number') {
-                el.className = 'bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-extrabold px-1.5 py-0.5 rounded flex items-center justify-between shadow-2xs cursor-pointer transition';
-                el.innerHTML = `<span>${item.text}</span> <button class="hover:text-rose-300 ml-1 text-[10px] px-0.5 remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
+                el.className = 'w-6 h-6 bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-extrabold rounded-md flex items-center justify-center relative shadow-xs cursor-pointer group/num transition';
+                el.innerHTML = `<span>${item.text}</span> <button class="absolute -top-1 -left-1 w-3.5 h-3.5 bg-rose-600 text-white hover:bg-rose-700 rounded-full text-[9px] flex items-center justify-center opacity-0 group-hover/num:opacity-100 transition shadow-2xs remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
             } else {
-                el.className = `${item.bg} text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center justify-between shadow-2xs cursor-pointer transition`;
+                el.className = `${item.bg} text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center justify-between shadow-2xs cursor-pointer transition w-full`;
                 el.innerHTML = `<span class="flex items-center space-x-1 truncate"><i class="fa-solid ${item.icon}"></i><span class="truncate">${item.text}</span></span> <button class="hover:opacity-70 ml-1 text-[10px] remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
             }
 
