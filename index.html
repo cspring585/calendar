@@ -30,25 +30,22 @@
         .crayon-rainbow-bg {
             background-color: #facc15;
             background-image: 
-                /* Paper grain & shading */
                 radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.08) 100%),
-                /* Strong, classic rainbow crayon bands */
                 repeating-linear-gradient(
                     135deg,
-                    rgba(220, 38, 38, 0.72) 0px,      /* Classic Crayon Red */
+                    rgba(220, 38, 38, 0.72) 0px,      /* Crayon Red */
                     rgba(220, 38, 38, 0.72) 60px,
-                    rgba(234, 88, 12, 0.72) 60px,     /* Classic Crayon Orange */
+                    rgba(234, 88, 12, 0.72) 60px,     /* Crayon Orange */
                     rgba(234, 88, 12, 0.72) 120px,
-                    rgba(234, 179, 8, 0.72) 120px,    /* Classic Crayon Yellow */
+                    rgba(234, 179, 8, 0.72) 120px,    /* Crayon Yellow */
                     rgba(234, 179, 8, 0.72) 180px,
-                    rgba(22, 163, 74, 0.72) 180px,    /* Classic Crayon Green */
+                    rgba(22, 163, 74, 0.72) 180px,    /* Crayon Green */
                     rgba(22, 163, 74, 0.72) 240px,
-                    rgba(37, 99, 235, 0.72) 240px,    /* Classic Crayon Blue */
+                    rgba(37, 99, 235, 0.72) 240px,    /* Crayon Blue */
                     rgba(37, 99, 235, 0.72) 300px,
-                    rgba(126, 34, 206, 0.72) 300px,   /* Classic Crayon Purple */
+                    rgba(126, 34, 206, 0.72) 300px,   /* Crayon Purple */
                     rgba(126, 34, 206, 0.72) 360px
                 ),
-                /* Crayon wax texture strokes */
                 repeating-linear-gradient(
                     45deg,
                     rgba(255, 255, 255, 0.18) 0px,
@@ -59,20 +56,12 @@
             background-attachment: fixed;
         }
 
-        /* Frosted translucent cards to let rainbow shine through */
         .frosted-panel {
             background-color: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
 
-        .frosted-subpanel {
-            background-color: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-
-        /* Custom scrollbar for sidebar tray */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -152,7 +141,7 @@
 
             <!-- Tray Helper Footer -->
             <div class="p-3 bg-white/50 border-t border-white/40 text-xs text-slate-700 font-medium flex items-center justify-between">
-                <span>Drag tiles onto the calendar days</span>
+                <span>Drag tiles onto any calendar slot</span>
                 <span id="activeTrayCount" class="font-bold text-indigo-700">31 tiles</span>
             </div>
         </aside>
@@ -166,11 +155,11 @@
                     <h2 id="calendarTitle" class="text-xl font-extrabold text-slate-900 tracking-tight">September 2026</h2>
                     <div class="text-xs font-semibold text-indigo-800 bg-indigo-100/90 border border-indigo-200 px-3 py-1.5 rounded-full flex items-center space-x-1.5 shadow-xs">
                         <i class="fa-solid fa-circle-info"></i>
-                        <span>Drag numbers to the correct date boxes</span>
+                        <span>Drag numbers to any box on the 5×7 grid</span>
                     </div>
                 </div>
 
-                <!-- Days of Week Header -->
+                <!-- Days of Week Header (Sun through Sat) -->
                 <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs text-slate-700 uppercase tracking-wider mb-2">
                     <div class="py-1">Sun</div>
                     <div class="py-1">Mon</div>
@@ -181,7 +170,7 @@
                     <div class="py-1">Sat</div>
                 </div>
 
-                <!-- Calendar Days Grid -->
+                <!-- Calendar Days Grid (5 rows x 7 cols = 35 uniform day slots) -->
                 <div id="calendarGrid" class="grid grid-cols-7 gap-1.5 auto-rows-fr flex-1"></div>
             </div>
 
@@ -199,7 +188,7 @@
                     <!-- Canvas Tools -->
                     <div class="flex items-center space-x-2 flex-wrap gap-y-2">
                         <div class="flex items-center space-x-1 bg-white/70 p-1 rounded-lg border border-white/60">
-                            <button class="w-6 h-6 rounded-full bg-slate-950 border-2 border-white shadow-sm ring-2 ring-indigo-600 color-btn transition" data-color="#020617" title="Black"></button>
+                            <button class="w-6 h-6 rounded-full bg-slate-955 border-2 border-white shadow-sm ring-2 ring-indigo-600 color-btn transition" data-color="#020617" title="Black"></button>
                             <button class="w-6 h-6 rounded-full bg-indigo-700 border-2 border-white shadow-sm color-btn transition" data-color="#4338ca" title="Indigo"></button>
                             <button class="w-6 h-6 rounded-full bg-emerald-700 border-2 border-white shadow-sm color-btn transition" data-color="#047857" title="Emerald"></button>
                             <button class="w-6 h-6 rounded-full bg-rose-700 border-2 border-white shadow-sm color-btn transition" data-color="#be123c" title="Rose"></button>
@@ -405,6 +394,7 @@
             activeTrayCount.textContent = `${eventBadges.length} badges`;
         });
 
+        // 5 rows x 7 columns = exactly 35 day slots
         function renderCalendar() {
             calendarGrid.innerHTML = '';
             const month = state.currentMonth;
@@ -413,24 +403,17 @@
 
             calendarTitle.textContent = `${monthNames[month]} ${year}`;
 
-            const firstDayIndex = new Date(year, month, 1).getDay();
-            const totalDays = new Date(year, month + 1, 0).getDate();
-
-            const totalCellsSoFar = firstDayIndex + totalDays;
-            const totalGridCells = totalCellsSoFar <= 35 ? 35 : 42;
-
-            for (let i = 0; i < totalGridCells; i++) {
+            for (let i = 0; i < 35; i++) {
                 const cellIndex = i;
-                const isCurrentMonthCell = (i >= firstDayIndex && i < firstDayIndex + totalDays);
                 const cellKey = `${year}-${month}-${cellIndex}`;
 
                 const dayCell = document.createElement('div');
-                dayCell.className = `drop-target ${isCurrentMonthCell ? 'bg-white/85 border-white/80 hover:border-indigo-500' : 'bg-white/40 border-white/40 opacity-60'} rounded-xl p-2 min-h-[95px] lg:min-h-[120px] flex flex-col justify-start relative group transition shadow-sm border`;
+                dayCell.className = 'drop-target bg-white/85 border border-white/80 hover:border-indigo-500 rounded-xl p-2 min-h-[95px] lg:min-h-[120px] flex flex-col justify-start relative group transition shadow-sm';
                 dayCell.dataset.cellKey = cellKey;
 
                 const cellHeader = document.createElement('div');
                 cellHeader.className = 'flex items-center justify-between mb-1';
-                cellHeader.innerHTML = `<span class="text-[10px] font-extrabold ${isCurrentMonthCell ? 'text-slate-500' : 'text-slate-400'} uppercase tracking-wider">${isCurrentMonthCell ? 'Day' : 'Slot'}</span>`;
+                cellHeader.innerHTML = '<span class="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Day</span>';
                 dayCell.appendChild(cellHeader);
 
                 const droppedContainer = document.createElement('div');
