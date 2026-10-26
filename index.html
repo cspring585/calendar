@@ -25,6 +25,7 @@
             background-color: rgba(79, 70, 229, 0.15);
             border-color: #4f46e5;
         }
+        /* Custom scrollbar for sidebar tray */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -137,7 +138,7 @@
                 <div id="calendarGrid" class="grid grid-cols-7 gap-1.5 auto-rows-fr flex-1"></div>
             </div>
 
-            <!-- Touch Writing / Notes Area -->
+            <!-- Touch Writing / Elementary Handwriting Pad -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 lg:p-6 flex flex-col">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-3 pb-3 border-b border-slate-100 gap-2">
                     <div>
@@ -145,7 +146,7 @@
                             <i class="fa-solid fa-pen-nib text-indigo-500"></i>
                             <span>Notes & Handwriting Pad</span>
                         </h3>
-                        <p class="text-xs text-slate-500">Write homework assignments, notes, or draw with your finger or stylus</p>
+                        <p class="text-xs text-slate-500">Practice writing letters, numbers, or notes on primary ruling lines</p>
                     </div>
 
                     <!-- Canvas Tools -->
@@ -175,7 +176,7 @@
                     </div>
                 </div>
 
-                <div class="relative w-full h-48 sm:h-56 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200 overflow-hidden touch-none">
+                <div class="relative w-full h-64 bg-[#fffefb] rounded-xl border border-slate-200 overflow-hidden touch-none shadow-inner">
                     <canvas id="notesCanvas" class="w-full h-full cursor-crosshair"></canvas>
                     <div id="canvasPlaceholder" class="absolute inset-0 flex items-center justify-center text-slate-400 text-sm pointer-events-none select-none">
                         <span>Write your notes or draw here with finger or stylus...</span>
@@ -224,6 +225,9 @@
         const STORAGE_KEY_MONTH = 'studentCalendarMonth';
         const STORAGE_KEY_CANVAS = 'studentCalendarCanvas';
 
+        // Separate user drawing canvas from guideline background
+        let drawingCanvas = null;
+
         function saveCalendarState() {
             try {
                 localStorage.setItem(STORAGE_KEY_PLACEMENTS, JSON.stringify(state.placements));
@@ -234,8 +238,9 @@
         }
 
         function saveCanvasState() {
+            if (!drawingCanvas) return;
             try {
-                localStorage.setItem(STORAGE_KEY_CANVAS, notesCanvas.toDataURL());
+                localStorage.setItem(STORAGE_KEY_CANVAS, drawingCanvas.toDataURL());
             } catch (e) {
                 console.error('Could not save canvas state:', e);
             }
@@ -517,36 +522,96 @@
             });
         }
 
-        function initCanvas() {
+        // Draw Elementary School Style Handwriting Guidelines
+        function drawHandwritingGuidelines(ctx, width, height) {
+            ctx.save();
+            ctx.fillStyle = '#fffefb';
+            ctx.fillRect(0, 0, width, height);
+
+            const rowHeight = 72; // Height per 3-line set
+            const halfRow = rowHeight / 2;
+            const topMargin = 28;
+
+            for (let y = topMargin; y + rowHeight <= height + 20; y += rowHeight + 24) {
+                // Top Headline (Solid Sky Blue)
+                ctx.beginPath();
+                ctx.strokeStyle = '#93c5fd';
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([]);
+                ctx.moveTo(12, y);
+                ctx.lineTo(width - 12, y);
+                ctx.stroke();
+
+                // Midline (Dashed Sky Blue)
+                ctx.beginPath();
+                ctx.strokeStyle = '#60a5fa';
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([8, 6]);
+                ctx.moveTo(12, y + halfRow);
+                ctx.lineTo(width - 12, y + halfRow);
+                ctx.stroke();
+
+                // Baseline (Solid Rose / Red)
+                ctx.beginPath();
+                ctx.strokeStyle = '#f87171';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([]);
+                ctx.moveTo(12, y + rowHeight);
+                ctx.lineTo(width - 12, y + rowHeight);
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        function renderCompositeCanvas() {
             const ctx = notesCanvas.getContext('2d');
+            drawHandwritingGuidelines(ctx, notesCanvas.width, notesCanvas.height);
+            if (drawingCanvas) {
+                ctx.drawImage(drawingCanvas, 0, 0);
+            }
+        }
+
+        function initCanvas() {
             let isDrawing = false;
             let lastX = 0;
             let lastY = 0;
 
+            drawingCanvas = document.createElement('canvas');
+
             function resizeCanvas() {
                 const rect = notesCanvas.parentElement.getBoundingClientRect();
-                
-                const tempCanvas = document.createElement('canvas');
-                tempCanvas.width = notesCanvas.width;
-                tempCanvas.height = notesCanvas.height;
-                const tempCtx = tempCanvas.getContext('2d');
-                if (notesCanvas.width > 0 && notesCanvas.height > 0) {
-                    tempCtx.drawImage(notesCanvas, 0, 0);
+                const newWidth = Math.floor(rect.width);
+                const newHeight = Math.floor(rect.height);
+
+                const tempCopy = document.createElement('canvas');
+                tempCopy.width = drawingCanvas.width;
+                tempCopy.height = drawingCanvas.height;
+                const tempCtx = tempCopy.getContext('2d');
+                if (drawingCanvas.width > 0 && drawingCanvas.height > 0) {
+                    tempCtx.drawImage(drawingCanvas, 0, 0);
                 }
 
-                notesCanvas.width = rect.width;
-                notesCanvas.height = rect.height;
+                notesCanvas.width = newWidth;
+                notesCanvas.height = newHeight;
+                drawingCanvas.width = newWidth;
+                drawingCanvas.height = newHeight;
 
+                const dCtx = drawingCanvas.getContext('2d');
                 const savedImage = localStorage.getItem(STORAGE_KEY_CANVAS);
+
                 if (savedImage) {
                     const img = new Image();
                     img.onload = () => {
-                        ctx.drawImage(img, 0, 0);
+                        dCtx.drawImage(img, 0, 0);
+                        renderCompositeCanvas();
                         canvasPlaceholder.classList.add('hidden');
                     };
                     img.src = savedImage;
-                } else if (tempCanvas.width > 0) {
-                    ctx.drawImage(tempCanvas, 0, 0);
+                } else if (tempCopy.width > 0) {
+                    dCtx.drawImage(tempCopy, 0, 0);
+                    renderCompositeCanvas();
+                } else {
+                    renderCompositeCanvas();
                 }
             }
 
@@ -572,17 +637,28 @@
                 const currentX = clientX - rect.left;
                 const currentY = clientY - rect.top;
 
-                ctx.beginPath();
-                ctx.moveTo(lastX, lastY);
-                ctx.lineTo(currentX, currentY);
-                ctx.strokeStyle = state.isErasing ? '#f8fafc' : state.brushColor;
-                ctx.lineWidth = state.isErasing ? state.brushSize * 4 : state.brushSize;
-                ctx.lineCap = 'round';
-                ctx.lineJoin = 'round';
-                ctx.stroke();
+                const dCtx = drawingCanvas.getContext('2d');
+                dCtx.beginPath();
+                dCtx.moveTo(lastX, lastY);
+                dCtx.lineTo(currentX, currentY);
+
+                if (state.isErasing) {
+                    dCtx.globalCompositeOperation = 'destination-out';
+                    dCtx.lineWidth = state.brushSize * 4;
+                } else {
+                    dCtx.globalCompositeOperation = 'source-over';
+                    dCtx.strokeStyle = state.brushColor;
+                    dCtx.lineWidth = state.brushSize;
+                }
+
+                dCtx.lineCap = 'round';
+                dCtx.lineJoin = 'round';
+                dCtx.stroke();
 
                 lastX = currentX;
                 lastY = currentY;
+
+                renderCompositeCanvas();
             }
 
             function endPosition() {
@@ -603,8 +679,11 @@
         }
 
         function clearCanvas() {
-            const ctx = notesCanvas.getContext('2d');
-            ctx.clearRect(0, 0, notesCanvas.width, notesCanvas.height);
+            if (drawingCanvas) {
+                const dCtx = drawingCanvas.getContext('2d');
+                dCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+            }
+            renderCompositeCanvas();
             canvasPlaceholder.classList.remove('hidden');
             localStorage.removeItem(STORAGE_KEY_CANVAS);
         }
