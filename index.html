@@ -151,4 +151,303 @@
             tabBadges.className = 'px-2.5 py-1 text-xs font-semibold rounded-md bg-indigo-600 text-white transition';
             tabNums.className = 'px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-200 text-slate-700 hover:bg-slate-300 transition';
             badgesSection.classList.remove('hidden');
-            numbersSection.
+            numbersSection.classList.add('hidden');
+            activeTrayCount.textContent = `${eventBadges.length} badges`;
+        });
+
+        // Render Calendar Grid
+        function renderCalendar() {
+            calendarGrid.innerHTML = '';
+            const month = state.currentMonth;
+            const year = month >= 8 ? 2026 : 2027;
+            state.currentYear = year;
+
+            calendarTitle.textContent = `${monthNames[month]} ${year}`;
+
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const totalDays = new Date(year, month + 1, 0).getDate();
+
+            const totalCellsSoFar = firstDayIndex + totalDays;
+            const totalGridCells = totalCellsSoFar <= 35 ? 35 : 42;
+
+            for (let i = 0; i < totalGridCells; i++) {
+                const cellIndex = i;
+                const isCurrentMonthCell = (i >= firstDayIndex && i < firstDayIndex + totalDays);
+                const cellKey = `${year}-${month}-${cellIndex}`;
+
+                const dayCell = document.createElement('div');
+                dayCell.className = `drop-target bg-white border ${isCurrentMonthCell ? 'border-slate-200 hover:border-indigo-400' : 'border-slate-100 bg-slate-50/40 opacity-60'} rounded-xl p-2 min-h-[95px] lg:min-h-[120px] flex flex-col justify-start relative group transition shadow-xs`;
+                dayCell.dataset.cellKey = cellKey;
+
+                const cellHeader = document.createElement('div');
+                cellHeader.className = 'flex items-center justify-between mb-1';
+                cellHeader.innerHTML = `<span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">${isCurrentMonthCell ? 'Day' : 'Slot'}</span>`;
+                dayCell.appendChild(cellHeader);
+
+                const droppedContainer = document.createElement('div');
+                droppedContainer.className = 'flex-1 flex flex-col gap-1.5 overflow-y-auto max-h-[85px]';
+                droppedContainer.dataset.cellKey = cellKey;
+
+                if (state.placements[cellKey]) {
+                    state.placements[cellKey].forEach((item, itemIndex) => {
+                        const itemEl = createDroppedItemElement(item, cellKey, itemIndex);
+                        droppedContainer.appendChild(itemEl);
+                    });
+                }
+
+                dayCell.appendChild(droppedContainer);
+                setupDropTarget(dayCell, cellKey);
+                calendarGrid.appendChild(dayCell);
+            }
+        }
+
+        // Create HTML element for an item placed on a calendar cell
+        function createDroppedItemElement(item, cellKey, index) {
+            const el = document.createElement('div');
+            if (item.type === 'number') {
+                el.className = 'bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold px-2 py-1.5 rounded-lg flex items-center justify-between shadow-sm animate-fadeIn cursor-pointer transition';
+                el.innerHTML = `<span>${item.text}</span> <button class="hover:text-rose-200 ml-1 text-xs px-1 py-0.5 rounded remove-item" title="Return to tray"><i class="fa-solid fa-xmark"></i></button>`;
+            } else {
+                el.className = `${item.bg} text-xs font-semibold px-2.5 py-2 rounded-lg flex items-center justify-between shadow-sm animate-fadeIn cursor-pointer transition`;
+                el.innerHTML = `<span class="flex items-center space-x-1.5 truncate"><i class="fa-solid ${item.icon}"></i><span class="truncate">${item.text}</span></span> <button class="hover:opacity-70 ml-1 text-xs remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
+            }
+
+            const removeItem = (e) => {
+                if (e) e.stopPropagation();
+                state.placements[cellKey].splice(index, 1);
+                if (state.placements[cellKey].length === 0) {
+                    delete state.placements[cellKey];
+                }
+                saveCalendarState();
+                renderCalendar();
+            };
+
+            el.querySelector('.remove-item').addEventListener('click', removeItem);
+            el.addEventListener('dblclick', removeItem);
+
+            return el;
+        }
+
+        // Month selector change
+        monthSelect.addEventListener('change', (e) => {
+            state.currentMonth = parseInt(e.target.value);
+            saveCalendarState();
+            renderCalendar();
+        });
+
+        // Reset Button
+        resetBtn.addEventListener('click', () => {
+            state.placements = {};
+            localStorage.removeItem(STORAGE_KEY_PLACEMENTS);
+            localStorage.removeItem(STORAGE_KEY_CANVAS);
+            renderCalendar();
+            clearCanvas();
+            showModal('Reset Successful', 'The calendar and notes canvas have been reset.');
+        });
+
+        // Drag and Touch Drop Logic
+        function attachDragListeners(element, itemData) {
+            element.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', JSON.stringify(itemData));
+            });
+            element.setAttribute('draggable', 'true');
+
+            element.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                state.draggedItem = itemData;
+
+                dragGhost.textContent = itemData.text;
+                dragGhost.classList.remove('hidden');
+                dragGhost.style.left = `${touch.clientX}px`;
+                dragGhost.style.top = `${touch.clientY}px`;
+            }, { passive: false });
+
+            element.addEventListener('touchmove', (e) => {
+                if (!state.draggedItem) return;
+                const touch = e.touches[0];
+                dragGhost.style.left = `${touch.clientX}px`;
+                dragGhost.style.top = `${touch.clientY}px`;
+
+                const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                const dropTarget = elemBelow ? elemBelow.closest('.drop-target') : null;
+                
+                document.querySelectorAll('.drop-target').forEach(el => el.classList.remove('drag-over'));
+                if (dropTarget) dropTarget.classList.add('drag-over');
+            }, { passive: false });
+
+            element.addEventListener('touchend', (e) => {
+                if (!state.draggedItem) return;
+                dragGhost.classList.add('hidden');
+                const touch = e.changedTouches[0];
+                const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                const dropTarget = elemBelow ? elemBelow.closest('.drop-target') : null;
+
+                document.querySelectorAll('.drop-target').forEach(el => el.classList.remove('drag-over'));
+
+                if (dropTarget) {
+                    const cellKey = dropTarget.dataset.cellKey;
+                    if (cellKey) {
+                        if (!state.placements[cellKey]) state.placements[cellKey] = [];
+                        state.placements[cellKey].push({ ...state.draggedItem });
+                        saveCalendarState();
+                        renderCalendar();
+                    }
+                }
+                state.draggedItem = null;
+            });
+        }
+
+        function setupDropTarget(dropTarget, cellKey) {
+            dropTarget.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropTarget.classList.add('drag-over');
+            });
+
+            dropTarget.addEventListener('dragleave', () => {
+                dropTarget.classList.remove('drag-over');
+            });
+
+            dropTarget.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropTarget.classList.remove('drag-over');
+                try {
+                    const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+                    if (!state.placements[cellKey]) state.placements[cellKey] = [];
+                    state.placements[cellKey].push(data);
+                    saveCalendarState();
+                    renderCalendar();
+                } catch (err) {
+                    console.error('Drop error:', err);
+                }
+            });
+        }
+
+        // Canvas / Touch Writing Implementation
+        function initCanvas() {
+            const ctx = notesCanvas.getContext('2d');
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+
+            function resizeCanvas() {
+                const rect = notesCanvas.parentElement.getBoundingClientRect();
+                
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = notesCanvas.width;
+                tempCanvas.height = notesCanvas.height;
+                const tempCtx = tempCanvas.getContext('2d');
+                if (notesCanvas.width > 0 && notesCanvas.height > 0) {
+                    tempCtx.drawImage(notesCanvas, 0, 0);
+                }
+
+                notesCanvas.width = rect.width;
+                notesCanvas.height = rect.height;
+
+                const savedImage = localStorage.getItem(STORAGE_KEY_CANVAS);
+                if (savedImage) {
+                    const img = new Image();
+                    img.onload = () => {
+                        ctx.drawImage(img, 0, 0);
+                        canvasPlaceholder.classList.add('hidden');
+                    };
+                    img.src = savedImage;
+                } else if (tempCanvas.width > 0) {
+                    ctx.drawImage(tempCanvas, 0, 0);
+                }
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            function startPosition(e) {
+                isDrawing = true;
+                canvasPlaceholder.classList.add('hidden');
+                const rect = notesCanvas.getBoundingClientRect();
+                const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+                lastX = clientX - rect.left;
+                lastY = clientY - rect.top;
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                const rect = notesCanvas.getBoundingClientRect();
+                const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+                const currentX = clientX - rect.left;
+                const currentY = clientY - rect.top;
+
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(currentX, currentY);
+                ctx.strokeStyle = state.isErasing ? '#f8fafc' : state.brushColor;
+                ctx.lineWidth = state.isErasing ? state.brushSize * 4 : state.brushSize;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.stroke();
+
+                lastX = currentX;
+                lastY = currentY;
+            }
+
+            function endPosition() {
+                if (isDrawing) {
+                    isDrawing = false;
+                    saveCanvasState();
+                }
+            }
+
+            // Mouse events
+            notesCanvas.addEventListener('mousedown', startPosition);
+            notesCanvas.addEventListener('mousemove', draw);
+            notesCanvas.addEventListener('mouseup', endPosition);
+            notesCanvas.addEventListener('mouseleave', endPosition);
+
+            // Touch events
+            notesCanvas.addEventListener('touchstart', startPosition, { passive: false });
+            notesCanvas.addEventListener('touchmove', draw, { passive: false });
+            notesCanvas.addEventListener('touchend', endPosition);
+        }
+
+        function clearCanvas() {
+            const ctx = notesCanvas.getContext('2d');
+            ctx.clearRect(0, 0, notesCanvas.width, notesCanvas.height);
+            canvasPlaceholder.classList.remove('hidden');
+            localStorage.removeItem(STORAGE_KEY_CANVAS);
+        }
+
+        clearCanvasBtn.addEventListener('click', clearCanvas);
+
+        // Eraser Toggle
+        eraserBtn.addEventListener('click', () => {
+            state.isErasing = !state.isErasing;
+            if (state.isErasing) {
+                eraserBtn.className = 'bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 shadow-sm';
+                eraserText.textContent = 'Eraser On';
+            } else {
+                eraserBtn.className = 'bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1';
+                eraserText.textContent = 'Eraser';
+            }
+        });
+
+        // Brush Size
+        brushSizeSelect.addEventListener('change', (e) => {
+            state.brushSize = parseInt(e.target.value);
+        });
+
+        // Color Picker Buttons
+        colorBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.brushColor = btn.dataset.color;
+                state.isErasing = false;
+                eraserBtn.className = 'bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1';
+                eraserText.textContent = 'Eraser';
+                colorBtns.forEach(b => b.classList.remove('ring-2', 'ring-indigo-500'));
+                btn.classList.add('ring-2', 'ring-indigo-500');
+            });
+        });
+
+        window.onload = init;
+    </script>
