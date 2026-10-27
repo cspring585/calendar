@@ -198,7 +198,7 @@
                 </div>
             </div>
 
-            <!-- Number & Badge Tray Section (Tactile Number Tiles, Tray Reset Option Removed) -->
+            <!-- Number & Badge Tray Section (Tactile Number Tiles) -->
             <div class="flex-[1.8] min-h-[145px] rounded-xl border-2 border-amber-300/80 bg-white/80 p-2 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
                 <div class="flex items-center justify-between pb-1.5 border-b border-amber-200 shrink-0">
                     <span class="font-extrabold text-slate-800 text-[11px] flex items-center space-x-1">
@@ -269,7 +269,7 @@
 
         </aside>
 
-        <!-- Right 80% Workspace (Grid: Calendar & YouTube/Weather Top, Handwriting Pad Bottom) -->
+        <!-- Right 80% Workspace: Grid with Calendar & YouTube/Weather Top, Handwriting Pad Bottom (150px Height) -->
         <div class="flex-1 w-full lg:w-4/5 h-full grid grid-rows-[minmax(0,1fr)_150px] gap-2 min-h-0 overflow-hidden">
 
             <!-- Row 1: Calendar + Right Column (YouTube, Weather, & Morning Greeting) -->
@@ -283,7 +283,7 @@
                             <h2 id="calendarTitle" class="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">September 2026</h2>
                             <span id="seasonBadge" class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-200 text-sky-900 shadow-2xs">Autumn</span>
                         </div>
-                        <!-- Today Indicator with Abbreviated Month Label Removed -->
+                        <!-- Clean Today Star Badge (Abbreviated month removed) -->
                         <div id="todayIndicator" class="text-[10px] font-extrabold text-amber-900 bg-amber-200 border-2 border-amber-400 px-2.5 py-0.5 rounded-full flex items-center space-x-1 shadow-2xs">
                             <span class="text-xs">⭐</span>
                             <span>Today</span>
@@ -396,25 +396,12 @@
 
             </div>
 
-            <!-- Row 2: Stationary Handwriting Pad (Expanded height by 0.25 inches) -->
+            <!-- Row 2: Stationary Handwriting Pad (Freehand Canvas without problematic stamps) -->
             <div class="panel-handwriting rounded-2xl border-2 border-purple-300 shadow-md p-1.5 flex flex-col h-full shrink-0 min-w-0 overflow-hidden">
                 <div class="flex items-center justify-between pb-0.5 mb-0.5 border-b border-purple-200 shrink-0">
                     <div class="flex items-center space-x-2">
                         <i class="fa-solid fa-pen-nib text-indigo-700 text-xs"></i>
                         <h3 class="font-extrabold text-purple-950 text-xs">Handwriting Practice (1 Line)</h3>
-                        
-                        <div class="flex items-center space-x-1 pl-2 border-l border-purple-200">
-                            <span class="text-[9px] font-bold text-purple-900 hidden sm:inline">Trace Stamp:</span>
-                            <button id="stampTodayBtn" class="px-2 py-0.5 bg-white hover:bg-purple-100 text-purple-900 border border-purple-300 rounded-lg text-[9px] font-bold shadow-2xs cursor-pointer" title="Stamp 'Today is' for tracing">
-                                ✏️ "Today is..."
-                            </button>
-                            <button id="stampDayBtn" class="px-2 py-0.5 bg-white hover:bg-purple-100 text-purple-900 border border-purple-300 rounded-lg text-[9px] font-bold shadow-2xs cursor-pointer" title="Stamp today's day of week">
-                                📅 Day
-                            </button>
-                            <button id="stampFeelBtn" class="px-2 py-0.5 bg-white hover:bg-purple-100 text-purple-900 border border-purple-300 rounded-lg text-[9px] font-bold shadow-2xs cursor-pointer" title="Stamp 'I feel...'">
-                                💛 "I feel..."
-                            </button>
-                        </div>
                     </div>
 
                     <!-- Canvas Palette Tools -->
@@ -470,7 +457,6 @@
             selectedGreeting: null,
             selectedFeeling: null,
             selectedWeather: 'sunny',
-            stampedText: null,
             youtubeVideoId: '03mq59i_k04',
             draggedItem: null,
             isErasing: false,
@@ -588,7 +574,14 @@
                 const savedMonth = localStorage.getItem(STORAGE_KEY_MONTH);
                 if (savedMonth !== null) {
                     state.currentMonth = parseInt(savedMonth, 10);
-                    if (monthSelect) monthSelect.value = state.currentMonth;
+                } else {
+                    // Default to current real-world month if no state exists
+                    const now = new Date();
+                    state.currentMonth = now.getMonth();
+                }
+
+                if (monthSelect) {
+                    monthSelect.value = state.currentMonth.toString();
                 }
 
                 const savedPlacements = localStorage.getItem(STORAGE_KEY_PLACEMENTS);
@@ -650,7 +643,6 @@
         ];
 
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
         const monthSelect = document.getElementById('monthSelect');
         const calendarTitle = document.getElementById('calendarTitle');
@@ -676,9 +668,6 @@
         const selectedFeelingText = document.getElementById('selectedFeelingText');
         const weatherBtns = document.querySelectorAll('.weather-btn');
         const selectedWeatherText = document.getElementById('selectedWeatherText');
-        const stampTodayBtn = document.getElementById('stampTodayBtn');
-        const stampDayBtn = document.getElementById('stampDayBtn');
-        const stampFeelBtn = document.getElementById('stampFeelBtn');
         const youtubePlayer = document.getElementById('youtubePlayer');
         const changeVideoBtn = document.getElementById('changeVideoBtn');
         const videoUrlBar = document.getElementById('videoUrlBar');
@@ -686,15 +675,14 @@
         const saveVideoBtn = document.getElementById('saveVideoBtn');
 
         function init() {
+            loadSavedState();
             renderTrayItems();
             renderCalendar();
             initCanvas();
             initGreetings();
             initFeelings();
             initWeather();
-            initStamps();
             initVideoControls();
-            loadSavedState();
         }
 
         // Weather Picker Routine
@@ -721,31 +709,6 @@
             if (selectedWeatherText) {
                 selectedWeatherText.textContent = weather.charAt(0).toUpperCase() + weather.slice(1);
             }
-        }
-
-        // Handwriting Traceable Stamps
-        function initStamps() {
-            stampTodayBtn.addEventListener('click', () => {
-                applyTraceStamp("Today is...");
-            });
-
-            stampDayBtn.addEventListener('click', () => {
-                const now = new Date();
-                const dayName = dayNames[now.getDay()];
-                applyTraceStamp(dayName);
-            });
-
-            stampFeelBtn.addEventListener('click', () => {
-                const feel = state.selectedFeeling ? ("I feel " + state.selectedFeeling) : "I feel calm";
-                applyTraceStamp(feel);
-            });
-        }
-
-        function applyTraceStamp(text) {
-            state.stampedText = text;
-            renderCompositeCanvas();
-            canvasPlaceholder.classList.add('hidden');
-            playSuccessChime();
         }
 
         function initGreetings() {
@@ -1007,19 +970,24 @@
             playPopChime();
         });
 
-        // Fixed Reset All Action
+        // Reset All: Keeps the currently selected month and clears notes/tiles/feelings
         resetBtn.addEventListener('click', () => {
             state.placements = {};
             state.selectedGreeting = null;
             state.selectedFeeling = null;
             state.selectedWeather = 'sunny';
-            state.stampedText = null;
+            
+            // Retain currently chosen month on dropdown
+            if (monthSelect) {
+                state.currentMonth = parseInt(monthSelect.value, 10);
+            }
             
             localStorage.removeItem(STORAGE_KEY_PLACEMENTS);
             localStorage.removeItem(STORAGE_KEY_CANVAS);
             localStorage.removeItem(STORAGE_KEY_GREETING);
             localStorage.removeItem(STORAGE_KEY_FEELING);
             localStorage.removeItem(STORAGE_KEY_WEATHER);
+            saveCalendarState();
             
             updateGreetingUI(null);
             updateFeelingUI(null);
@@ -1109,7 +1077,7 @@
             });
         }
 
-        // Single Full-Width Primary Elementary Line Set with Exact Capital Letter Cap-Height Matching
+        // Single Full-Width Primary Elementary Line Set
         function drawHandwritingGuidelines(ctx, width, height) {
             ctx.save();
             ctx.fillStyle = '#fffefb';
@@ -1145,28 +1113,6 @@
             ctx.moveTo(8, topMargin + rowHeight);
             ctx.lineTo(width - 8, topMargin + rowHeight);
             ctx.stroke();
-
-            // Capital letters scale to exactly fill the distance between the red baseline and top blue headline
-            if (state.stampedText) {
-                ctx.save();
-                ctx.fillStyle = 'rgba(148, 163, 184, 0.55)';
-                
-                // Iteratively compute font size so actual Cap-Height matches rowHeight exactly
-                let testSize = Math.floor(rowHeight * 1.35);
-                ctx.font = '700 ' + testSize + "px 'Lexend', sans-serif";
-                let capMetrics = ctx.measureText("T");
-                let actualCapHeight = capMetrics.actualBoundingBoxAscent || (testSize * 0.72);
-                
-                if (actualCapHeight > 0) {
-                    testSize = Math.floor(testSize * (rowHeight / actualCapHeight));
-                }
-                
-                ctx.font = '700 ' + testSize + "px 'Lexend', sans-serif";
-                ctx.textBaseline = 'alphabetic';
-                // Aligns capital letter base on red line and top touching blue headline
-                ctx.fillText(state.stampedText, 16, topMargin + rowHeight);
-                ctx.restore();
-            }
 
             ctx.restore();
         }
@@ -1293,7 +1239,6 @@
                 const dCtx = drawingCanvas.getContext('2d');
                 dCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
             }
-            state.stampedText = null;
             renderCompositeCanvas();
             canvasPlaceholder.classList.remove('hidden');
             localStorage.removeItem(STORAGE_KEY_CANVAS);
