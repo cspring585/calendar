@@ -114,10 +114,10 @@
     <!-- Main Workspace -->
     <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative p-1.5 lg:p-2 gap-1.5 lg:gap-2">
 
-        <!-- Left Column: Exactly 1/5 width (20%), dynamically filled vertically with no scrolling needed -->
+        <!-- Left Column: 1/5 width (20%) -->
         <aside class="w-full lg:w-1/5 h-full frosted-panel border border-white/60 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden p-1.5 gap-1.5 justify-between">
             
-            <!-- Dynamic Good Morning Card -->
+            <!-- Good Morning Card -->
             <div class="flex-1 min-h-[65px] max-h-[110px] rounded-lg overflow-hidden border border-amber-200/90 shadow-inner bg-gradient-to-r from-amber-100/70 via-yellow-100/90 to-amber-100/70 p-1.5 relative flex flex-col items-center justify-center shrink-0">
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-70">
                     <svg class="w-24 h-24 text-amber-300 animate-[spin_40s_linear_infinite]" viewBox="0 0 100 100" fill="currentColor">
@@ -158,7 +158,6 @@
                 </div>
                 
                 <div id="trayContainer" class="flex-1 flex flex-col justify-center overflow-hidden py-0.5">
-                    <!-- 7 columns fits 1-31 without scroll in full view -->
                     <div id="numbersSection" class="grid grid-cols-7 gap-1 h-full items-center"></div>
                     <div id="badgesSection" class="hidden space-y-1 overflow-y-auto max-h-24"></div>
                 </div>
@@ -237,38 +236,38 @@
 
         </aside>
 
-        <!-- Right Main Workspace: Remaining 4/5 width (Calendar, YouTube Video, & Handwriting Pad) -->
+        <!-- Right Main Workspace: 4/5 width (Calendar 1/4 of total page, Wide Rectangle YouTube, Handwriting Pad) -->
         <main class="flex-1 flex flex-col gap-1.5 min-h-0 overflow-hidden">
 
-            <!-- Top Row: Calendar + YouTube Video Card -->
+            <!-- Top Row: Calendar (1/4 total page width = 31.25% of the 4/5 main area) + Rectangular YouTube Card -->
             <div class="flex-1 flex flex-col lg:flex-row gap-1.5 min-h-0">
                 
-                <!-- Calendar Grid Container -->
-                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col flex-1 min-h-0">
+                <!-- Calendar Card: 1/4 of the total page width on large screens -->
+                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col w-full lg:w-[31.25%] shrink-0 min-h-0">
                     <div class="flex items-center justify-between mb-1 shrink-0">
-                        <h2 id="calendarTitle" class="text-sm font-extrabold text-slate-900 tracking-tight">September 2026</h2>
-                        <span class="text-[10px] font-semibold text-indigo-800 bg-indigo-100 border border-indigo-200 px-2 py-0.5 rounded-full shadow-2xs">
+                        <h2 id="calendarTitle" class="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight">September 2026</h2>
+                        <span class="text-[9px] font-semibold text-indigo-800 bg-indigo-100 border border-indigo-200 px-1.5 py-0.5 rounded-full shadow-2xs">
                             5 × 7 Grid
                         </span>
                     </div>
 
                     <!-- Days of Week Header -->
-                    <div class="grid grid-cols-7 gap-1 text-center font-bold text-[10px] text-slate-700 uppercase tracking-wider mb-0.5 shrink-0">
-                        <div>Sun</div>
-                        <div>Mon</div>
-                        <div>Tue</div>
-                        <div>Wed</div>
-                        <div>Thu</div>
-                        <div>Fri</div>
-                        <div>Sat</div>
+                    <div class="grid grid-cols-7 gap-0.5 text-center font-bold text-[9px] text-slate-700 uppercase tracking-wider mb-0.5 shrink-0">
+                        <div>S</div>
+                        <div>M</div>
+                        <div>T</div>
+                        <div>W</div>
+                        <div>T</div>
+                        <div>F</div>
+                        <div>S</div>
                     </div>
 
                     <!-- 35 Uniform Grid Slots -->
-                    <div id="calendarGrid" class="grid grid-cols-7 gap-1 flex-1 auto-rows-fr min-h-0"></div>
+                    <div id="calendarGrid" class="grid grid-cols-7 gap-0.5 flex-1 auto-rows-fr min-h-0"></div>
                 </div>
 
-                <!-- YouTube Video Section -->
-                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col w-full lg:w-72 shrink-0 min-h-[160px]">
+                <!-- Wide Rectangular YouTube Video Section -->
+                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col flex-1 min-h-0">
                     <div class="flex items-center justify-between mb-1 shrink-0">
                         <div class="flex items-center space-x-1.5">
                             <i class="fa-brands fa-youtube text-red-600 text-sm"></i>
@@ -277,13 +276,13 @@
                         <button id="changeVideoBtn" class="text-[10px] font-bold text-indigo-700 hover:text-indigo-900 underline">Change URL</button>
                     </div>
 
-                    <!-- Video Player Container -->
-                    <div class="flex-1 rounded-lg overflow-hidden bg-black/90 relative shadow-inner min-h-0 flex items-center justify-center">
+                    <!-- 16:9 Landscape Rectangular Video Player -->
+                    <div class="flex-1 rounded-lg overflow-hidden bg-black/90 relative shadow-inner min-h-0 flex items-center justify-center aspect-video w-full">
                         <iframe id="youtubePlayer" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
 
                     <!-- Quick URL Input Bar -->
-                    <div id="videoUrlBar" class="hidden mt-1.5 pt-1.5 border-t border-white/60 flex items-center space-x-1">
+                    <div id="videoUrlBar" class="hidden mt-1.5 pt-1.5 border-t border-white/60 flex items-center space-x-1 shrink-0">
                         <input id="videoUrlInput" type="text" placeholder="Paste YouTube link or ID..." class="flex-1 bg-white/95 border border-slate-300 rounded px-2 py-0.5 text-[10px] text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-600">
                         <button id="saveVideoBtn" class="bg-indigo-700 text-white font-bold text-[10px] px-2 py-0.5 rounded shadow-xs">Load</button>
                     </div>
@@ -650,7 +649,7 @@
                 const cellKey = `${year}-${month}-${cellIndex}`;
 
                 const dayCell = document.createElement('div');
-                dayCell.className = 'drop-target bg-white/85 border border-white/80 hover:border-indigo-500 rounded-lg p-1 flex flex-col justify-between relative group transition shadow-2xs min-h-0 overflow-hidden';
+                dayCell.className = 'drop-target bg-white/85 border border-white/80 hover:border-indigo-500 rounded p-0.5 flex flex-col justify-between relative group transition shadow-2xs min-h-0 overflow-hidden';
                 dayCell.dataset.cellKey = cellKey;
 
                 const numberRow = document.createElement('div');
@@ -680,11 +679,11 @@
         function createDroppedItemElement(item, cellKey, index) {
             const el = document.createElement('div');
             if (item.type === 'number') {
-                el.className = 'w-4 h-4 sm:w-5 sm:h-5 bg-indigo-700 hover:bg-indigo-800 text-white text-[10px] sm:text-[11px] font-extrabold rounded flex items-center justify-center relative shadow-xs cursor-pointer group/num transition';
-                el.innerHTML = `<span>${item.text}</span> <button class="absolute -top-1 -left-1 w-3.5 h-3.5 bg-rose-600 text-white hover:bg-rose-700 rounded-full text-[9px] flex items-center justify-center opacity-0 group-hover/num:opacity-100 transition shadow-2xs remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
+                el.className = 'w-3.5 h-3.5 sm:w-4 sm:h-4 bg-indigo-700 hover:bg-indigo-800 text-white text-[9px] sm:text-[10px] font-extrabold rounded flex items-center justify-center relative shadow-xs cursor-pointer group/num transition';
+                el.innerHTML = `<span>${item.text}</span> <button class="absolute -top-1 -left-1 w-3 h-3 bg-rose-600 text-white hover:bg-rose-700 rounded-full text-[8px] flex items-center justify-center opacity-0 group-hover/num:opacity-100 transition shadow-2xs remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
             } else {
-                el.className = `${item.bg} text-[9px] font-bold px-1 py-0.5 rounded flex items-center justify-between shadow-2xs cursor-pointer transition w-full`;
-                el.innerHTML = `<span class="flex items-center space-x-1 truncate"><i class="fa-solid ${item.icon}"></i><span class="truncate">${item.text}</span></span> <button class="hover:opacity-70 ml-1 text-[9px] remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
+                el.className = `${item.bg} text-[8px] font-bold px-1 py-0.5 rounded flex items-center justify-between shadow-2xs cursor-pointer transition w-full`;
+                el.innerHTML = `<span class="flex items-center space-x-1 truncate"><i class="fa-solid ${item.icon}"></i><span class="truncate">${item.text}</span></span> <button class="hover:opacity-70 ml-0.5 text-[8px] remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
             }
 
             const removeItem = (e) => {
