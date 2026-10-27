@@ -272,8 +272,8 @@
 
         </aside>
 
-        <!-- Right 80% Workspace: Grid with Calendar & YouTube/Weather Top, Handwriting Pad Bottom -->
-        <div class="flex-1 w-full lg:w-4/5 h-full grid grid-rows-[minmax(0,1fr)_125px] gap-2 min-h-0 overflow-hidden">
+        <!-- Right 80% Workspace: Grid with Calendar & YouTube/Weather Top, Handwriting Pad Bottom (Increased to 150px) -->
+        <div class="flex-1 w-full lg:w-4/5 h-full grid grid-rows-[minmax(0,1fr)_150px] gap-2 min-h-0 overflow-hidden">
 
             <!-- Row 1: Calendar + Right Column (YouTube, Weather, & Morning Greeting) -->
             <div class="w-full h-full flex flex-col lg:flex-row gap-2 min-h-0 overflow-hidden">
@@ -399,7 +399,7 @@
 
             </div>
 
-            <!-- Row 2: Stationary Handwriting Pad (Spans directly under Calendar and Right Column) -->
+            <!-- Row 2: Stationary Handwriting Pad (Expanded height by 0.25 inches) -->
             <div class="panel-handwriting rounded-2xl border-2 border-purple-300 shadow-md p-1.5 flex flex-col h-full shrink-0 min-w-0 overflow-hidden">
                 <div class="flex items-center justify-between pb-0.5 mb-0.5 border-b border-purple-200 shrink-0">
                     <div class="flex items-center space-x-2">
@@ -1126,13 +1126,13 @@
             });
         }
 
-        // Single Full-Width Primary Elementary Line Set with Full-Height Sized Traceable Lettering
+        // Single Full-Width Primary Elementary Line Set with Sized Traceable Lettering
         function drawHandwritingGuidelines(ctx, width, height) {
             ctx.save();
             ctx.fillStyle = '#fffefb';
             ctx.fillRect(0, 0, width, height);
 
-            const rowHeight = Math.min(height * 0.76, 68);
+            const rowHeight = Math.min(height * 0.76, 80);
             const halfRow = rowHeight / 2;
             const topMargin = Math.max((height - rowHeight) / 2, 4);
 
@@ -1163,11 +1163,11 @@
             ctx.lineTo(width - 8, topMargin + rowHeight);
             ctx.stroke();
 
-            // Sized to exactly fill the height between the top headline and baseline
+            // Sized to cleanly fill the height between the top headline and red baseline
             if (state.stampedText) {
                 ctx.save();
                 ctx.fillStyle = 'rgba(148, 163, 184, 0.55)';
-                const fontSize = Math.floor(rowHeight * 0.98);
+                const fontSize = Math.floor(rowHeight * 0.95);
                 ctx.font = 'bold ' + fontSize + "px 'Lexend', sans-serif";
                 ctx.textBaseline = 'alphabetic';
                 ctx.fillText(state.stampedText, 16, topMargin + rowHeight - 2);
