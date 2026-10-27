@@ -114,13 +114,13 @@
     <!-- Main Workspace -->
     <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative p-1.5 lg:p-2 gap-1.5 lg:gap-2">
 
-        <!-- Left Column: Exactly 1/5 width (20%) -->
-        <aside class="w-full lg:w-1/5 h-full frosted-panel border border-white/60 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden p-1.5 gap-1.5 justify-between">
+        <!-- Left Column: Exactly 35% width -->
+        <aside class="w-full lg:w-[35%] h-full frosted-panel border border-white/60 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden p-2 gap-2 justify-between">
             
             <!-- Good Morning Card -->
-            <div class="flex-1 min-h-[65px] max-h-[110px] rounded-lg overflow-hidden border border-amber-200/90 shadow-inner bg-gradient-to-r from-amber-100/70 via-yellow-100/90 to-amber-100/70 p-1.5 relative flex flex-col items-center justify-center shrink-0">
+            <div class="flex-1 min-h-[75px] max-h-[120px] rounded-lg overflow-hidden border border-amber-200/90 shadow-inner bg-gradient-to-r from-amber-100/70 via-yellow-100/90 to-amber-100/70 p-2 relative flex flex-col items-center justify-center shrink-0">
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-70">
-                    <svg class="w-24 h-24 text-amber-300 animate-[spin_40s_linear_infinite]" viewBox="0 0 100 100" fill="currentColor">
+                    <svg class="w-28 h-28 text-amber-300 animate-[spin_40s_linear_infinite]" viewBox="0 0 100 100" fill="currentColor">
                         <g stroke="currentColor" stroke-width="3" stroke-linecap="round">
                             <line x1="50" y1="10" x2="50" y2="2" />
                             <line x1="50" y1="90" x2="50" y2="98" />
@@ -135,161 +135,99 @@
                         <circle cx="50" cy="50" r="22" fill="#fbbf24" />
                     </svg>
                 </div>
-                <div class="relative z-10 flex flex-col items-center px-2 py-0.5 bg-white/80 backdrop-blur-xs rounded-xl border border-amber-300/80 shadow-xs text-center">
-                    <div class="flex items-center space-x-1">
-                        <span class="text-base leading-none">☀️</span>
-                        <span class="font-bubble text-sm sm:text-base text-amber-950 font-bold leading-tight">Good Morning!</span>
+                <div class="relative z-10 flex flex-col items-center px-3 py-1 bg-white/80 backdrop-blur-xs rounded-xl border border-amber-300/80 shadow-xs text-center">
+                    <div class="flex items-center space-x-1.5">
+                        <span class="text-xl leading-none">☀️</span>
+                        <span class="font-bubble text-base sm:text-lg text-amber-950 font-bold leading-tight">Good Morning!</span>
                     </div>
-                    <span class="text-[9px] font-bold text-amber-900/80 hidden sm:block">Have a great day</span>
+                    <span class="text-[10px] font-bold text-amber-900/80">Have a great day</span>
                 </div>
             </div>
 
             <!-- Number & Badge Tray Section -->
-            <div class="flex-[1.4] min-h-[110px] rounded-lg border border-white/70 bg-white/50 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs">
+            <div class="flex-[1.5] min-h-[120px] rounded-lg border border-white/70 bg-white/50 p-2 flex flex-col justify-between shrink-0 shadow-2xs">
                 <div class="flex items-center justify-between pb-1 border-b border-white/50 shrink-0">
-                    <span class="font-bold text-slate-800 text-[10px] flex items-center space-x-1">
+                    <span class="font-bold text-slate-800 text-xs flex items-center space-x-1">
                         <i class="fa-solid fa-shapes text-indigo-600"></i>
                         <span>Tray</span>
                     </span>
                     <div class="flex space-x-1">
-                        <button id="tabNums" class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-indigo-700 text-white shadow-2xs">Nums</button>
-                        <button id="tabBadges" class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white">Badges</button>
+                        <button id="tabNums" class="px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-700 text-white shadow-2xs">Nums</button>
+                        <button id="tabBadges" class="px-2 py-0.5 text-[10px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white">Badges</button>
                     </div>
                 </div>
                 
-                <div id="trayContainer" class="flex-1 flex flex-col justify-center overflow-hidden py-0.5">
-                    <div id="numbersSection" class="grid grid-cols-7 gap-1 h-full items-center"></div>
-                    <div id="badgesSection" class="hidden space-y-1 overflow-y-auto max-h-24"></div>
-                </div>
-            </div>
-
-            <!-- Morning Greeting Card -->
-            <div class="flex-1 min-h-[70px] max-h-[105px] rounded-lg border border-white/70 bg-white/50 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs">
-                <div class="flex items-center justify-between pb-0.5 border-b border-white/50 shrink-0">
-                    <span class="text-[10px] font-extrabold text-slate-800 flex items-center space-x-1">
-                        <i class="fa-solid fa-handshake-angle text-indigo-600 text-xs"></i>
-                        <span>Greeting</span>
-                    </span>
-                    <span id="selectedGreetingText" class="text-[8px] font-bold text-slate-500 uppercase tracking-wider">Choose</span>
-                </div>
-                <div class="grid grid-cols-5 gap-1 flex-1 items-center pt-0.5" id="greetingsGrid">
-                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition shadow-2xs" data-greeting="Fist Bump" title="Fist Bump">
-                        <span class="text-base leading-none">👊</span>
-                        <span class="text-[7.5px] font-bold text-sky-900 mt-0.5 truncate w-full text-center">Fist</span>
-                    </button>
-                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition shadow-2xs" data-greeting="High Five" title="High Five">
-                        <span class="text-base leading-none">✋</span>
-                        <span class="text-[7.5px] font-bold text-amber-900 mt-0.5 truncate w-full text-center">Five</span>
-                    </button>
-                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition shadow-2xs" data-greeting="Handshake" title="Handshake">
-                        <span class="text-base leading-none">🤝</span>
-                        <span class="text-[7.5px] font-bold text-emerald-900 mt-0.5 truncate w-full text-center">Shake</span>
-                    </button>
-                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition shadow-2xs" data-greeting="Heart Hands" title="Heart Hands">
-                        <span class="text-base leading-none">🫶</span>
-                        <span class="text-[7.5px] font-bold text-rose-900 mt-0.5 truncate w-full text-center">Heart</span>
-                    </button>
-                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition shadow-2xs" data-greeting="Hug" title="Hug">
-                        <span class="text-base leading-none">🫂</span>
-                        <span class="text-[7.5px] font-bold text-purple-900 mt-0.5 truncate w-full text-center">Hug</span>
-                    </button>
+                <div id="trayContainer" class="flex-1 flex flex-col justify-center overflow-hidden py-1">
+                    <div id="numbersSection" class="grid grid-cols-7 gap-1.5 h-full items-center"></div>
+                    <div id="badgesSection" class="hidden space-y-1 overflow-y-auto max-h-28"></div>
                 </div>
             </div>
 
             <!-- Feelings Check-in Card -->
-            <div class="flex-[1.1] min-h-[85px] max-h-[125px] rounded-lg border border-white/70 bg-white/50 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs">
-                <div class="flex items-center justify-between pb-0.5 border-b border-white/50 shrink-0">
-                    <span class="text-[10px] font-extrabold text-slate-800 flex items-center space-x-1">
+            <div class="flex-[1.2] min-h-[95px] max-h-[140px] rounded-lg border border-white/70 bg-white/50 p-2 flex flex-col justify-between shrink-0 shadow-2xs">
+                <div class="flex items-center justify-between pb-1 border-b border-white/50 shrink-0">
+                    <span class="text-xs font-extrabold text-slate-800 flex items-center space-x-1">
                         <i class="fa-solid fa-face-smile text-amber-500 text-xs"></i>
                         <span>Feelings</span>
                     </span>
-                    <span id="selectedFeelingText" class="text-[8px] font-bold text-slate-500 uppercase tracking-wider">Select</span>
+                    <span id="selectedFeelingText" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Select</span>
                 </div>
                 
-                <div class="grid grid-cols-3 gap-1 flex-1 items-center pt-0.5" id="feelingsGrid">
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-2xs" data-feeling="Happy">
-                        <span class="text-sm leading-none">😊</span>
-                        <span class="text-[8px] font-bold text-emerald-800 mt-0.5">Happy</span>
+                <div class="grid grid-cols-3 gap-1.5 flex-1 items-center pt-1" id="feelingsGrid">
+                    <button class="feeling-btn h-full max-h-[48px] flex flex-col items-center justify-center p-1 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-2xs" data-feeling="Happy">
+                        <span class="text-base leading-none">😊</span>
+                        <span class="text-[9px] font-bold text-emerald-800 mt-0.5">Happy</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition text-center shadow-2xs" data-feeling="Sad">
-                        <span class="text-sm leading-none">😢</span>
-                        <span class="text-[8px] font-bold text-sky-800 mt-0.5">Sad</span>
+                    <button class="feeling-btn h-full max-h-[48px] flex flex-col items-center justify-center p-1 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition text-center shadow-2xs" data-feeling="Sad">
+                        <span class="text-base leading-none">😢</span>
+                        <span class="text-[9px] font-bold text-sky-800 mt-0.5">Sad</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition text-center shadow-2xs" data-feeling="Angry">
-                        <span class="text-sm leading-none">😡</span>
-                        <span class="text-[8px] font-bold text-rose-800 mt-0.5">Angry</span>
+                    <button class="feeling-btn h-full max-h-[48px] flex flex-col items-center justify-center p-1 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition text-center shadow-2xs" data-feeling="Angry">
+                        <span class="text-base leading-none">😡</span>
+                        <span class="text-[9px] font-bold text-rose-800 mt-0.5">Angry</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition text-center shadow-2xs" data-feeling="Scared">
-                        <span class="text-sm leading-none">😨</span>
-                        <span class="text-[8px] font-bold text-purple-800 mt-0.5">Scared</span>
+                    <button class="feeling-btn h-full max-h-[48px] flex flex-col items-center justify-center p-1 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition text-center shadow-2xs" data-feeling="Scared">
+                        <span class="text-base leading-none">😨</span>
+                        <span class="text-[9px] font-bold text-purple-800 mt-0.5">Scared</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition text-center shadow-2xs" data-feeling="Excited">
-                        <span class="text-sm leading-none">🤪</span>
-                        <span class="text-[8px] font-bold text-amber-800 mt-0.5">Excited</span>
+                    <button class="feeling-btn h-full max-h-[48px] flex flex-col items-center justify-center p-1 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition text-center shadow-2xs" data-feeling="Excited">
+                        <span class="text-base leading-none">🤪</span>
+                        <span class="text-[9px] font-bold text-amber-800 mt-0.5">Excited</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-teal-300 bg-teal-50 hover:bg-teal-100 transition text-center shadow-2xs" data-feeling="Calm">
-                        <span class="text-sm leading-none">😌</span>
-                        <span class="text-[8px] font-bold text-teal-800 mt-0.5">Calm</span>
+                    <button class="feeling-btn h-full max-h-[48px] flex flex-col items-center justify-center p-1 rounded-lg border border-teal-300 bg-teal-50 hover:bg-teal-100 transition text-center shadow-2xs" data-feeling="Calm">
+                        <span class="text-base leading-none">😌</span>
+                        <span class="text-[9px] font-bold text-teal-800 mt-0.5">Calm</span>
                     </button>
                 </div>
             </div>
 
         </aside>
 
-        <!-- Right Main Workspace: Calendar (Dynamic fill), Top-Aligned YouTube Card (1/5 width), & Handwriting Pad -->
-        <main class="flex-1 flex flex-col gap-1.5 min-h-0 overflow-hidden">
+        <!-- Center Workspace: Calendar (Fills remaining 30%) + Handwriting Pad -->
+        <main class="flex-1 flex flex-col gap-1.5 min-w-0 min-h-0 overflow-hidden">
 
-            <!-- Top Row: Calendar + Proportional 16:9 YouTube Video Card -->
-            <div class="flex-1 flex flex-col lg:flex-row gap-1.5 min-h-0 items-start">
-                
-                <!-- Calendar Card: Dynamically fills all remaining space and stretches full row height -->
-                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col flex-1 min-w-0 h-full min-h-0">
-                    <div class="flex items-center justify-between mb-1 shrink-0">
-                        <h2 id="calendarTitle" class="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight">September 2026</h2>
-                        <span class="text-[9px] font-semibold text-indigo-800 bg-indigo-100 border border-indigo-200 px-1.5 py-0.5 rounded-full shadow-2xs">
-                            5 × 7 Grid
-                        </span>
-                    </div>
-
-                    <!-- Days of Week Header -->
-                    <div class="grid grid-cols-7 gap-0.5 text-center font-bold text-[9px] text-slate-700 uppercase tracking-wider mb-0.5 shrink-0">
-                        <div>Sun</div>
-                        <div>Mon</div>
-                        <div>Tue</div>
-                        <div>Wed</div>
-                        <div>Thu</div>
-                        <div>Fri</div>
-                        <div>Sat</div>
-                    </div>
-
-                    <!-- 35 Uniform Grid Slots -->
-                    <div id="calendarGrid" class="grid grid-cols-7 gap-0.5 flex-1 auto-rows-fr min-h-0"></div>
+            <!-- Calendar Card: Dynamically fills all center space -->
+            <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col flex-1 min-w-0 min-h-0">
+                <div class="flex items-center justify-between mb-1 shrink-0">
+                    <h2 id="calendarTitle" class="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight">September 2026</h2>
+                    <span class="text-[9px] font-semibold text-indigo-800 bg-indigo-100 border border-indigo-200 px-1.5 py-0.5 rounded-full shadow-2xs">
+                        5 × 7 Grid
+                    </span>
                 </div>
 
-                <!-- Right Column for YouTube Card: Matches 1/5 width (20%), aligned to top, not stretching vertically -->
-                <div class="w-full lg:w-1/5 shrink-0 flex flex-col self-start">
-                    <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col w-full h-auto">
-                        <div class="flex items-center justify-between mb-1 shrink-0">
-                            <div class="flex items-center space-x-1.5">
-                                <i class="fa-brands fa-youtube text-red-600 text-sm"></i>
-                                <h3 class="font-bold text-slate-900 text-xs">Daily Video</h3>
-                            </div>
-                            <button id="changeVideoBtn" class="text-[10px] font-bold text-indigo-700 hover:text-indigo-900 underline">Change URL</button>
-                        </div>
-
-                        <!-- 16:9 Landscape Rectangular Video Player (Height proportional to width) -->
-                        <div class="w-full aspect-video rounded-lg overflow-hidden bg-black/90 relative shadow-inner flex items-center justify-center">
-                            <iframe id="youtubePlayer" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-
-                        <!-- Quick URL Input Bar -->
-                        <div id="videoUrlBar" class="hidden mt-1.5 pt-1.5 border-t border-white/60 flex items-center space-x-1 shrink-0">
-                            <input id="videoUrlInput" type="text" placeholder="Paste link..." class="flex-1 bg-white/95 border border-slate-300 rounded px-2 py-0.5 text-[10px] text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-600">
-                            <button id="saveVideoBtn" class="bg-indigo-700 text-white font-bold text-[10px] px-2 py-0.5 rounded shadow-xs">Load</button>
-                        </div>
-                    </div>
+                <!-- Days of Week Header -->
+                <div class="grid grid-cols-7 gap-0.5 text-center font-bold text-[9px] text-slate-700 uppercase tracking-wider mb-0.5 shrink-0">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
                 </div>
 
+                <!-- 35 Uniform Grid Slots -->
+                <div id="calendarGrid" class="grid grid-cols-7 gap-0.5 flex-1 auto-rows-fr min-h-0"></div>
             </div>
 
             <!-- Single-Line Primary Handwriting Pad -->
@@ -337,6 +275,67 @@
             </div>
 
         </main>
+
+        <!-- Right Column: Exactly 35% width, Top-Aligned YouTube Video Card & Morning Greeting Card -->
+        <aside class="w-full lg:w-[35%] h-full frosted-panel border border-white/60 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden p-2 gap-2 justify-between">
+            
+            <!-- YouTube Video Section -->
+            <div class="flex-1 rounded-lg border border-white/70 bg-white/50 p-2 flex flex-col justify-between shrink-0 shadow-2xs">
+                <div class="flex items-center justify-between pb-1 mb-1 border-b border-white/50 shrink-0">
+                    <div class="flex items-center space-x-1.5">
+                        <i class="fa-brands fa-youtube text-red-600 text-sm"></i>
+                        <h3 class="font-bold text-slate-900 text-xs">Daily Video</h3>
+                    </div>
+                    <button id="changeVideoBtn" class="text-[10px] font-bold text-indigo-700 hover:text-indigo-900 underline">Change URL</button>
+                </div>
+
+                <!-- 16:9 Landscape Rectangular Video Player -->
+                <div class="w-full aspect-video rounded-lg overflow-hidden bg-black/90 relative shadow-inner flex items-center justify-center my-auto">
+                    <iframe id="youtubePlayer" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <!-- Quick URL Input Bar -->
+                <div id="videoUrlBar" class="hidden mt-1 pt-1 border-t border-white/60 flex items-center space-x-1 shrink-0">
+                    <input id="videoUrlInput" type="text" placeholder="Paste link..." class="flex-1 bg-white/95 border border-slate-300 rounded px-2 py-0.5 text-[10px] text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-600">
+                    <button id="saveVideoBtn" class="bg-indigo-700 text-white font-bold text-[10px] px-2 py-0.5 rounded shadow-xs">Load</button>
+                </div>
+            </div>
+
+            <!-- Morning Greeting Card (Moved here) -->
+            <div class="min-h-[85px] max-h-[120px] rounded-lg border border-white/70 bg-white/50 p-2 flex flex-col justify-between shrink-0 shadow-2xs">
+                <div class="flex items-center justify-between pb-1 border-b border-white/50 shrink-0">
+                    <span class="text-xs font-extrabold text-slate-800 flex items-center space-x-1">
+                        <i class="fa-solid fa-handshake-angle text-indigo-600 text-xs"></i>
+                        <span>Morning Greeting</span>
+                    </span>
+                    <span id="selectedGreetingText" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Choose</span>
+                </div>
+                <div class="grid grid-cols-5 gap-1.5 flex-1 items-center pt-1" id="greetingsGrid">
+                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-1 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition shadow-2xs" data-greeting="Fist Bump" title="Fist Bump">
+                        <span class="text-lg leading-none">👊</span>
+                        <span class="text-[9px] font-bold text-sky-900 mt-0.5 truncate w-full text-center">Fist</span>
+                    </button>
+                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-1 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition shadow-2xs" data-greeting="High Five" title="High Five">
+                        <span class="text-lg leading-none">✋</span>
+                        <span class="text-[9px] font-bold text-amber-900 mt-0.5 truncate w-full text-center">Five</span>
+                    </button>
+                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-1 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition shadow-2xs" data-greeting="Handshake" title="Handshake">
+                        <span class="text-lg leading-none">🤝</span>
+                        <span class="text-[9px] font-bold text-emerald-900 mt-0.5 truncate w-full text-center">Shake</span>
+                    </button>
+                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-1 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition shadow-2xs" data-greeting="Heart Hands" title="Heart Hands">
+                        <span class="text-lg leading-none">🫶</span>
+                        <span class="text-[9px] font-bold text-rose-900 mt-0.5 truncate w-full text-center">Heart</span>
+                    </button>
+                    <button class="greeting-btn h-full max-h-[52px] flex flex-col items-center justify-center p-1 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition shadow-2xs" data-greeting="Hug" title="Hug">
+                        <span class="text-lg leading-none">🫂</span>
+                        <span class="text-[9px] font-bold text-purple-900 mt-0.5 truncate w-full text-center">Hug</span>
+                    </button>
+                </div>
+            </div>
+
+        </aside>
+
     </div>
 
     <!-- Drag Ghost Element -->
@@ -527,10 +526,10 @@
             });
             if (greeting) {
                 selectedGreetingText.textContent = `${greeting}!`;
-                selectedGreetingText.className = 'text-[8px] font-black text-indigo-800 uppercase tracking-wider';
+                selectedGreetingText.className = 'text-[9px] font-black text-indigo-800 uppercase tracking-wider';
             } else {
                 selectedGreetingText.textContent = 'Choose';
-                selectedGreetingText.className = 'text-[8px] font-bold text-slate-500 uppercase tracking-wider';
+                selectedGreetingText.className = 'text-[9px] font-bold text-slate-500 uppercase tracking-wider';
             }
         }
 
@@ -560,10 +559,10 @@
             });
             if (feeling) {
                 selectedFeelingText.textContent = `${feeling}!`;
-                selectedFeelingText.className = 'text-[8px] font-black text-indigo-800 uppercase tracking-wider';
+                selectedFeelingText.className = 'text-[9px] font-black text-indigo-800 uppercase tracking-wider';
             } else {
                 selectedFeelingText.textContent = 'Select';
-                selectedFeelingText.className = 'text-[8px] font-bold text-slate-500 uppercase tracking-wider';
+                selectedFeelingText.className = 'text-[9px] font-bold text-slate-500 uppercase tracking-wider';
             }
         }
 
@@ -624,16 +623,16 @@
 
         tabNums.addEventListener('click', () => {
             state.activeTab = 'numbers';
-            tabNums.className = 'px-1.5 py-0.5 text-[9px] font-bold rounded bg-indigo-700 text-white shadow-2xs';
-            tabBadges.className = 'px-1.5 py-0.5 text-[9px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white';
+            tabNums.className = 'px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-700 text-white shadow-2xs';
+            tabBadges.className = 'px-2 py-0.5 text-[10px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white';
             numbersSection.classList.remove('hidden');
             badgesSection.classList.add('hidden');
         });
 
         tabBadges.addEventListener('click', () => {
             state.activeTab = 'badges';
-            tabBadges.className = 'px-1.5 py-0.5 text-[9px] font-bold rounded bg-indigo-700 text-white shadow-2xs';
-            tabNums.className = 'px-1.5 py-0.5 text-[9px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white';
+            tabBadges.className = 'px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-700 text-white shadow-2xs';
+            tabNums.className = 'px-2 py-0.5 text-[10px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white';
             badgesSection.classList.remove('hidden');
             numbersSection.classList.add('hidden');
         });
