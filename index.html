@@ -8,10 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter & Bubblegum Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <!-- Google Fonts Inter, Bubblegum Sans, & Fredoka -->
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; touch-action: manipulation; }
+        body { font-family: 'Fredoka', 'Inter', sans-serif; touch-action: manipulation; }
         .font-bubble { font-family: 'Bubblegum Sans', cursive, sans-serif; }
         .draggable-item {
             cursor: grab;
@@ -23,7 +23,7 @@
             transition: background-color 0.15s, border-color 0.15s;
         }
         .drop-target.drag-over {
-            background-color: rgba(79, 70, 229, 0.25);
+            background-color: rgba(99, 102, 241, 0.25);
             border-color: #4338ca;
         }
         
@@ -58,9 +58,9 @@
         }
 
         .frosted-panel {
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         ::-webkit-scrollbar {
@@ -79,19 +79,19 @@
 <body class="h-full crayon-rainbow-bg text-slate-800 flex flex-col overflow-hidden">
 
     <!-- Top Navigation Bar -->
-    <header class="frosted-panel border-b border-white/50 px-3 py-1.5 flex items-center justify-between shrink-0 shadow-sm z-20">
+    <header class="frosted-panel border-b border-white/60 px-3 py-1.5 flex items-center justify-between shrink-0 shadow-sm z-20">
         <div class="flex items-center space-x-2">
             <div class="w-7 h-7 bg-indigo-700 rounded-lg flex items-center justify-center text-white shadow-sm">
                 <i class="fa-solid fa-calendar-days text-xs"></i>
             </div>
             <div>
-                <h1 class="font-bold text-slate-900 text-xs sm:text-sm leading-tight">Student Calendar & Check-in</h1>
-                <p class="text-[10px] text-slate-600 hidden md:block">Fill calendar • Choose greeting & feeling • Watch daily video • Write notes</p>
+                <h1 class="font-bold text-slate-900 text-xs sm:text-sm leading-tight">Student Calendar & Morning Routine</h1>
+                <p class="text-[10px] text-slate-600 hidden md:block">Fill calendar • Choose greeting & feeling • Daily song & practice</p>
             </div>
         </div>
 
         <div class="flex items-center space-x-2">
-            <select id="monthSelect" class="bg-white/95 border border-slate-300 text-slate-800 text-xs rounded-lg px-2 py-1 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-xs">
+            <select id="monthSelect" class="bg-white/95 border border-slate-300 text-slate-800 text-xs rounded-lg px-2.5 py-1 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-xs cursor-pointer">
                 <option value="8">September 2026</option>
                 <option value="9">October 2026</option>
                 <option value="10">November 2026</option>
@@ -115,11 +115,11 @@
     <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative p-1.5 lg:p-2 gap-1.5 lg:gap-2">
 
         <!-- Left Column: Exactly 20% width -->
-        <aside class="w-full lg:w-1/5 h-full frosted-panel border border-white/60 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden p-1.5 gap-1.5 justify-between">
+        <aside class="w-full lg:w-1/5 h-full frosted-panel border border-white/70 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden p-1.5 gap-1.5 justify-between">
             
-            <!-- Good Morning Card -->
-            <div class="flex-1 min-h-[65px] max-h-[110px] rounded-lg overflow-hidden border border-amber-200/90 shadow-inner bg-gradient-to-r from-amber-100/70 via-yellow-100/90 to-amber-100/70 p-1.5 relative flex flex-col items-center justify-center shrink-0">
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-70">
+            <!-- Good Morning Banner -->
+            <div class="flex-1 min-h-[65px] max-h-[105px] rounded-lg overflow-hidden border border-amber-200 shadow-inner bg-gradient-to-r from-amber-100/80 via-yellow-100/90 to-amber-100/80 p-1.5 relative flex flex-col items-center justify-center shrink-0">
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-60">
                     <svg class="w-24 h-24 text-amber-300 animate-[spin_40s_linear_infinite]" viewBox="0 0 100 100" fill="currentColor">
                         <g stroke="currentColor" stroke-width="3" stroke-linecap="round">
                             <line x1="50" y1="10" x2="50" y2="2" />
@@ -135,38 +135,39 @@
                         <circle cx="50" cy="50" r="22" fill="#fbbf24" />
                     </svg>
                 </div>
-                <div class="relative z-10 flex flex-col items-center px-2 py-0.5 bg-white/80 backdrop-blur-xs rounded-xl border border-amber-300/80 shadow-xs text-center">
-                    <div class="flex items-center space-x-1">
-                        <span class="text-base leading-none">☀️</span>
-                        <span class="font-bubble text-sm sm:text-base text-amber-950 font-bold leading-tight">Good Morning!</span>
+                <div class="relative z-10 flex flex-col items-center px-2.5 py-0.5 bg-white/85 backdrop-blur-xs rounded-xl border border-amber-300 shadow-xs text-center">
+                    <div class="flex items-center space-x-1.5">
+                        <span class="text-lg leading-none">☀️</span>
+                        <span class="font-bubble text-base sm:text-lg text-amber-950 font-bold leading-tight">Good Morning!</span>
                     </div>
                     <span class="text-[9px] font-bold text-amber-900/80 hidden sm:block">Have a great day</span>
                 </div>
             </div>
 
-            <!-- Number & Badge Tray Section -->
-            <div class="flex-[1.4] min-h-[110px] rounded-lg border border-white/70 bg-white/50 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs">
+            <!-- Number & Badge Tray Section (Tiles dynamically stretch to fill height and width) -->
+            <div class="flex-[1.8] min-h-[140px] rounded-lg border border-white/70 bg-white/60 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs">
                 <div class="flex items-center justify-between pb-1 border-b border-white/50 shrink-0">
-                    <span class="font-bold text-slate-800 text-[10px] flex items-center space-x-1">
+                    <span class="font-bold text-slate-800 text-[11px] flex items-center space-x-1">
                         <i class="fa-solid fa-shapes text-indigo-600"></i>
-                        <span>Tray</span>
+                        <span>Number Tiles</span>
                     </span>
                     <div class="flex space-x-1">
-                        <button id="tabNums" class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-indigo-700 text-white shadow-2xs">Nums</button>
-                        <button id="tabBadges" class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white">Badges</button>
+                        <button id="tabNums" class="px-2 py-0.5 text-[9px] font-bold rounded bg-indigo-700 text-white shadow-2xs">Nums</button>
+                        <button id="tabBadges" class="px-2 py-0.5 text-[9px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white">Badges</button>
                     </div>
                 </div>
                 
-                <div id="trayContainer" class="flex-1 flex flex-col justify-center overflow-hidden py-0.5">
-                    <div id="numbersSection" class="grid grid-cols-7 gap-1 h-full items-center"></div>
-                    <div id="badgesSection" class="hidden space-y-1 overflow-y-auto max-h-24"></div>
+                <!-- Container fills remaining space; grid has 5 rows so 31 tiles fill the entire card evenly -->
+                <div id="trayContainer" class="flex-1 w-full h-full min-h-0 pt-1">
+                    <div id="numbersSection" class="grid grid-cols-7 grid-rows-5 gap-1 w-full h-full"></div>
+                    <div id="badgesSection" class="hidden space-y-1 overflow-y-auto h-full"></div>
                 </div>
             </div>
 
             <!-- Feelings Check-in Card -->
-            <div class="flex-[1.1] min-h-[85px] max-h-[125px] rounded-lg border border-white/70 bg-white/50 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs">
+            <div class="flex-[1.1] min-h-[90px] max-h-[135px] rounded-lg border border-white/70 bg-white/60 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs">
                 <div class="flex items-center justify-between pb-0.5 border-b border-white/50 shrink-0">
-                    <span class="text-[10px] font-extrabold text-slate-800 flex items-center space-x-1">
+                    <span class="text-[11px] font-extrabold text-slate-800 flex items-center space-x-1">
                         <i class="fa-solid fa-face-smile text-amber-500 text-xs"></i>
                         <span>Feelings</span>
                     </span>
@@ -174,28 +175,28 @@
                 </div>
                 
                 <div class="grid grid-cols-3 gap-1 flex-1 items-center pt-0.5" id="feelingsGrid">
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-2xs" data-feeling="Happy">
-                        <span class="text-sm leading-none">😊</span>
+                    <button class="feeling-btn h-full max-h-[46px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-2xs" data-feeling="Happy">
+                        <span class="text-base leading-none">😊</span>
                         <span class="text-[8px] font-bold text-emerald-800 mt-0.5">Happy</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition text-center shadow-2xs" data-feeling="Sad">
-                        <span class="text-sm leading-none">😢</span>
+                    <button class="feeling-btn h-full max-h-[46px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition text-center shadow-2xs" data-feeling="Sad">
+                        <span class="text-base leading-none">😢</span>
                         <span class="text-[8px] font-bold text-sky-800 mt-0.5">Sad</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition text-center shadow-2xs" data-feeling="Angry">
-                        <span class="text-sm leading-none">😡</span>
+                    <button class="feeling-btn h-full max-h-[46px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 transition text-center shadow-2xs" data-feeling="Angry">
+                        <span class="text-base leading-none">😡</span>
                         <span class="text-[8px] font-bold text-rose-800 mt-0.5">Angry</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition text-center shadow-2xs" data-feeling="Scared">
-                        <span class="text-sm leading-none">😨</span>
+                    <button class="feeling-btn h-full max-h-[46px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 transition text-center shadow-2xs" data-feeling="Scared">
+                        <span class="text-base leading-none">😨</span>
                         <span class="text-[8px] font-bold text-purple-800 mt-0.5">Scared</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition text-center shadow-2xs" data-feeling="Excited">
-                        <span class="text-sm leading-none">🤪</span>
+                    <button class="feeling-btn h-full max-h-[46px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition text-center shadow-2xs" data-feeling="Excited">
+                        <span class="text-base leading-none">🤪</span>
                         <span class="text-[8px] font-bold text-amber-800 mt-0.5">Excited</span>
                     </button>
-                    <button class="feeling-btn h-full max-h-[44px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-teal-300 bg-teal-50 hover:bg-teal-100 transition text-center shadow-2xs" data-feeling="Calm">
-                        <span class="text-sm leading-none">😌</span>
+                    <button class="feeling-btn h-full max-h-[46px] flex flex-col items-center justify-center p-0.5 rounded-lg border border-teal-300 bg-teal-50 hover:bg-teal-100 transition text-center shadow-2xs" data-feeling="Calm">
+                        <span class="text-base leading-none">😌</span>
                         <span class="text-[8px] font-bold text-teal-800 mt-0.5">Calm</span>
                     </button>
                 </div>
@@ -203,38 +204,38 @@
 
         </aside>
 
-        <!-- Right 80% Container: Contains Calendar & Right Column on Top, Handwriting Pad across the Bottom -->
+        <!-- Right 80% Container -->
         <div class="flex-1 flex flex-col gap-1.5 min-w-0 min-h-0 overflow-hidden">
 
-            <!-- Top Row: Calendar (Fills middle) + Right Column (20% of total page = 25% of this 80% container) -->
+            <!-- Top Row: Calendar (Center) + Right Column (YouTube & Greetings) -->
             <div class="flex-1 flex flex-col lg:flex-row gap-1.5 min-h-0">
                 
                 <!-- Calendar Card: Dynamically fills center area -->
-                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col flex-1 min-w-0 min-h-0">
+                <div class="frosted-panel rounded-xl border border-white/70 shadow-md p-2 flex flex-col flex-1 min-w-0 min-h-0">
                     <div class="flex items-center justify-between mb-1 shrink-0">
                         <h2 id="calendarTitle" class="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight">September 2026</h2>
                     </div>
 
                     <!-- Days of Week Header -->
-                    <div class="grid grid-cols-7 gap-0.5 text-center font-bold text-[9px] text-slate-700 uppercase tracking-wider mb-0.5 shrink-0">
-                        <div>Sun</div>
-                        <div>Mon</div>
-                        <div>Tue</div>
-                        <div>Wed</div>
-                        <div>Thu</div>
-                        <div>Fri</div>
-                        <div>Sat</div>
+                    <div class="grid grid-cols-7 gap-1 text-center font-bold text-[10px] text-slate-700 uppercase tracking-wider mb-1 shrink-0">
+                        <div class="py-0.5 rounded bg-slate-100/70">Sun</div>
+                        <div class="py-0.5 rounded bg-slate-100/70">Mon</div>
+                        <div class="py-0.5 rounded bg-slate-100/70">Tue</div>
+                        <div class="py-0.5 rounded bg-slate-100/70">Wed</div>
+                        <div class="py-0.5 rounded bg-slate-100/70">Thu</div>
+                        <div class="py-0.5 rounded bg-slate-100/70">Fri</div>
+                        <div class="py-0.5 rounded bg-slate-100/70">Sat</div>
                     </div>
 
                     <!-- 35 Uniform Grid Slots -->
-                    <div id="calendarGrid" class="grid grid-cols-7 gap-0.5 flex-1 auto-rows-fr min-h-0"></div>
+                    <div id="calendarGrid" class="grid grid-cols-7 gap-1 flex-1 auto-rows-fr min-h-0"></div>
                 </div>
 
                 <!-- Right Column: 20% of total page width, holding YouTube card and Greeting card -->
-                <aside class="w-full lg:w-1/4 h-full frosted-panel border border-white/60 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden p-1.5 gap-1.5 justify-between">
+                <aside class="w-full lg:w-1/4 h-full frosted-panel border border-white/70 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden p-1.5 gap-1.5 justify-between">
                     
                     <!-- YouTube Video Section -->
-                    <div class="flex-1 rounded-lg border border-white/70 bg-white/50 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs min-h-[140px]">
+                    <div class="flex-1 rounded-lg border border-white/70 bg-white/60 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs min-h-[140px]">
                         <div class="flex items-center justify-between pb-1 mb-0.5 border-b border-white/50 shrink-0">
                             <div class="flex items-center space-x-1.5">
                                 <i class="fa-brands fa-youtube text-red-600 text-sm"></i>
@@ -256,9 +257,9 @@
                     </div>
 
                     <!-- Morning Greeting Card -->
-                    <div class="min-h-[80px] max-h-[115px] rounded-lg border border-white/70 bg-white/50 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs">
+                    <div class="min-h-[85px] max-h-[115px] rounded-lg border border-white/70 bg-white/60 p-1.5 flex flex-col justify-between shrink-0 shadow-2xs">
                         <div class="flex items-center justify-between pb-0.5 border-b border-white/50 shrink-0">
-                            <span class="text-[10px] font-extrabold text-slate-800 flex items-center space-x-1">
+                            <span class="text-[11px] font-extrabold text-slate-800 flex items-center space-x-1">
                                 <i class="fa-solid fa-handshake-angle text-indigo-600 text-xs"></i>
                                 <span>Morning Greeting</span>
                             </span>
@@ -293,7 +294,7 @@
             </div>
 
             <!-- Single-Line Primary Handwriting Pad: Spans entirely under Calendar and Right Column -->
-            <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-1.5 flex flex-col h-24 lg:h-28 shrink-0">
+            <div class="frosted-panel rounded-xl border border-white/70 shadow-md p-1.5 flex flex-col h-24 lg:h-28 shrink-0">
                 <div class="flex items-center justify-between pb-0.5 mb-0.5 border-b border-white/50 shrink-0">
                     <div class="flex items-center space-x-1.5">
                         <i class="fa-solid fa-pen-nib text-indigo-600 text-xs"></i>
@@ -309,7 +310,7 @@
                             <button class="w-3.5 h-3.5 rounded-full bg-rose-700 border border-white shadow-2xs color-btn" data-color="#be123c" title="Rose"></button>
                         </div>
 
-                        <select id="brushSize" class="bg-white/80 border border-slate-300 text-slate-800 text-[9px] font-bold rounded px-1 py-0.5 focus:outline-none">
+                        <select id="brushSize" class="bg-white/80 border border-slate-300 text-slate-800 text-[9px] font-bold rounded px-1 py-0.5 focus:outline-none cursor-pointer">
                             <option value="2">Fine</option>
                             <option value="4" selected>Normal</option>
                             <option value="7">Thick</option>
@@ -528,7 +529,7 @@
             });
             if (greeting) {
                 selectedGreetingText.textContent = `${greeting}!`;
-                selectedGreetingText.className = 'text-[8px] font-black text-indigo-800 uppercase tracking-wider';
+                selectedGreetingText.className = 'text-[9px] font-black text-indigo-800 uppercase tracking-wider';
             } else {
                 selectedGreetingText.textContent = 'Choose';
                 selectedGreetingText.className = 'text-[8px] font-bold text-slate-500 uppercase tracking-wider';
@@ -561,7 +562,7 @@
             });
             if (feeling) {
                 selectedFeelingText.textContent = `${feeling}!`;
-                selectedFeelingText.className = 'text-[8px] font-black text-indigo-800 uppercase tracking-wider';
+                selectedFeelingText.className = 'text-[9px] font-black text-indigo-800 uppercase tracking-wider';
             } else {
                 selectedFeelingText.textContent = 'Select';
                 selectedFeelingText.className = 'text-[8px] font-bold text-slate-500 uppercase tracking-wider';
@@ -600,7 +601,7 @@
             numbersSection.innerHTML = '';
             for (let i = 1; i <= 31; i++) {
                 const item = document.createElement('div');
-                item.className = 'draggable-item bg-white/95 border border-white hover:border-indigo-600 hover:shadow-xs rounded text-center font-bold text-slate-800 text-[10px] transition flex items-center justify-center aspect-square h-full max-h-7 select-none shadow-2xs';
+                item.className = 'draggable-item bg-white/95 border border-white hover:border-indigo-600 hover:shadow-xs rounded text-center font-bold text-slate-800 text-[11px] sm:text-xs transition flex items-center justify-center w-full h-full select-none shadow-2xs';
                 item.textContent = i;
                 item.dataset.type = 'number';
                 item.dataset.id = `num-${i}`;
@@ -625,16 +626,16 @@
 
         tabNums.addEventListener('click', () => {
             state.activeTab = 'numbers';
-            tabNums.className = 'px-1.5 py-0.5 text-[9px] font-bold rounded bg-indigo-700 text-white shadow-2xs';
-            tabBadges.className = 'px-1.5 py-0.5 text-[9px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white';
+            tabNums.className = 'px-2 py-0.5 text-[9px] font-bold rounded bg-indigo-700 text-white shadow-2xs';
+            tabBadges.className = 'px-2 py-0.5 text-[9px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white';
             numbersSection.classList.remove('hidden');
             badgesSection.classList.add('hidden');
         });
 
         tabBadges.addEventListener('click', () => {
             state.activeTab = 'badges';
-            tabBadges.className = 'px-1.5 py-0.5 text-[9px] font-bold rounded bg-indigo-700 text-white shadow-2xs';
-            tabNums.className = 'px-1.5 py-0.5 text-[9px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white';
+            tabBadges.className = 'px-2 py-0.5 text-[9px] font-bold rounded bg-indigo-700 text-white shadow-2xs';
+            tabNums.className = 'px-2 py-0.5 text-[9px] font-bold rounded bg-white/70 text-slate-700 hover:bg-white';
             badgesSection.classList.remove('hidden');
             numbersSection.classList.add('hidden');
         });
@@ -652,7 +653,7 @@
                 const cellKey = `${year}-${month}-${cellIndex}`;
 
                 const dayCell = document.createElement('div');
-                dayCell.className = 'drop-target bg-white/85 border border-white/80 hover:border-indigo-500 rounded p-0.5 flex flex-col justify-between relative group transition shadow-2xs min-h-0 overflow-hidden';
+                dayCell.className = 'drop-target bg-white/85 border border-white/80 hover:border-indigo-500 rounded p-1 flex flex-col justify-between relative group transition shadow-2xs min-h-0 overflow-hidden';
                 dayCell.dataset.cellKey = cellKey;
 
                 const numberRow = document.createElement('div');
@@ -682,8 +683,8 @@
         function createDroppedItemElement(item, cellKey, index) {
             const el = document.createElement('div');
             if (item.type === 'number') {
-                el.className = 'w-3.5 h-3.5 sm:w-4 sm:h-4 bg-indigo-700 hover:bg-indigo-800 text-white text-[9px] sm:text-[10px] font-extrabold rounded flex items-center justify-center relative shadow-xs cursor-pointer group/num transition';
-                el.innerHTML = `<span>${item.text}</span> <button class="absolute -top-1 -left-1 w-3 h-3 bg-rose-600 text-white hover:bg-rose-700 rounded-full text-[8px] flex items-center justify-center opacity-0 group-hover/num:opacity-100 transition shadow-2xs remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
+                el.className = 'w-4 h-4 sm:w-5 sm:h-5 bg-indigo-700 hover:bg-indigo-800 text-white text-[10px] sm:text-[11px] font-extrabold rounded flex items-center justify-center relative shadow-xs cursor-pointer group/num transition';
+                el.innerHTML = `<span>${item.text}</span> <button class="absolute -top-1 -left-1 w-3.5 h-3.5 bg-rose-600 text-white hover:bg-rose-700 rounded-full text-[9px] flex items-center justify-center opacity-0 group-hover/num:opacity-100 transition shadow-2xs remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
             } else {
                 el.className = `${item.bg} text-[8px] font-bold px-1 py-0.5 rounded flex items-center justify-between shadow-2xs cursor-pointer transition w-full`;
                 el.innerHTML = `<span class="flex items-center space-x-1 truncate"><i class="fa-solid ${item.icon}"></i><span class="truncate">${item.text}</span></span> <button class="hover:opacity-70 ml-0.5 text-[8px] remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
