@@ -168,11 +168,11 @@
         </div>
     </header>
 
-    <!-- Main Workspace -->
-    <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative p-1.5 lg:p-2 gap-1.5 lg:gap-2">
+    <!-- Main Workspace: Split into Left Column (20%) and Right Workspace (80%) -->
+    <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative p-2 gap-2 min-h-0">
 
         <!-- Left Column: Exactly 20% width (Amber / Yellow Theme for Routine & Feelings) -->
-        <aside class="w-full lg:w-1/5 h-full panel-feelings border-2 border-amber-300/80 rounded-2xl flex flex-col shrink-0 shadow-md overflow-hidden p-2 gap-2 justify-between">
+        <aside class="w-full lg:w-1/5 h-full panel-feelings border-2 border-amber-300/80 rounded-2xl flex flex-col shrink-0 shadow-md overflow-hidden p-2 gap-2 justify-between min-h-0">
             
             <!-- Good Morning Banner with Sun Animation -->
             <div class="flex-1 min-h-[65px] max-h-[105px] rounded-xl overflow-hidden border-2 border-amber-300 shadow-sm bg-gradient-to-r from-amber-200/90 via-yellow-200/95 to-amber-200/90 p-1.5 relative flex flex-col items-center justify-center shrink-0">
@@ -202,7 +202,7 @@
             </div>
 
             <!-- Number & Badge Tray Section (High-Contrast Tactile Tiles) -->
-            <div class="flex-[1.8] min-h-[145px] rounded-xl border-2 border-amber-300/80 bg-white/80 p-2 flex flex-col justify-between shrink-0 shadow-sm">
+            <div class="flex-[1.8] min-h-[145px] rounded-xl border-2 border-amber-300/80 bg-white/80 p-2 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
                 <div class="flex items-center justify-between pb-1.5 border-b border-amber-200 shrink-0">
                     <span class="font-bold text-slate-800 text-[11px] flex items-center space-x-1">
                         <i class="fa-solid fa-shapes text-indigo-600"></i>
@@ -218,14 +218,14 @@
                     </div>
                 </div>
                 
-                <div id="trayContainer" class="flex-1 w-full h-full min-h-0 pt-1.5">
+                <div id="trayContainer" class="flex-1 w-full h-full min-h-0 pt-1.5 overflow-hidden">
                     <div id="numbersSection" class="grid grid-cols-7 grid-rows-5 gap-1.5 w-full h-full"></div>
                     <div id="badgesSection" class="hidden space-y-1.5 overflow-y-auto h-full"></div>
                 </div>
             </div>
 
             <!-- Feelings Scale with Zones of Regulation Alignment -->
-            <div class="flex-[1.2] min-h-[110px] max-h-[155px] rounded-xl border-2 border-amber-300/80 bg-white/80 p-2 flex flex-col justify-between shrink-0 shadow-sm">
+            <div class="flex-[1.2] min-h-[110px] max-h-[155px] rounded-xl border-2 border-amber-300/80 bg-white/80 p-2 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
                 <div class="flex items-center justify-between pb-1 border-b border-amber-200 shrink-0">
                     <div class="flex items-center space-x-1">
                         <span class="text-xs">🚦</span>
@@ -276,14 +276,14 @@
 
         </aside>
 
-        <!-- Right 80% Container (Calendar, Media & Handwriting) -->
-        <div class="flex-1 flex flex-col gap-1.5 min-w-0 min-h-0 overflow-hidden">
+        <!-- Right 80% Workspace: Explicit Grid Layout (Row 1: Calendar + Right Column; Row 2: Handwriting Pad) -->
+        <div class="flex-1 w-full lg:w-4/5 h-full grid grid-rows-[minmax(0,1fr)_auto] gap-2 min-h-0 overflow-hidden">
 
-            <!-- Top Row: Calendar (Sky Blue) + Right Column (Mint Green Greetings & Rose Media) -->
-            <div class="flex-1 flex flex-col lg:flex-row gap-1.5 min-h-0">
+            <!-- Row 1: Calendar (Expands) + Right Column (25% of this 80% area = 20% of total page) -->
+            <div class="w-full h-full flex flex-col lg:flex-row gap-2 min-h-0 overflow-hidden">
                 
                 <!-- Calendar Card: Soft Sky Blue categorized panel -->
-                <div class="panel-calendar rounded-2xl border-2 border-sky-300 shadow-md p-2 flex flex-col flex-1 min-w-0 min-h-0">
+                <div class="panel-calendar rounded-2xl border-2 border-sky-300 shadow-md p-2 flex flex-col flex-1 min-w-0 h-full min-h-0 overflow-hidden">
                     <div class="flex items-center justify-between mb-1 shrink-0">
                         <!-- Thematic Monthly Header with Seasonal Icon & Season Badge -->
                         <div class="flex items-center space-x-2">
@@ -312,11 +312,11 @@
                     <div id="calendarGrid" class="grid grid-cols-7 gap-1 flex-1 auto-rows-fr min-h-0"></div>
                 </div>
 
-                <!-- Right Column: 20% of page (Mint Green Greetings & Rose Media) -->
-                <aside class="w-full lg:w-1/4 h-full flex flex-col shrink-0 gap-1.5 justify-between min-h-0">
+                <!-- Right Column: 25% width of workspace (20% of total screen) -->
+                <aside class="w-full lg:w-1/4 h-full flex flex-col shrink-0 gap-2 justify-between min-h-0 overflow-hidden">
                     
                     <!-- YouTube Video Section (Soft Rose categorized) -->
-                    <div class="panel-video flex-1 rounded-2xl border-2 border-rose-300 p-2 flex flex-col justify-between shrink-0 shadow-sm min-h-[140px]">
+                    <div class="panel-video flex-1 rounded-2xl border-2 border-rose-300 p-2 flex flex-col justify-between shrink-0 shadow-sm min-h-[140px] overflow-hidden">
                         <div class="flex items-center justify-between pb-1 mb-0.5 border-b border-rose-200 shrink-0">
                             <div class="flex items-center space-x-1.5">
                                 <i class="fa-brands fa-youtube text-red-600 text-sm"></i>
@@ -326,7 +326,7 @@
                         </div>
 
                         <!-- 16:9 Landscape Video Player -->
-                        <div class="w-full aspect-video rounded-xl overflow-hidden bg-black/90 relative shadow-inner flex items-center justify-center my-auto border border-rose-200">
+                        <div class="w-full aspect-video rounded-xl overflow-hidden bg-black/90 relative shadow-inner flex items-center justify-center my-auto border border-rose-200 shrink-0">
                             <iframe id="youtubePlayer" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
 
@@ -338,7 +338,7 @@
                     </div>
 
                     <!-- Morning Greeting Card (Soft Mint Green categorized with Large Touch Targets) -->
-                    <div class="panel-greetings min-h-[90px] max-h-[125px] rounded-2xl border-2 border-emerald-300 p-2 flex flex-col justify-between shrink-0 shadow-sm">
+                    <div class="panel-greetings min-h-[90px] max-h-[125px] rounded-2xl border-2 border-emerald-300 p-2 flex flex-col justify-between shrink-0 shadow-sm overflow-hidden">
                         <div class="flex items-center justify-between pb-0.5 border-b border-emerald-200 shrink-0">
                             <span class="text-[11px] font-extrabold text-emerald-950 flex items-center space-x-1">
                                 <i class="fa-solid fa-handshake-angle text-emerald-600 text-xs"></i>
@@ -374,8 +374,8 @@
 
             </div>
 
-            <!-- Pale Lavender Categorized Handwriting Practice with Quick Traceable Word Stamps -->
-            <div class="panel-handwriting rounded-2xl border-2 border-purple-300 shadow-md p-1.5 flex flex-col h-26 lg:h-30 shrink-0">
+            <!-- Row 2: Handwriting Pad (Stationary bottom row spanning under Calendar and Right Column) -->
+            <div class="panel-handwriting rounded-2xl border-2 border-purple-300 shadow-md p-1.5 flex flex-col h-28 lg:h-32 shrink-0 min-w-0">
                 <div class="flex items-center justify-between pb-0.5 mb-0.5 border-b border-purple-200 shrink-0">
                     <div class="flex items-center space-x-2">
                         <i class="fa-solid fa-pen-nib text-indigo-700 text-xs"></i>
@@ -490,7 +490,7 @@
                 osc.start();
                 osc.stop(audioCtx.currentTime + duration);
             } catch (e) {
-                // Ignore audio if policy blocks before user interaction
+                // Ignore audio if policy blocks before interaction
             }
         }
 
@@ -1162,6 +1162,8 @@
                 const rect = notesCanvas.parentElement.getBoundingClientRect();
                 const newWidth = Math.floor(rect.width);
                 const newHeight = Math.floor(rect.height);
+
+                if (newWidth <= 0 || newHeight <= 0) return;
 
                 const tempCopy = document.createElement('canvas');
                 tempCopy.width = drawingCanvas.width;
