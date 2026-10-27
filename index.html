@@ -133,6 +133,11 @@
             background-color: #fef08a !important;
         }
 
+        /* Center Pop Splash Animation */
+        #splashOverlay {
+            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
         ::-webkit-scrollbar {
             width: 5px;
             height: 5px;
@@ -146,7 +151,7 @@
         }
     </style>
 </head>
-<body class="h-full crayon-rainbow-bg text-slate-800 flex flex-col overflow-hidden">
+<body class="h-full crayon-rainbow-bg text-slate-800 flex flex-col overflow-hidden relative">
 
     <!-- Top Navigation Bar -->
     <header class="panel-header border-b-2 border-white/80 px-3.5 py-1.5 flex items-center justify-between shrink-0 shadow-sm z-20">
@@ -246,37 +251,37 @@
                 
                 <div class="grid grid-cols-3 gap-1.5 flex-1 items-center pt-1" id="feelingsGrid">
                     <!-- Green Zone: Happy -->
-                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-emerald-400 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Happy" data-zone="Green Zone">
+                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-emerald-400 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Happy" data-zone="Green Zone" data-icon="😊">
                         <span class="text-lg leading-none">😊</span>
                         <span class="text-[8.5px] font-extrabold text-emerald-900 leading-tight">Happy</span>
                         <span class="text-[6.5px] font-black uppercase text-emerald-700 bg-emerald-200/80 px-1 rounded-full">Green</span>
                     </button>
                     <!-- Blue Zone: Sad -->
-                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-sky-400 bg-sky-50 hover:bg-sky-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Sad" data-zone="Blue Zone">
+                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-sky-400 bg-sky-50 hover:bg-sky-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Sad" data-zone="Blue Zone" data-icon="😢">
                         <span class="text-lg leading-none">😢</span>
                         <span class="text-[8.5px] font-extrabold text-sky-900 leading-tight">Sad</span>
                         <span class="text-[6.5px] font-black uppercase text-sky-700 bg-sky-200/80 px-1 rounded-full">Blue</span>
                     </button>
                     <!-- Red Zone: Angry -->
-                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-rose-400 bg-rose-50 hover:bg-rose-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Angry" data-zone="Red Zone">
+                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-rose-400 bg-rose-50 hover:bg-rose-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Angry" data-zone="Red Zone" data-icon="😡">
                         <span class="text-lg leading-none">😡</span>
                         <span class="text-[8.5px] font-extrabold text-rose-900 leading-tight">Angry</span>
                         <span class="text-[6.5px] font-black uppercase text-rose-700 bg-rose-200/80 px-1 rounded-full">Red</span>
                     </button>
                     <!-- Blue Zone: Worried -->
-                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-indigo-400 bg-indigo-50 hover:bg-indigo-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Scared" data-zone="Blue Zone">
+                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-indigo-400 bg-indigo-50 hover:bg-indigo-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Worried" data-zone="Blue Zone" data-icon="😨">
                         <span class="text-lg leading-none">😨</span>
                         <span class="text-[8.5px] font-extrabold text-indigo-900 leading-tight">Worried</span>
                         <span class="text-[6.5px] font-black uppercase text-indigo-700 bg-indigo-200/80 px-1 rounded-full">Blue</span>
                     </button>
                     <!-- Yellow Zone: Excited -->
-                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-amber-400 bg-amber-50 hover:bg-amber-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Excited" data-zone="Yellow Zone">
+                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-amber-400 bg-amber-50 hover:bg-amber-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Excited" data-zone="Yellow Zone" data-icon="🤪">
                         <span class="text-lg leading-none">🤪</span>
                         <span class="text-[8.5px] font-extrabold text-amber-900 leading-tight">Excited</span>
                         <span class="text-[6.5px] font-black uppercase text-amber-800 bg-amber-200 px-1 rounded-full">Yellow</span>
                     </button>
                     <!-- Green Zone: Calm -->
-                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-teal-400 bg-teal-50 hover:bg-teal-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Calm" data-zone="Green Zone">
+                    <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-teal-400 bg-teal-50 hover:bg-teal-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Calm" data-zone="Green Zone" data-icon="😌">
                         <span class="text-lg leading-none">😌</span>
                         <span class="text-[8.5px] font-extrabold text-teal-900 leading-tight">Calm</span>
                         <span class="text-[6.5px] font-black uppercase text-teal-700 bg-teal-200 px-1 rounded-full">Green</span>
@@ -286,7 +291,7 @@
 
         </aside>
 
-        <!-- Right 80% Workspace (Grid: Calendar & YouTube/Weather Top, Handwriting Pad Bottom) -->
+        <!-- Right 80% Workspace: Grid with Calendar & YouTube/Weather Top, Handwriting Pad Bottom (150px Height) -->
         <div class="flex-1 w-full lg:w-4/5 h-full grid grid-rows-[minmax(0,1fr)_150px] gap-2 min-h-0 overflow-hidden">
 
             <!-- Row 1: Calendar + Right Column (YouTube, Weather, & Morning Greeting) -->
@@ -300,7 +305,6 @@
                             <h2 id="calendarTitle" class="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">September 2026</h2>
                             <span id="seasonBadge" class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-200 text-sky-900 shadow-2xs">Autumn</span>
                         </div>
-                        <!-- Clean Today Star Badge -->
                         <div id="todayIndicator" class="text-[10px] font-extrabold text-amber-900 bg-amber-200 border-2 border-amber-400 px-2.5 py-0.5 rounded-full flex items-center space-x-1 shadow-2xs">
                             <span class="text-xs">⭐</span>
                             <span>Today</span>
@@ -357,19 +361,19 @@
                             <span id="selectedWeatherText" class="text-[8px] font-bold text-sky-800 uppercase tracking-wider bg-sky-200/80 px-1.5 py-0.2 rounded-full">Sunny</span>
                         </div>
                         <div class="grid grid-cols-4 gap-1 pt-1">
-                            <button class="weather-btn flex flex-col items-center justify-center py-1 rounded-xl border border-sky-300 bg-white hover:bg-sky-50 transition shadow-2xs cursor-pointer" data-weather="sunny" title="Sunny">
+                            <button class="weather-btn flex flex-col items-center justify-center py-1 rounded-xl border border-sky-300 bg-white hover:bg-sky-50 transition shadow-2xs cursor-pointer" data-weather="sunny" data-icon="☀️" title="Sunny">
                                 <span class="text-base leading-none">☀️</span>
                                 <span class="text-[8px] font-bold text-sky-900 mt-0.5">Sunny</span>
                             </button>
-                            <button class="weather-btn flex flex-col items-center justify-center py-1 rounded-xl border border-sky-300 bg-white hover:bg-sky-50 transition shadow-2xs cursor-pointer" data-weather="cloudy" title="Cloudy">
+                            <button class="weather-btn flex flex-col items-center justify-center py-1 rounded-xl border border-sky-300 bg-white hover:bg-sky-50 transition shadow-2xs cursor-pointer" data-weather="cloudy" data-icon="⛅" title="Cloudy">
                                 <span class="text-base leading-none">⛅</span>
                                 <span class="text-[8px] font-bold text-sky-900 mt-0.5">Cloudy</span>
                             </button>
-                            <button class="weather-btn flex flex-col items-center justify-center py-1 rounded-xl border border-sky-300 bg-white hover:bg-sky-50 transition shadow-2xs cursor-pointer" data-weather="rainy" title="Rainy">
+                            <button class="weather-btn flex flex-col items-center justify-center py-1 rounded-xl border border-sky-300 bg-white hover:bg-sky-50 transition shadow-2xs cursor-pointer" data-weather="rainy" data-icon="🌧️" title="Rainy">
                                 <span class="text-base leading-none">🌧️</span>
                                 <span class="text-[8px] font-bold text-sky-900 mt-0.5">Rainy</span>
                             </button>
-                            <button class="weather-btn flex flex-col items-center justify-center py-1 rounded-xl border border-sky-300 bg-white hover:bg-sky-50 transition shadow-2xs cursor-pointer" data-weather="windy" title="Windy">
+                            <button class="weather-btn flex flex-col items-center justify-center py-1 rounded-xl border border-sky-300 bg-white hover:bg-sky-50 transition shadow-2xs cursor-pointer" data-weather="windy" data-icon="💨" title="Windy">
                                 <span class="text-base leading-none">💨</span>
                                 <span class="text-[8px] font-bold text-sky-900 mt-0.5">Windy</span>
                             </button>
@@ -386,23 +390,23 @@
                             <span id="selectedGreetingText" class="text-[8px] font-bold text-emerald-800 uppercase tracking-wider bg-emerald-200/70 px-1.5 py-0.2 rounded-full">Choose</span>
                         </div>
                         <div class="grid grid-cols-5 gap-1.5 flex-1 items-center pt-0.5" id="greetingsGrid">
-                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-sky-300 bg-white hover:bg-sky-50 transition shadow-xs cursor-pointer" data-greeting="Fist Bump" title="Fist Bump">
+                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-sky-300 bg-white hover:bg-sky-50 transition shadow-xs cursor-pointer" data-greeting="Fist Bump" data-icon="👊" title="Fist Bump">
                                 <span class="text-xl leading-none">👊</span>
                                 <span class="text-[8.5px] font-extrabold text-sky-950 mt-0.5 truncate w-full text-center">Fist</span>
                             </button>
-                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-amber-300 bg-white hover:bg-amber-50 transition shadow-xs cursor-pointer" data-greeting="High Five" title="High Five">
+                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-amber-300 bg-white hover:bg-amber-50 transition shadow-xs cursor-pointer" data-greeting="High Five" data-icon="✋" title="High Five">
                                 <span class="text-xl leading-none">✋</span>
                                 <span class="text-[8.5px] font-extrabold text-amber-950 mt-0.5 truncate w-full text-center">Five</span>
                             </button>
-                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-emerald-300 bg-white hover:bg-emerald-50 transition shadow-xs cursor-pointer" data-greeting="Handshake" title="Handshake">
+                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-emerald-300 bg-white hover:bg-emerald-50 transition shadow-xs cursor-pointer" data-greeting="Handshake" data-icon="🤝" title="Handshake">
                                 <span class="text-xl leading-none">🤝</span>
                                 <span class="text-[8.5px] font-extrabold text-emerald-950 mt-0.5 truncate w-full text-center">Shake</span>
                             </button>
-                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-rose-300 bg-white hover:bg-rose-50 transition shadow-xs cursor-pointer" data-greeting="Heart Hands" title="Heart Hands">
+                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-rose-300 bg-white hover:bg-rose-50 transition shadow-xs cursor-pointer" data-greeting="Heart Hands" data-icon="🫶" title="Heart Hands">
                                 <span class="text-xl leading-none">🫶</span>
                                 <span class="text-[8.5px] font-extrabold text-rose-950 mt-0.5 truncate w-full text-center">Heart</span>
                             </button>
-                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-purple-300 bg-white hover:bg-purple-50 transition shadow-xs cursor-pointer" data-greeting="Hug" title="Hug">
+                            <button class="greeting-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-purple-300 bg-white hover:bg-purple-50 transition shadow-xs cursor-pointer" data-greeting="Hug" data-icon="🫂" title="Hug">
                                 <span class="text-xl leading-none">🫂</span>
                                 <span class="text-[8.5px] font-extrabold text-purple-950 mt-0.5 truncate w-full text-center">Hug</span>
                             </button>
@@ -413,7 +417,7 @@
 
             </div>
 
-            <!-- Row 2: Stationary Handwriting Pad (Clean Freehand Canvas without Stamps) -->
+            <!-- Row 2: Stationary Handwriting Pad -->
             <div class="panel-handwriting rounded-2xl border-2 border-purple-300 shadow-md p-1.5 flex flex-col h-full shrink-0 min-w-0 overflow-hidden">
                 <div class="flex items-center justify-between pb-0.5 mb-0.5 border-b border-purple-200 shrink-0">
                     <div class="flex items-center space-x-2">
@@ -461,6 +465,15 @@
 
     </div>
 
+    <!-- Center Screen Pop & Fade Animation Overlay -->
+    <div id="splashOverlay" class="fixed inset-0 pointer-events-none z-50 flex items-center justify-center opacity-0 transform scale-50">
+        <div class="bg-white/95 backdrop-blur-md border-4 border-indigo-600 rounded-3xl p-6 shadow-2xl flex flex-col items-center justify-center max-w-xs text-center">
+            <span id="splashIcon" class="text-8xl leading-none drop-shadow-md">😊</span>
+            <span id="splashLabel" class="text-2xl font-black text-slate-900 mt-3 tracking-tight">Happy</span>
+            <span id="splashSub" class="text-xs font-bold text-indigo-700 uppercase tracking-widest mt-1">Green Zone</span>
+        </div>
+    </div>
+
     <!-- Drag Ghost Element -->
     <div id="dragGhost" class="fixed pointer-events-none z-50 hidden px-2 py-1 rounded-xl shadow-xl text-xs font-black text-white bg-indigo-700 opacity-95 transform -translate-x-1/2 -translate-y-1/2 border-2 border-white"></div>
 
@@ -490,42 +503,38 @@
         const STORAGE_KEY_VIDEO = 'studentCalendarVideo';
 
         let drawingCanvas = null;
+        let splashTimeout = null;
 
-        // Audio Synthesizer
-        let audioCtx = null;
-        function playChime(freq, type, duration) {
-            freq = freq || 523.25;
-            type = type || 'sine';
-            duration = duration || 0.15;
-            try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch (e) {
-                // Ignore audio policy restrictions
+        // Visual Center Pop & Fade Announcement (Silent & Sensory-Friendly)
+        function triggerCenterSplash(icon, label, subtitle, borderColorClass) {
+            const overlay = document.getElementById('splashOverlay');
+            const iconEl = document.getElementById('splashIcon');
+            const labelEl = document.getElementById('splashLabel');
+            const subEl = document.getElementById('splashSub');
+            const card = overlay.firstElementChild;
+
+            if (splashTimeout) {
+                clearTimeout(splashTimeout);
             }
-        }
 
-        function playSuccessChime() {
-            playChime(587.33, 'triangle', 0.12);
-            setTimeout(() => playChime(880, 'triangle', 0.2), 80);
-        }
+            iconEl.textContent = icon;
+            labelEl.textContent = label;
+            subEl.textContent = subtitle || '';
+            subEl.style.display = subtitle ? 'inline-block' : 'none';
 
-        function playPopChime() {
-            playChime(440, 'sine', 0.08);
+            if (borderColorClass) {
+                card.className = 'bg-white/95 backdrop-blur-md border-4 ' + borderColorClass + ' rounded-3xl p-6 shadow-2xl flex flex-col items-center justify-center max-w-xs text-center';
+            }
+
+            // Animate In
+            overlay.classList.remove('opacity-0', 'scale-50');
+            overlay.classList.add('opacity-100', 'scale-100');
+
+            // Fade Out
+            splashTimeout = setTimeout(() => {
+                overlay.classList.remove('opacity-100', 'scale-100');
+                overlay.classList.add('opacity-0', 'scale-50');
+            }, 850);
         }
 
         function saveCalendarState() {
@@ -700,15 +709,18 @@
             initVideoControls();
         }
 
-        // Weather Picker Routine
+        // Weather Picker Routine with Center Screen Pop
         function initWeather() {
             weatherBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const weather = btn.dataset.weather;
+                    const icon = btn.dataset.icon || '☀️';
                     state.selectedWeather = weather;
                     updateWeatherUI(weather);
                     saveWeatherState();
-                    playPopChime();
+
+                    const weatherTitle = weather.charAt(0).toUpperCase() + weather.slice(1);
+                    triggerCenterSplash(icon, weatherTitle, "Today's Weather", "border-sky-500");
                 });
             });
         }
@@ -726,18 +738,19 @@
             }
         }
 
+        // Morning Greeting with Center Screen Pop
         function initGreetings() {
             greetingBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const greeting = btn.dataset.greeting;
+                    const icon = btn.dataset.icon || '🤝';
                     if (state.selectedGreeting === greeting) {
                         state.selectedGreeting = null;
                         updateGreetingUI(null);
-                        playPopChime();
                     } else {
                         state.selectedGreeting = greeting;
                         updateGreetingUI(greeting);
-                        playSuccessChime();
+                        triggerCenterSplash(icon, greeting, "Morning Greeting", "border-emerald-500");
                     }
                     saveGreetingState();
                 });
@@ -761,18 +774,28 @@
             }
         }
 
+        // Feelings & Zones of Regulation with Center Screen Pop
         function initFeelings() {
             feelingBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const feeling = btn.dataset.feeling;
+                    const zone = btn.dataset.zone || '';
+                    const icon = btn.dataset.icon || '😊';
+                    
                     if (state.selectedFeeling === feeling) {
                         state.selectedFeeling = null;
                         updateFeelingUI(null);
-                        playPopChime();
                     } else {
                         state.selectedFeeling = feeling;
                         updateFeelingUI(feeling);
-                        playSuccessChime();
+                        
+                        let borderCol = "border-indigo-600";
+                        if (zone.includes("Green")) borderCol = "border-emerald-500";
+                        if (zone.includes("Blue")) borderCol = "border-sky-500";
+                        if (zone.includes("Yellow")) borderCol = "border-amber-500";
+                        if (zone.includes("Red")) borderCol = "border-rose-500";
+
+                        triggerCenterSplash(icon, feeling, zone, borderCol);
                     }
                     saveFeelingState();
                 });
@@ -821,7 +844,6 @@
                 state.youtubeVideoId = videoId;
                 youtubePlayer.src = 'https://www.youtube.com/embed/' + videoId;
                 saveVideoState();
-                playSuccessChime();
                 videoUrlBar.classList.add('hidden');
                 videoUrlInput.value = '';
             });
@@ -861,7 +883,6 @@
             tabBadges.className = 'px-2.5 py-0.5 text-[9px] font-bold rounded-lg bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 cursor-pointer';
             numbersSection.classList.remove('hidden');
             badgesSection.classList.add('hidden');
-            playPopChime();
         });
 
         tabBadges.addEventListener('click', () => {
@@ -870,7 +891,6 @@
             tabNums.className = 'px-2.5 py-0.5 text-[9px] font-bold rounded-lg bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 cursor-pointer';
             badgesSection.classList.remove('hidden');
             numbersSection.classList.add('hidden');
-            playPopChime();
         });
 
         function renderCalendar() {
@@ -907,7 +927,6 @@
                 dayCell.className = 'drop-target border-2 ' + baseCellClass + (isTodayCell ? ' today-cell border-amber-500' : '') + ' hover:border-indigo-600 rounded-xl p-1 flex flex-col justify-between relative group transition shadow-xs min-h-0 overflow-hidden';
                 dayCell.dataset.cellKey = cellKey;
 
-                // Header container inside cell allowing click events
                 const topBar = document.createElement('div');
                 topBar.className = 'w-full flex items-center justify-between';
 
@@ -967,7 +986,6 @@
                 }
                 saveCalendarState();
                 renderCalendar();
-                playPopChime();
             };
 
             if (item.type === 'number') {
@@ -988,7 +1006,6 @@
                 btn.addEventListener('touchstart', removeItem, { passive: false });
             }
 
-            // Fallback: Double click or tap also removes item immediately
             el.addEventListener('dblclick', removeItem);
 
             return el;
@@ -998,7 +1015,6 @@
             state.currentMonth = parseInt(e.target.value, 10);
             saveCalendarState();
             renderCalendar();
-            playPopChime();
         });
 
         // Reset All: Keeps the currently chosen month intact and clears notes/tiles/feelings
@@ -1024,7 +1040,6 @@
             updateWeatherUI('sunny');
             renderCalendar();
             clearCanvas();
-            playPopChime();
         });
 
         function attachDragListeners(element, itemData) {
@@ -1042,7 +1057,6 @@
                 dragGhost.classList.remove('hidden');
                 dragGhost.style.left = touch.clientX + 'px';
                 dragGhost.style.top = touch.clientY + 'px';
-                playPopChime();
             }, { passive: false });
 
             element.addEventListener('touchmove', (e) => {
@@ -1074,7 +1088,6 @@
                         state.placements[cellKey].push(Object.assign({}, state.draggedItem));
                         saveCalendarState();
                         renderCalendar();
-                        playSuccessChime();
                     }
                 }
                 state.draggedItem = null;
@@ -1100,7 +1113,6 @@
                     state.placements[cellKey].push(data);
                     saveCalendarState();
                     renderCalendar();
-                    playSuccessChime();
                 } catch (err) {
                     console.error('Drop error:', err);
                 }
@@ -1272,7 +1284,6 @@
             renderCompositeCanvas();
             canvasPlaceholder.classList.remove('hidden');
             localStorage.removeItem(STORAGE_KEY_CANVAS);
-            playPopChime();
         }
 
         clearCanvasBtn.addEventListener('click', clearCanvas);
@@ -1286,12 +1297,10 @@
                 eraserBtn.className = 'bg-white hover:bg-purple-50 text-purple-950 px-2 py-0.5 rounded-lg text-[9px] font-bold transition flex items-center space-x-1 border border-purple-300 cursor-pointer';
                 eraserText.textContent = 'Eraser';
             }
-            playPopChime();
         });
 
         brushSizeSelect.addEventListener('change', (e) => {
             state.brushSize = parseInt(e.target.value, 10);
-            playPopChime();
         });
 
         colorBtns.forEach(btn => {
@@ -1302,7 +1311,6 @@
                 eraserText.textContent = 'Eraser';
                 colorBtns.forEach(b => b.classList.remove('ring-2', 'ring-indigo-600'));
                 btn.classList.add('ring-2', 'ring-indigo-600');
-                playPopChime();
             });
         });
 
