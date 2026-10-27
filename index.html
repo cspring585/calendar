@@ -73,29 +73,29 @@
             background-attachment: fixed;
         }
 
-        /* Frosted Categorized Panels */
+        /* Categorized Frosted Panels */
         .panel-calendar {
-            background-color: rgba(239, 246, 255, 0.93); /* Soft Sky Blue */
+            background-color: rgba(239, 246, 255, 0.93);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
         .panel-feelings {
-            background-color: rgba(254, 243, 199, 0.94); /* Warm Amber */
+            background-color: rgba(254, 243, 199, 0.94);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
         .panel-greetings {
-            background-color: rgba(236, 253, 245, 0.94); /* Soft Mint Green */
+            background-color: rgba(236, 253, 245, 0.94);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
         .panel-handwriting {
-            background-color: rgba(245, 243, 255, 0.95); /* Pale Lavender */
+            background-color: rgba(245, 243, 255, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
         .panel-video {
-            background-color: rgba(255, 241, 242, 0.93); /* Soft Rose */
+            background-color: rgba(255, 241, 242, 0.93);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
@@ -138,9 +138,8 @@
             </div>
         </div>
 
-        <!-- Morning Routine Weather Picker & Month Selection -->
+        <!-- Weather Picker & Month Selection -->
         <div class="flex items-center space-x-2">
-            <!-- Weather Picker Anchor -->
             <div class="flex items-center space-x-1 bg-sky-100/80 border border-sky-300 rounded-xl px-2 py-0.5 shadow-2xs">
                 <span class="text-[10px] font-bold text-sky-900 hidden sm:inline mr-1">Weather:</span>
                 <button class="weather-btn px-1.5 py-0.5 rounded-lg text-sm hover:scale-110 transition cursor-pointer" data-weather="sunny" title="Sunny">☀️</button>
@@ -149,7 +148,6 @@
                 <button class="weather-btn px-1.5 py-0.5 rounded-lg text-sm hover:scale-110 transition cursor-pointer" data-weather="windy" title="Windy">💨</button>
             </div>
 
-            <!-- Month Dropdown -->
             <select id="monthSelect" class="bg-white border-2 border-slate-300 text-slate-800 text-xs rounded-xl px-2.5 py-1 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-xs cursor-pointer">
                 <option value="8">September 2026</option>
                 <option value="9">October 2026</option>
@@ -163,7 +161,6 @@
                 <option value="5">June 2027</option>
             </select>
 
-            <!-- Reset Button -->
             <button id="resetBtn" class="bg-rose-100 hover:bg-rose-200 text-rose-800 border-2 border-rose-300 px-2.5 py-1 rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-xs cursor-pointer" title="Reset All Activity">
                 <i class="fa-solid fa-rotate-right text-[11px]"></i>
                 <span class="hidden sm:inline">Reset</span>
@@ -214,7 +211,6 @@
                     <div class="flex items-center space-x-1">
                         <button id="tabNums" class="px-2 py-0.5 text-[9px] font-bold rounded-lg bg-indigo-700 text-white shadow-xs cursor-pointer">Nums</button>
                         <button id="tabBadges" class="px-2 py-0.5 text-[9px] font-bold rounded-lg bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 cursor-pointer">Badges</button>
-                        <!-- Dedicated Return Numbers Button -->
                         <button id="clearNumbersBtn" class="px-2 py-0.5 text-[9px] font-bold rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-400 shadow-xs cursor-pointer" title="Return all numbers back to tray">
                             <i class="fa-solid fa-arrow-rotate-left text-[8px]"></i>
                             <span>Tray</span>
@@ -228,7 +224,7 @@
                 </div>
             </div>
 
-            <!-- Interactive Feelings Scale with Zones of Regulation Alignment -->
+            <!-- Feelings Scale with Zones of Regulation Alignment -->
             <div class="flex-[1.2] min-h-[110px] max-h-[155px] rounded-xl border-2 border-amber-300/80 bg-white/80 p-2 flex flex-col justify-between shrink-0 shadow-sm">
                 <div class="flex items-center justify-between pb-1 border-b border-amber-200 shrink-0">
                     <div class="flex items-center space-x-1">
@@ -238,9 +234,8 @@
                     <span id="selectedFeelingText" class="text-[8px] font-bold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-700 uppercase tracking-wider">Select one</span>
                 </div>
                 
-                <!-- Expanded Touch Targets with Colored Zone Bands -->
                 <div class="grid grid-cols-3 gap-1.5 flex-1 items-center pt-1" id="feelingsGrid">
-                    <!-- Green Zone: Calm & Happy -->
+                    <!-- Green Zone: Happy -->
                     <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-emerald-400 bg-emerald-50 hover:bg-emerald-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Happy" data-zone="Green Zone">
                         <span class="text-lg leading-none">😊</span>
                         <span class="text-[8.5px] font-extrabold text-emerald-900 leading-tight">Happy</span>
@@ -258,19 +253,19 @@
                         <span class="text-[8.5px] font-extrabold text-rose-900 leading-tight">Angry</span>
                         <span class="text-[6.5px] font-black uppercase text-rose-700 bg-rose-200/80 px-1 rounded-full">Red</span>
                     </button>
-                    <!-- Blue Zone: Tired / Scared -->
+                    <!-- Blue Zone: Worried -->
                     <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-indigo-400 bg-indigo-50 hover:bg-indigo-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Scared" data-zone="Blue Zone">
                         <span class="text-lg leading-none">😨</span>
                         <span class="text-[8.5px] font-extrabold text-indigo-900 leading-tight">Worried</span>
                         <span class="text-[6.5px] font-black uppercase text-indigo-700 bg-indigo-200/80 px-1 rounded-full">Blue</span>
                     </button>
-                    <!-- Yellow Zone: Excited / Silly -->
+                    <!-- Yellow Zone: Excited -->
                     <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-amber-400 bg-amber-50 hover:bg-amber-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Excited" data-zone="Yellow Zone">
                         <span class="text-lg leading-none">🤪</span>
                         <span class="text-[8.5px] font-extrabold text-amber-900 leading-tight">Excited</span>
                         <span class="text-[6.5px] font-black uppercase text-amber-800 bg-amber-200 px-1 rounded-full">Yellow</span>
                     </button>
-                    <!-- Green Zone: Calm & Ready -->
+                    <!-- Green Zone: Calm -->
                     <button class="feeling-btn h-full max-h-[50px] flex flex-col items-center justify-center p-1 rounded-xl border-2 border-teal-400 bg-teal-50 hover:bg-teal-100 transition text-center shadow-xs cursor-pointer relative" data-feeling="Calm" data-zone="Green Zone">
                         <span class="text-lg leading-none">😌</span>
                         <span class="text-[8.5px] font-extrabold text-teal-900 leading-tight">Calm</span>
@@ -386,7 +381,6 @@
                         <i class="fa-solid fa-pen-nib text-indigo-700 text-xs"></i>
                         <h3 class="font-extrabold text-purple-950 text-xs">Handwriting Practice (1 Line)</h3>
                         
-                        <!-- Handwriting Traceable Stamps (Today is, Day of Week, Name) -->
                         <div class="flex items-center space-x-1 pl-2 border-l border-purple-200">
                             <span class="text-[9px] font-bold text-purple-900 hidden sm:inline">Trace Stamp:</span>
                             <button id="stampTodayBtn" class="px-2 py-0.5 bg-white hover:bg-purple-100 text-purple-900 border border-purple-300 rounded-lg text-[9px] font-bold shadow-2xs cursor-pointer" title="Stamp 'Today is' for tracing">
@@ -474,7 +468,10 @@
 
         // Audio Chime Synthesizer
         let audioCtx = null;
-        function playChime(freq = 523.25, type = 'sine', duration = 0.15) {
+        function playChime(freq, type, duration) {
+            freq = freq || 523.25;
+            type = type || 'sine';
+            duration = duration || 0.15;
             try {
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -493,7 +490,7 @@
                 osc.start();
                 osc.stop(audioCtx.currentTime + duration);
             } catch (e) {
-                // Ignore audio if policy blocks before interaction
+                // Ignore audio if policy blocks before user interaction
             }
         }
 
@@ -598,27 +595,26 @@
                 const savedVideo = localStorage.getItem(STORAGE_KEY_VIDEO);
                 if (savedVideo) {
                     state.youtubeVideoId = savedVideo;
-                    youtubePlayer.src = `https://www.youtube.com/embed/${savedVideo}`;
+                    youtubePlayer.src = 'https://www.youtube.com/embed/' + savedVideo;
                 }
             } catch (e) {
                 console.error('Could not load saved state:', e);
             }
         }
 
-        // Seasonal themes configuration (Icons & Badges)
         const seasonalThemes = {
-            0: { icon: '❄️', name: 'Winter', badge: 'bg-sky-200 text-sky-950' },     // January
-            1: { icon: '💖', name: 'Winter', badge: 'bg-pink-200 text-pink-950' },    // February
-            2: { icon: '🌱', name: 'Spring', badge: 'bg-emerald-200 text-emerald-950' }, // March
-            3: { icon: '🌧️', name: 'Spring', badge: 'bg-cyan-200 text-cyan-950' },     // April
-            4: { icon: '🌸', name: 'Spring', badge: 'bg-rose-200 text-rose-950' },     // May
-            5: { icon: '☀️', name: 'Summer', badge: 'bg-amber-200 text-amber-950' },   // June
-            6: { icon: '🏖️', name: 'Summer', badge: 'bg-yellow-200 text-yellow-950' }, // July
-            7: { icon: '🌻', name: 'Summer', badge: 'bg-orange-200 text-orange-950' }, // August
-            8: { icon: '🍎', name: 'Autumn', badge: 'bg-red-200 text-red-950' },       // September
-            9: { icon: '🎃', name: 'Autumn', badge: 'bg-amber-200 text-amber-950' },   // October
-            10: { icon: '🍂', name: 'Autumn', badge: 'bg-yellow-200 text-yellow-950' }, // November
-            11: { icon: '⛄', name: 'Winter', badge: 'bg-indigo-200 text-indigo-950' }  // December
+            0: { icon: '❄️', name: 'Winter', badge: 'bg-sky-200 text-sky-950' },
+            1: { icon: '💖', name: 'Winter', badge: 'bg-pink-200 text-pink-950' },
+            2: { icon: '🌱', name: 'Spring', badge: 'bg-emerald-200 text-emerald-950' },
+            3: { icon: '🌧️', name: 'Spring', badge: 'bg-cyan-200 text-cyan-950' },
+            4: { icon: '🌸', name: 'Spring', badge: 'bg-rose-200 text-rose-950' },
+            5: { icon: '☀️', name: 'Summer', badge: 'bg-amber-200 text-amber-950' },
+            6: { icon: '🏖️', name: 'Summer', badge: 'bg-yellow-200 text-yellow-950' },
+            7: { icon: '🌻', name: 'Summer', badge: 'bg-orange-200 text-orange-950' },
+            8: { icon: '🍎', name: 'Autumn', badge: 'bg-red-200 text-red-950' },
+            9: { icon: '🎃', name: 'Autumn', badge: 'bg-amber-200 text-amber-950' },
+            10: { icon: '🍂', name: 'Autumn', badge: 'bg-yellow-200 text-yellow-950' },
+            11: { icon: '⛄', name: 'Winter', badge: 'bg-indigo-200 text-indigo-950' }
         };
 
         const eventBadges = [
@@ -680,7 +676,6 @@
             loadSavedState();
         }
 
-        // Weather Picker Routine
         function initWeather() {
             weatherBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -703,7 +698,6 @@
             });
         }
 
-        // Handwriting Traceable Stamps
         function initStamps() {
             stampTodayBtn.addEventListener('click', () => {
                 applyTraceStamp("Today is...");
@@ -716,7 +710,7 @@
             });
 
             stampFeelBtn.addEventListener('click', () => {
-                const feel = state.selectedFeeling ? `I feel ${state.selectedFeeling}` : "I feel calm";
+                const feel = state.selectedFeeling ? ("I feel " + state.selectedFeeling) : "I feel calm";
                 applyTraceStamp(feel);
             });
         }
@@ -755,7 +749,7 @@
                 }
             });
             if (greeting) {
-                selectedGreetingText.textContent = `${greeting}!`;
+                selectedGreetingText.textContent = greeting + '!';
                 selectedGreetingText.className = 'text-[8.5px] font-black text-emerald-950 uppercase tracking-wider bg-emerald-300 px-2 py-0.5 rounded-full';
             } else {
                 selectedGreetingText.textContent = 'Choose';
@@ -792,7 +786,7 @@
             if (feeling) {
                 const btn = Array.from(feelingBtns).find(b => b.dataset.feeling === feeling);
                 const zone = btn ? btn.dataset.zone : '';
-                selectedFeelingText.textContent = `${feeling} (${zone})`;
+                selectedFeelingText.textContent = feeling + ' (' + zone + ')';
                 selectedFeelingText.className = 'text-[8px] font-black text-slate-900 uppercase tracking-wider bg-amber-300 px-2 py-0.5 rounded-full';
             } else {
                 selectedFeelingText.textContent = 'Select';
@@ -821,7 +815,7 @@
                 }
 
                 state.youtubeVideoId = videoId;
-                youtubePlayer.src = `https://www.youtube.com/embed/${videoId}`;
+                youtubePlayer.src = 'https://www.youtube.com/embed/' + videoId;
                 saveVideoState();
                 playSuccessChime();
                 videoUrlBar.classList.add('hidden');
@@ -829,7 +823,6 @@
             });
         }
 
-        // Render High-Contrast Number Tiles (Tactile buttons)
         function renderTrayItems() {
             numbersSection.innerHTML = '';
             for (let i = 1; i <= 31; i++) {
@@ -837,22 +830,22 @@
                 item.className = 'draggable-item tactile-tile bg-indigo-700 border-2 border-indigo-900 hover:bg-indigo-600 rounded-lg text-center font-black text-white text-[12px] sm:text-xs transition flex items-center justify-center w-full h-full select-none cursor-grab shadow-sm';
                 item.textContent = i;
                 item.dataset.type = 'number';
-                item.dataset.id = `num-${i}`;
+                item.dataset.id = 'num-' + i;
                 item.dataset.value = i;
                 
-                attachDragListeners(item, { type: 'number', id: `num-${i}`, text: i.toString() });
+                attachDragListeners(item, { type: 'number', id: 'num-' + i, text: i.toString() });
                 numbersSection.appendChild(item);
             }
 
             badgesSection.innerHTML = '';
             eventBadges.forEach(badge => {
                 const item = document.createElement('div');
-                item.className = `draggable-item ${badge.bg} ${badge.textCol} border-2 ${badge.border} hover:shadow-xs rounded-xl p-1.5 font-bold text-[10.5px] transition flex items-center space-x-1.5 h-7 px-2 select-none shadow-2xs`;
-                item.innerHTML = `<i class="fa-solid ${badge.icon} text-xs"></i><span class="truncate">${badge.text}</span>`;
+                item.className = 'draggable-item ' + badge.bg + ' ' + badge.textCol + ' border-2 ' + badge.border + ' hover:shadow-xs rounded-xl p-1.5 font-bold text-[10.5px] transition flex items-center space-x-1.5 h-7 px-2 select-none shadow-2xs';
+                item.innerHTML = '<i class="fa-solid ' + badge.icon + ' text-xs"></i><span class="truncate">' + badge.text + '</span>';
                 item.dataset.type = 'badge';
                 item.dataset.id = badge.id;
                 
-                attachDragListeners(item, { type: 'badge', id: badge.id, text: badge.text, bg: `${badge.bg} ${badge.textCol} border-2 ${badge.border}`, icon: badge.icon });
+                attachDragListeners(item, { type: 'badge', id: badge.id, text: badge.text, bg: (badge.bg + ' ' + badge.textCol + ' border-2 ' + badge.border), icon: badge.icon });
                 badgesSection.appendChild(item);
             });
         }
@@ -888,27 +881,25 @@
             playPopChime();
         });
 
-        // Render Calendar with Thematic Visual Anchors & High-Contrast Squares
         function renderCalendar() {
             calendarGrid.innerHTML = '';
             const month = state.currentMonth;
             const year = month >= 8 ? 2026 : 2027;
             state.currentYear = year;
 
-            calendarTitle.textContent = `${monthNames[month]} ${year}`;
+            calendarTitle.textContent = monthNames[month] + ' ' + year;
 
-            // Seasonal Theme Visuals
             const theme = seasonalThemes[month] || seasonalThemes[8];
             seasonalIcon.textContent = theme.icon;
             seasonBadge.textContent = theme.name;
-            seasonBadge.className = `text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-2xs ${theme.badge}`;
+            seasonBadge.className = 'text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-2xs ' + theme.badge;
 
             const now = new Date();
             const isCurrentMonthView = (now.getMonth() === month && now.getFullYear() === year);
             const todayDay = now.getDate();
 
             if (isCurrentMonthView) {
-                todayDateLabel.textContent = `${monthNames[month].slice(0, 3)} ${todayDay}`;
+                todayDateLabel.textContent = monthNames[month].slice(0, 3) + ' ' + todayDay;
             } else {
                 todayDateLabel.textContent = 'Today';
             }
@@ -917,7 +908,7 @@
 
             for (let i = 0; i < 35; i++) {
                 const cellIndex = i;
-                const cellKey = `${year}-${month}-${cellIndex}`;
+                const cellKey = year + '-' + month + '-' + cellIndex;
 
                 const colIndex = i % 7;
                 const isWeekend = (colIndex === 0 || colIndex === 6);
@@ -925,16 +916,14 @@
                 const mappedDayNum = cellIndex - firstDayIndex + 1;
                 const isTodayCell = isCurrentMonthView && (mappedDayNum === todayDay);
 
-                // High-contrast, tactile calendar day cell
                 const dayCell = document.createElement('div');
                 const baseCellClass = isWeekend ? 'bg-sky-100/90 border-sky-300' : 'bg-white border-slate-300';
-                dayCell.className = `drop-target border-2 ${baseCellClass} ${isTodayCell ? 'today-cell border-amber-500' : ''} hover:border-indigo-600 rounded-xl p-1 flex flex-col justify-between relative group transition shadow-xs min-h-0 overflow-hidden`;
+                dayCell.className = 'drop-target border-2 ' + baseCellClass + (isTodayCell ? ' today-cell border-amber-500' : '') + ' hover:border-indigo-600 rounded-xl p-1 flex flex-col justify-between relative group transition shadow-xs min-h-0 overflow-hidden';
                 dayCell.dataset.cellKey = cellKey;
 
                 const topBar = document.createElement('div');
                 topBar.className = 'w-full flex items-center justify-between pointer-events-none';
 
-                // Left: Today indicator or subtle anchor icon
                 if (isTodayCell) {
                     const todayTag = document.createElement('span');
                     todayTag.className = 'text-[8px] font-black text-amber-950 bg-amber-300 px-1 py-0.2 rounded-md uppercase tracking-tighter shadow-2xs animate-pulse';
@@ -951,12 +940,10 @@
                     topBar.appendChild(anchorPlaceholder);
                 }
 
-                // Right slot for square number badge
                 const numberSlot = document.createElement('div');
                 numberSlot.className = 'flex items-center justify-end';
                 topBar.appendChild(numberSlot);
 
-                // Badges container
                 const badgesContainer = document.createElement('div');
                 badgesContainer.className = 'w-full flex flex-col gap-0.5 overflow-y-auto min-h-0 mt-0.5';
 
@@ -978,15 +965,14 @@
             }
         }
 
-        // High-Contrast Square Number on Calendar with defined border
         function createDroppedItemElement(item, cellKey, index) {
             const el = document.createElement('div');
             if (item.type === 'number') {
                 el.className = 'w-5 h-5 bg-indigo-800 border-2 border-indigo-950 text-white text-[11px] font-black rounded-lg flex items-center justify-center relative shadow-sm cursor-pointer group/num transition';
-                el.innerHTML = `<span>${item.text}</span> <button class="absolute -top-1 -left-1 w-3.5 h-3.5 bg-rose-600 text-white hover:bg-rose-700 rounded-full text-[9px] flex items-center justify-center opacity-0 group-hover/num:opacity-100 transition shadow-2xs remove-item cursor-pointer" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
+                el.innerHTML = '<span>' + item.text + '</span> <button class="absolute -top-1 -left-1 w-3.5 h-3.5 bg-rose-600 text-white hover:bg-rose-700 rounded-full text-[9px] flex items-center justify-center opacity-0 group-hover/num:opacity-100 transition shadow-2xs remove-item cursor-pointer" title="Remove"><i class="fa-solid fa-xmark"></i></button>';
             } else {
-                el.className = `${item.bg} text-[8.5px] font-extrabold px-1.5 py-0.5 rounded-md flex items-center justify-between shadow-2xs cursor-pointer transition w-full`;
-                el.innerHTML = `<span class="flex items-center space-x-1 truncate"><i class="fa-solid ${item.icon}"></i><span class="truncate">${item.text}</span></span> <button class="hover:opacity-70 ml-0.5 text-[8.5px] remove-item cursor-pointer" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
+                el.className = item.bg + ' text-[8.5px] font-extrabold px-1.5 py-0.5 rounded-md flex items-center justify-between shadow-2xs cursor-pointer transition w-full';
+                el.innerHTML = '<span class="flex items-center space-x-1 truncate"><i class="fa-solid ' + item.icon + '"></i><span class="truncate">' + item.text + '</span></span> <button class="hover:opacity-70 ml-0.5 text-[8.5px] remove-item cursor-pointer" title="Remove"><i class="fa-solid fa-xmark"></i></button>';
             }
 
             const removeItem = (e) => {
@@ -1007,7 +993,7 @@
         }
 
         monthSelect.addEventListener('change', (e) => {
-            state.currentMonth = parseInt(e.target.value);
+            state.currentMonth = parseInt(e.target.value, 10);
             saveCalendarState();
             renderCalendar();
             playPopChime();
@@ -1042,16 +1028,16 @@
 
                 dragGhost.textContent = itemData.text;
                 dragGhost.classList.remove('hidden');
-                dragGhost.style.left = `${touch.clientX}px`;
-                dragGhost.style.top = `${touch.clientY}px`;
+                dragGhost.style.left = touch.clientX + 'px';
+                dragGhost.style.top = touch.clientY + 'px';
                 playPopChime();
             }, { passive: false });
 
             element.addEventListener('touchmove', (e) => {
                 if (!state.draggedItem) return;
                 const touch = e.touches[0];
-                dragGhost.style.left = `${touch.clientX}px`;
-                dragGhost.style.top = `${touch.clientY}px`;
+                dragGhost.style.left = touch.clientX + 'px';
+                dragGhost.style.top = touch.clientY + 'px';
 
                 const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
                 const dropTarget = elemBelow ? elemBelow.closest('.drop-target') : null;
@@ -1073,7 +1059,7 @@
                     const cellKey = dropTarget.dataset.cellKey;
                     if (cellKey) {
                         if (!state.placements[cellKey]) state.placements[cellKey] = [];
-                        state.placements[cellKey].push({ ...state.draggedItem });
+                        state.placements[cellKey].push(Object.assign({}, state.draggedItem));
                         saveCalendarState();
                         renderCalendar();
                         playSuccessChime();
@@ -1109,7 +1095,6 @@
             });
         }
 
-        // Single Full-Width Primary Elementary Line Set with Traceable Lettering Support
         function drawHandwritingGuidelines(ctx, width, height) {
             ctx.save();
             ctx.fillStyle = '#fffefb';
@@ -1119,7 +1104,7 @@
             const halfRow = rowHeight / 2;
             const topMargin = Math.max((height - rowHeight) / 2, 4);
 
-            // Headline (Solid Sky Blue)
+            // Headline
             ctx.beginPath();
             ctx.strokeStyle = '#60a5fa';
             ctx.lineWidth = 1.5;
@@ -1128,7 +1113,7 @@
             ctx.lineTo(width - 8, topMargin);
             ctx.stroke();
 
-            // Midline (Dashed Sky Blue)
+            // Midline
             ctx.beginPath();
             ctx.strokeStyle = '#3b82f6';
             ctx.lineWidth = 1.5;
@@ -1137,7 +1122,7 @@
             ctx.lineTo(width - 8, topMargin + halfRow);
             ctx.stroke();
 
-            // Baseline (Solid Red)
+            // Baseline
             ctx.beginPath();
             ctx.strokeStyle = '#ef4444';
             ctx.lineWidth = 2;
@@ -1146,11 +1131,10 @@
             ctx.lineTo(width - 8, topMargin + rowHeight);
             ctx.stroke();
 
-            // Render Light Dotted Trace Stamp if activated
             if (state.stampedText) {
                 ctx.save();
                 ctx.fillStyle = 'rgba(148, 163, 184, 0.45)';
-                ctx.font = `bold ${Math.floor(rowHeight * 0.85)}px 'Fredoka', sans-serif`;
+                ctx.font = 'bold ' + Math.floor(rowHeight * 0.85) + "px 'Fredoka', sans-serif";
                 ctx.textBaseline = 'alphabetic';
                 ctx.fillText(state.stampedText, 16, topMargin + rowHeight - 2);
                 ctx.restore();
@@ -1301,7 +1285,7 @@
         });
 
         brushSizeSelect.addEventListener('change', (e) => {
-            state.brushSize = parseInt(e.target.value);
+            state.brushSize = parseInt(e.target.value, 10);
             playPopChime();
         });
 
