@@ -236,14 +236,14 @@
 
         </aside>
 
-        <!-- Right Main Workspace: 4/5 width (Calendar 1/4 of total page, Wide Rectangle YouTube, Handwriting Pad) -->
+        <!-- Right Main Workspace: Calendar (1/2 page width), YouTube Video, & Handwriting Pad -->
         <main class="flex-1 flex flex-col gap-1.5 min-h-0 overflow-hidden">
 
-            <!-- Top Row: Calendar (1/4 total page width = 31.25% of the 4/5 main area) + Rectangular YouTube Card -->
+            <!-- Top Row: Calendar (1/2 of total page) + Rectangular YouTube Card -->
             <div class="flex-1 flex flex-col lg:flex-row gap-1.5 min-h-0">
                 
-                <!-- Calendar Card: 1/4 of the total page width on large screens -->
-                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col w-full lg:w-[31.25%] shrink-0 min-h-0">
+                <!-- Calendar Card: Exactly 1/2 of the total page on large screens -->
+                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col w-full lg:w-1/2 shrink-0 min-h-0">
                     <div class="flex items-center justify-between mb-1 shrink-0">
                         <h2 id="calendarTitle" class="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight">September 2026</h2>
                         <span class="text-[9px] font-semibold text-indigo-800 bg-indigo-100 border border-indigo-200 px-1.5 py-0.5 rounded-full shadow-2xs">
@@ -253,13 +253,13 @@
 
                     <!-- Days of Week Header -->
                     <div class="grid grid-cols-7 gap-0.5 text-center font-bold text-[9px] text-slate-700 uppercase tracking-wider mb-0.5 shrink-0">
-                        <div>S</div>
-                        <div>M</div>
-                        <div>T</div>
-                        <div>W</div>
-                        <div>T</div>
-                        <div>F</div>
-                        <div>S</div>
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
                     </div>
 
                     <!-- 35 Uniform Grid Slots -->
