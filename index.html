@@ -114,7 +114,7 @@
     <!-- Main Workspace -->
     <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative p-1.5 lg:p-2 gap-1.5 lg:gap-2">
 
-        <!-- Left Column: 1/5 width (20%) -->
+        <!-- Left Column: Exactly 1/5 width (20%) -->
         <aside class="w-full lg:w-1/5 h-full frosted-panel border border-white/60 rounded-xl flex flex-col shrink-0 shadow-md overflow-hidden p-1.5 gap-1.5 justify-between">
             
             <!-- Good Morning Card -->
@@ -236,14 +236,14 @@
 
         </aside>
 
-        <!-- Right Main Workspace: Calendar (Dynamic fill), YouTube Video (1/5 of page), & Handwriting Pad -->
+        <!-- Right Main Workspace: Calendar (Dynamic fill), Top-Aligned YouTube Card (1/5 width), & Handwriting Pad -->
         <main class="flex-1 flex flex-col gap-1.5 min-h-0 overflow-hidden">
 
-            <!-- Top Row: Calendar (Dynamically Fills remaining width) + YouTube Card (1/5 of total page width) -->
-            <div class="flex-1 flex flex-col lg:flex-row gap-1.5 min-h-0">
+            <!-- Top Row: Calendar + Proportional 16:9 YouTube Video Card -->
+            <div class="flex-1 flex flex-col lg:flex-row gap-1.5 min-h-0 items-start">
                 
-                <!-- Calendar Card: Dynamically fills all remaining space -->
-                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col flex-1 min-w-0 min-h-0">
+                <!-- Calendar Card: Dynamically fills all remaining space and stretches full row height -->
+                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col flex-1 min-w-0 h-full min-h-0">
                     <div class="flex items-center justify-between mb-1 shrink-0">
                         <h2 id="calendarTitle" class="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight">September 2026</h2>
                         <span class="text-[9px] font-semibold text-indigo-800 bg-indigo-100 border border-indigo-200 px-1.5 py-0.5 rounded-full shadow-2xs">
@@ -266,25 +266,27 @@
                     <div id="calendarGrid" class="grid grid-cols-7 gap-0.5 flex-1 auto-rows-fr min-h-0"></div>
                 </div>
 
-                <!-- YouTube Video Section: 1/5 of total page width on large screens -->
-                <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col w-full lg:w-1/5 shrink-0 min-h-0">
-                    <div class="flex items-center justify-between mb-1 shrink-0">
-                        <div class="flex items-center space-x-1.5">
-                            <i class="fa-brands fa-youtube text-red-600 text-sm"></i>
-                            <h3 class="font-bold text-slate-900 text-xs">Daily Video</h3>
+                <!-- Right Column for YouTube Card: Matches 1/5 width (20%), aligned to top, not stretching vertically -->
+                <div class="w-full lg:w-1/5 shrink-0 flex flex-col self-start">
+                    <div class="frosted-panel rounded-xl border border-white/60 shadow-md p-2 flex flex-col w-full h-auto">
+                        <div class="flex items-center justify-between mb-1 shrink-0">
+                            <div class="flex items-center space-x-1.5">
+                                <i class="fa-brands fa-youtube text-red-600 text-sm"></i>
+                                <h3 class="font-bold text-slate-900 text-xs">Daily Video</h3>
+                            </div>
+                            <button id="changeVideoBtn" class="text-[10px] font-bold text-indigo-700 hover:text-indigo-900 underline">Change URL</button>
                         </div>
-                        <button id="changeVideoBtn" class="text-[10px] font-bold text-indigo-700 hover:text-indigo-900 underline">Change URL</button>
-                    </div>
 
-                    <!-- 16:9 Landscape Video Player -->
-                    <div class="flex-1 rounded-lg overflow-hidden bg-black/90 relative shadow-inner min-h-0 flex items-center justify-center aspect-video w-full">
-                        <iframe id="youtubePlayer" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+                        <!-- 16:9 Landscape Rectangular Video Player (Height proportional to width) -->
+                        <div class="w-full aspect-video rounded-lg overflow-hidden bg-black/90 relative shadow-inner flex items-center justify-center">
+                            <iframe id="youtubePlayer" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
 
-                    <!-- Quick URL Input Bar -->
-                    <div id="videoUrlBar" class="hidden mt-1.5 pt-1.5 border-t border-white/60 flex items-center space-x-1 shrink-0">
-                        <input id="videoUrlInput" type="text" placeholder="Paste YouTube link or ID..." class="flex-1 bg-white/95 border border-slate-300 rounded px-2 py-0.5 text-[10px] text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-600">
-                        <button id="saveVideoBtn" class="bg-indigo-700 text-white font-bold text-[10px] px-2 py-0.5 rounded shadow-xs">Load</button>
+                        <!-- Quick URL Input Bar -->
+                        <div id="videoUrlBar" class="hidden mt-1.5 pt-1.5 border-t border-white/60 flex items-center space-x-1 shrink-0">
+                            <input id="videoUrlInput" type="text" placeholder="Paste link..." class="flex-1 bg-white/95 border border-slate-300 rounded px-2 py-0.5 text-[10px] text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-600">
+                            <button id="saveVideoBtn" class="bg-indigo-700 text-white font-bold text-[10px] px-2 py-0.5 rounded shadow-xs">Load</button>
+                        </div>
                     </div>
                 </div>
 
