@@ -329,8 +329,8 @@
                 <!-- Right Column: 25% width of workspace (20% of total page width) -->
                 <aside class="w-full lg:w-1/4 h-full flex flex-col shrink-0 gap-1.5 justify-between min-h-0 overflow-hidden">
                     
-                    <!-- YouTube Video Section -->
-                    <div class="panel-video flex-1 rounded-2xl border-2 border-rose-300 p-2 flex flex-col justify-between shrink-0 shadow-sm min-h-[125px] overflow-hidden">
+                    <!-- YouTube Video Section (Stacked Videos) -->
+                    <div class="panel-video flex-1 rounded-2xl border-2 border-rose-300 p-2 flex flex-col justify-between shrink-0 shadow-sm min-h-[170px] overflow-hidden">
                         <div class="flex items-center justify-between pb-1 mb-0.5 border-b border-rose-200 shrink-0">
                             <div class="flex items-center space-x-1.5">
                                 <i class="fa-brands fa-youtube text-red-600 text-sm"></i>
@@ -339,15 +339,31 @@
                             <button id="changeVideoBtn" class="text-[10px] font-bold text-rose-800 hover:text-rose-950 underline cursor-pointer">Change</button>
                         </div>
 
-                        <!-- 16:9 Landscape Video Player -->
-                        <div class="w-full aspect-video rounded-xl overflow-hidden bg-black/90 relative shadow-inner flex items-center justify-center my-auto border border-rose-200 shrink-0">
-                            <iframe id="youtubePlayer" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!-- Stacked Videos Container -->
+                        <div class="flex-1 flex flex-col gap-1.5 justify-center min-h-0 overflow-y-auto">
+                            <!-- Video 1 (Song) -->
+                            <div class="w-full aspect-video rounded-xl overflow-hidden bg-black/90 relative shadow-inner border border-rose-200 shrink-0">
+                                <iframe id="youtubePlayer1" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="Video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+
+                            <!-- Video 2 (Story) -->
+                            <div class="w-full aspect-video rounded-xl overflow-hidden bg-black/90 relative shadow-inner border border-rose-200 shrink-0">
+                                <iframe id="youtubePlayer2" class="w-full h-full" src="https://www.youtube.com/embed/03mq59i_k04" title="Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </div>
 
                         <!-- Quick URL Input Bar -->
-                        <div id="videoUrlBar" class="hidden mt-1 pt-1 border-t border-rose-200 flex items-center space-x-1 shrink-0">
-                            <input id="videoUrlInput" type="text" placeholder="Paste link..." class="flex-1 bg-white border border-rose-300 rounded-lg px-2 py-0.5 text-[10px] text-slate-800 focus:outline-none focus:ring-1 focus:ring-rose-500">
-                            <button id="saveVideoBtn" class="bg-rose-700 text-white font-bold text-[10px] px-2 py-0.5 rounded-lg shadow-xs cursor-pointer">Load</button>
+                        <div id="videoUrlBar" class="hidden mt-1 pt-1 border-t border-rose-200 flex flex-col gap-1 shrink-0">
+                            <div class="flex items-center space-x-1">
+                                <span class="text-[9px] font-bold text-rose-900 w-8 shrink-0">Vid 1:</span>
+                                <input id="videoUrlInput1" type="text" placeholder="Paste link..." class="flex-1 bg-white border border-rose-300 rounded-lg px-2 py-0.5 text-[10px] text-slate-800 focus:outline-none focus:ring-1 focus:ring-rose-500">
+                                <button id="saveVideoBtn1" class="bg-rose-700 text-white font-bold text-[10px] px-2 py-0.5 rounded-lg shadow-xs cursor-pointer">Load</button>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <span class="text-[9px] font-bold text-rose-900 w-8 shrink-0">Vid 2:</span>
+                                <input id="videoUrlInput2" type="text" placeholder="Paste link..." class="flex-1 bg-white border border-rose-300 rounded-lg px-2 py-0.5 text-[10px] text-slate-800 focus:outline-none focus:ring-1 focus:ring-rose-500">
+                                <button id="saveVideoBtn2" class="bg-rose-700 text-white font-bold text-[10px] px-2 py-0.5 rounded-lg shadow-xs cursor-pointer">Load</button>
+                            </div>
                         </div>
                     </div>
 
@@ -487,7 +503,8 @@
             selectedGreeting: null,
             selectedFeeling: null,
             selectedWeather: 'sunny',
-            youtubeVideoId: '03mq59i_k04',
+            youtubeVideoId1: '03mq59i_k04',
+            youtubeVideoId2: '03mq59i_k04',
             draggedItem: null,
             isErasing: false,
             brushColor: '#020617',
@@ -500,12 +517,12 @@
         const STORAGE_KEY_GREETING = 'studentCalendarGreeting';
         const STORAGE_KEY_FEELING = 'studentCalendarFeeling';
         const STORAGE_KEY_WEATHER = 'studentCalendarWeather';
-        const STORAGE_KEY_VIDEO = 'studentCalendarVideo';
+        const STORAGE_KEY_VIDEO1 = 'studentCalendarVideo1';
+        const STORAGE_KEY_VIDEO2 = 'studentCalendarVideo2';
 
         let drawingCanvas = null;
         let splashTimeout = null;
 
-        // Visual Center Pop & Fade Announcement (Silent & Sensory-Friendly)
         function triggerCenterSplash(icon, label, subtitle, borderColorClass) {
             const overlay = document.getElementById('splashOverlay');
             const iconEl = document.getElementById('splashIcon');
@@ -526,11 +543,9 @@
                 card.className = 'bg-white/95 backdrop-blur-md border-4 ' + borderColorClass + ' rounded-3xl p-6 shadow-2xl flex flex-col items-center justify-center max-w-xs text-center';
             }
 
-            // Animate In
             overlay.classList.remove('opacity-0', 'scale-50');
             overlay.classList.add('opacity-100', 'scale-100');
 
-            // Fade Out
             splashTimeout = setTimeout(() => {
                 overlay.classList.remove('opacity-100', 'scale-100');
                 overlay.classList.add('opacity-0', 'scale-50');
@@ -578,11 +593,12 @@
             }
         }
 
-        function saveVideoState() {
+        function saveVideoStates() {
             try {
-                localStorage.setItem(STORAGE_KEY_VIDEO, state.youtubeVideoId);
+                localStorage.setItem(STORAGE_KEY_VIDEO1, state.youtubeVideoId1);
+                localStorage.setItem(STORAGE_KEY_VIDEO2, state.youtubeVideoId2);
             } catch (e) {
-                console.error('Could not save video:', e);
+                console.error('Could not save video states:', e);
             }
         }
 
@@ -631,10 +647,16 @@
                     updateWeatherUI(savedWeather);
                 }
 
-                const savedVideo = localStorage.getItem(STORAGE_KEY_VIDEO);
-                if (savedVideo) {
-                    state.youtubeVideoId = savedVideo;
-                    youtubePlayer.src = 'https://www.youtube.com/embed/' + savedVideo;
+                const savedVideo1 = localStorage.getItem(STORAGE_KEY_VIDEO1) || localStorage.getItem('studentCalendarVideo');
+                if (savedVideo1) {
+                    state.youtubeVideoId1 = savedVideo1;
+                    youtubePlayer1.src = 'https://www.youtube.com/embed/' + savedVideo1;
+                }
+
+                const savedVideo2 = localStorage.getItem(STORAGE_KEY_VIDEO2);
+                if (savedVideo2) {
+                    state.youtubeVideoId2 = savedVideo2;
+                    youtubePlayer2.src = 'https://www.youtube.com/embed/' + savedVideo2;
                 }
             } catch (e) {
                 console.error('Could not load saved state:', e);
@@ -692,11 +714,14 @@
         const selectedFeelingText = document.getElementById('selectedFeelingText');
         const weatherBtns = document.querySelectorAll('.weather-btn');
         const selectedWeatherText = document.getElementById('selectedWeatherText');
-        const youtubePlayer = document.getElementById('youtubePlayer');
+        const youtubePlayer1 = document.getElementById('youtubePlayer1');
+        const youtubePlayer2 = document.getElementById('youtubePlayer2');
         const changeVideoBtn = document.getElementById('changeVideoBtn');
         const videoUrlBar = document.getElementById('videoUrlBar');
-        const videoUrlInput = document.getElementById('videoUrlInput');
-        const saveVideoBtn = document.getElementById('saveVideoBtn');
+        const videoUrlInput1 = document.getElementById('videoUrlInput1');
+        const videoUrlInput2 = document.getElementById('videoUrlInput2');
+        const saveVideoBtn1 = document.getElementById('saveVideoBtn1');
+        const saveVideoBtn2 = document.getElementById('saveVideoBtn2');
 
         function init() {
             loadSavedState();
@@ -709,7 +734,6 @@
             initVideoControls();
         }
 
-        // Weather Picker Routine with Center Screen Pop
         function initWeather() {
             weatherBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -738,7 +762,6 @@
             }
         }
 
-        // Morning Greeting with Center Screen Pop
         function initGreetings() {
             greetingBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -774,7 +797,6 @@
             }
         }
 
-        // Feelings & Zones of Regulation with Center Screen Pop
         function initFeelings() {
             feelingBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -821,35 +843,48 @@
             }
         }
 
+        function parseYouTubeId(input) {
+            if (!input) return null;
+            let videoId = input;
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = input.match(regExp);
+            if (match && match[2].length === 11) {
+                videoId = match[2];
+            }
+            return videoId;
+        }
+
         function initVideoControls() {
             changeVideoBtn.addEventListener('click', () => {
                 videoUrlBar.classList.toggle('hidden');
                 if (!videoUrlBar.classList.contains('hidden')) {
-                    videoUrlInput.focus();
+                    videoUrlInput1.focus();
                 }
             });
 
-            saveVideoBtn.addEventListener('click', () => {
-                const input = videoUrlInput.value.trim();
-                if (!input) return;
-
-                let videoId = input;
-                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-                const match = input.match(regExp);
-
-                if (match && match[2].length === 11) {
-                    videoId = match[2];
+            saveVideoBtn1.addEventListener('click', () => {
+                const input = videoUrlInput1.value.trim();
+                const videoId = parseYouTubeId(input);
+                if (videoId) {
+                    state.youtubeVideoId1 = videoId;
+                    youtubePlayer1.src = 'https://www.youtube.com/embed/' + videoId;
+                    saveVideoStates();
+                    videoUrlInput1.value = '';
                 }
+            });
 
-                state.youtubeVideoId = videoId;
-                youtubePlayer.src = 'https://www.youtube.com/embed/' + videoId;
-                saveVideoState();
-                videoUrlBar.classList.add('hidden');
-                videoUrlInput.value = '';
+            saveVideoBtn2.addEventListener('click', () => {
+                const input = videoUrlInput2.value.trim();
+                const videoId = parseYouTubeId(input);
+                if (videoId) {
+                    state.youtubeVideoId2 = videoId;
+                    youtubePlayer2.src = 'https://www.youtube.com/embed/' + videoId;
+                    saveVideoStates();
+                    videoUrlInput2.value = '';
+                }
             });
         }
 
-        // Render Tactile Number Tiles
         function renderTrayItems() {
             numbersSection.innerHTML = '';
             for (let i = 1; i <= 31; i++) {
@@ -971,7 +1006,6 @@
             }
         }
 
-        // Tactile placed number badge with visible X remove button
         function createDroppedItemElement(item, cellKey, index) {
             const el = document.createElement('div');
             
@@ -1017,7 +1051,6 @@
             renderCalendar();
         });
 
-        // Reset All: Keeps the currently chosen month intact and clears notes/tiles/feelings
         resetBtn.addEventListener('click', () => {
             state.placements = {};
             state.selectedGreeting = null;
@@ -1119,7 +1152,6 @@
             });
         }
 
-        // Single Full-Width Primary Elementary Line Set
         function drawHandwritingGuidelines(ctx, width, height) {
             ctx.save();
             ctx.fillStyle = '#fffefb';
